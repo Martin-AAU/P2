@@ -19,8 +19,8 @@ public class CreateMidi{
         ShortMessage dNoteOff = new ShortMessage();
 
         // Define the 4 shortmessages as noteOn and noteOff
-        cNoteOn.setMessage(ShortMessage.NOTE_ON, 0, 60, 100);
-        cNoteOff.setMessage(ShortMessage.NOTE_OFF, 0, 60, 100);
+        cNoteOn.setMessage(ShortMessage.NOTE_ON, 0, 64, 100);
+        cNoteOff.setMessage(ShortMessage.NOTE_OFF, 0, 64, 100);
 
         dNoteOn.setMessage(ShortMessage.NOTE_ON, 0, 62, 100);
         dNoteOff.setMessage(ShortMessage.NOTE_OFF, 0, 62, 100);
