@@ -5,7 +5,7 @@ import javafx.scene.shape.Circle;
 
 import java.util.ArrayList;
 
-public class NightSky {
+public class NightSky extends Group{
     private int height, width;
     private ArrayList<Circle> stars;
     private ArrayList<Constellation> constellations;
