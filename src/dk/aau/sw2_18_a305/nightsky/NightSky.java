@@ -99,20 +99,20 @@ public class NightSky extends Group{
 
     public void generateStars(int ammount) {
         Random random = new Random();
+        stars.add(new Circle(random.nextInt(width), random.nextInt(height), random.nextInt(5), Color.BLUE));
 
-        for(int i = 0; i < ammount; i++) {
+        for(int i = 0; i < ammount-1; i++) {
             Circle c = new Circle(random.nextInt(width), random.nextInt(height), random.nextInt(5), Color.BLUE);
-            for (int k = 0; k < stars.size(); k++) {
-                if (Math.abs(c.getCenterX() - stars.get(k).getCenterX()) + Math.abs(c.getCenterY() - stars.get(k).getCenterY())
-                    > c.getRadius() + stars.get(k).getRadius() + 2){
-                    stars.add(c);
+                for (int k = 0; k < stars.size(); k++) {
+                    if (Math.abs(c.getCenterX() - stars.get(k).getCenterX()) + Math.abs(c.getCenterY() - stars.get(k).getCenterY())
+                            > c.getRadius() + stars.get(k).getRadius() + 2) {
+                        stars.add(c);
+                    }
+                    else {
+                        i--;
+                    }
                 }
-                else {
-                    i--;
-                }
-            }
         }
-
-        getChildren().addAll(stars);
+        this.getChildren().addAll(stars);
     }
 }
