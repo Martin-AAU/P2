@@ -1,8 +1,12 @@
 package dk.aau.sw2_18_a305.nightsky;
 
+import dk.aau.sw2_18_a305.nightsky.exceptions.IllegalHeightException;
+import javafx.scene.shape.Circle;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -12,7 +16,7 @@ class NightSkyTest {
 
     @BeforeEach
     void setUp() {
-        NightSky nightSky = new NightSky(100, 100);
+        nightSky = new NightSky(100, 100);
     }
 
     @Test
@@ -34,54 +38,35 @@ class NightSkyTest {
     }
 
     @Test
-    void setStars() {
-    }
-
-    @Test
-    void setConstellations() {
-    }
-
-    @Test
-    void getHeight1() {
-    }
-
-    @Test
-    void getWidth1() {
-    }
-
-    @Test
-    void getStars1() {
-    }
-
-    @Test
-    void getConstellations1() {
-    }
-
-    @Test
     void getActiveConstellation() {
     }
 
     @Test
-    void setHeight() {
-        nightSky.setHeight(-5);
-        assertEquals(100, nightSky.getHeight());
+    void setHeight01() {
+        assertThrows(IllegalHeightException.class, ()->{nightSky.setHeight(0);});
     }
 
     @Test
-    void setWidth() {
-        nightSky.setWidth(-5);
-        assertEquals(100, nightSky.getWidth());
-    }
-
-    @Test
-    void setStars1() {
-    }
-
-    @Test
-    void setConstellations1() {
+    void setWidth01() {
+        assertThrows(IllegalHeightException.class, ()->{nightSky.setWidth(0);});
     }
 
     @Test
     void setActiveConstellation() {
+    }
+
+    @Test
+    void setStars() {
+        ArrayList<Circle> stars = new ArrayList<Circle>();
+        stars.add(new Circle(10, 10, 5));
+        nightSky.setStars(stars);
+
+        assertEquals(10, nightSky.getStars().get(0).getCenterX());
+        assertEquals(10, nightSky.getStars().get(0).getCenterY());
+        assertEquals(5, nightSky.getStars().get(0).getRadius());
+    }
+
+    @Test
+    void setConstellations() {
     }
 }
