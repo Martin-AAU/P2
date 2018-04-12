@@ -12,8 +12,8 @@ import java.util.Random;
 
 public class NightSky extends Group{
     private int height, width, activeConstellation;
-    private ArrayList<Circle> stars;
-    private ArrayList<Constellation> constellations;
+    private ArrayList<Circle> stars = new ArrayList<>();
+    private ArrayList<Constellation> constellations = new ArrayList<>();
 
     //Constructors
     public NightSky(int height, int width) {
@@ -98,21 +98,26 @@ public class NightSky extends Group{
     }
 
     public void generateStars(int ammount) {
+
         Random random = new Random();
-        stars.add(new Circle(random.nextInt(width), random.nextInt(height), random.nextInt(5), Color.BLUE));
+        stars.add(new Circle(random.nextInt(width), random.nextInt(height), 3+random.nextInt(4), Color.BLUE));
 
         for(int i = 0; i < ammount-1; i++) {
-            Circle c = new Circle(random.nextInt(width), random.nextInt(height), random.nextInt(5), Color.BLUE);
-                for (int k = 0; k < stars.size(); k++) {
-                    if (Math.abs(c.getCenterX() - stars.get(k).getCenterX()) + Math.abs(c.getCenterY() - stars.get(k).getCenterY())
-                            > c.getRadius() + stars.get(k).getRadius() + 2) {
+
+            Circle c = new Circle(random.nextInt(width), random.nextInt(height), 3+ random.nextInt(4), Color.BLUE);
+
+            stars.add(c);
+            /*for (int k = 0; k < stars.size()-1; k++){
+                System.out.println("Distance between Circle " + i + " and star " + k + "mis: " + dist(c.getCenterX(), c.getCenterY(), stars.get(k).getCenterX(), stars.get(k).getCenterY()));
+                if (dist(c.getCenterX(), c.getCenterY(), stars.get(k).getCenterX(), stars.get(k).getCenterY()) > c.getRadius() + stars.get(k).getRadius() + 2) {
                         stars.add(c);
-                    }
-                    else {
-                        i--;
-                    }
                 }
+            }*/
         }
         this.getChildren().addAll(stars);
+    }
+
+    double dist(double x1, double y1, double x2, double y2) {
+        return Math.sqrt((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2));
     }
 }
