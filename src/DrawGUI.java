@@ -1,5 +1,4 @@
-package dk.aau.sw2_18_a305.nightsky;
-
+import dk.aau.sw2_18_a305.nightsky.NightSky;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
