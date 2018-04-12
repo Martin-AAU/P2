@@ -3,9 +3,12 @@ package dk.aau.sw2_18_a305.nightsky;
 import dk.aau.sw2_18_a305.nightsky.exceptions.IllegalHeightException;
 import dk.aau.sw2_18_a305.nightsky.exceptions.IllegalWidthException;
 import javafx.scene.Group;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class NightSky extends Group{
     private int height, width, activeConstellation;
@@ -92,5 +95,24 @@ public class NightSky extends Group{
 
     private boolean isWidthValid(int width) {
         return width > 0;
+    }
+
+    public void generateStars(int ammount) {
+        Random random = new Random();
+
+        for(int i = 0; i < ammount; i++) {
+            Circle c = new Circle(random.nextInt(width), random.nextInt(height), random.nextInt(5), Color.BLUE);
+            for (int k = 0; k < stars.size(); k++) {
+                if (Math.abs(c.getCenterX() - stars.get(k).getCenterX()) + Math.abs(c.getCenterY() - stars.get(k).getCenterY())
+                    > c.getRadius() + stars.get(k).getRadius() + 2){
+                    stars.add(c);
+                }
+                else {
+                    i--;
+                }
+            }
+        }
+
+        getChildren().addAll(stars);
     }
 }
