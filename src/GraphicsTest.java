@@ -17,16 +17,16 @@ public class GraphicsTest extends Application {
 
     public void start(Stage primaryStage) {
         Random rng = new Random();
-
-        Circle[] circle = new Circle[50];
+        ArrayList<Circle> circle = new ArrayList<Circle>();
         Button button1 = new Button("Hephey");
 
         for (int i = 0; i < 50; i++) {
             int hest = i;
-            circle[i] = new Circle(rng.nextInt(1024), rng.nextInt(768),15, Color.GREEN);
-            circle[i].addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            Circle c = new Circle(rng.nextInt(1024), rng.nextInt(768),15, Color.GREEN);
+            c.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
                 button1.setText("Circle number:" + hest);
             } );
+            circle.add(c);
         }
 
         primaryStage.setTitle("Demo");
