@@ -3,6 +3,7 @@ package dk.aau.sw2_18_a305.nightsky;
 import dk.aau.sw2_18_a305.nightsky.exceptions.IllegalHeightException;
 import dk.aau.sw2_18_a305.nightsky.exceptions.IllegalWidthException;
 import javafx.scene.Group;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
@@ -11,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class NightSky extends Group{
-    private int height, width, activeConstellation;
+    private int height, width, activeConstellation = 0;
     private ArrayList<Circle> stars = new ArrayList<>();
     private ArrayList<Constellation> constellations = new ArrayList<>();
 
@@ -98,13 +99,16 @@ public class NightSky extends Group{
     }
 
     public void generateStars(int ammount) {
-
+        constellations.add(new Constellation());
         Random random = new Random();
         stars.add(new Circle(random.nextInt(width), random.nextInt(height), 3+random.nextInt(4), Color.BLUE));
 
         for(int i = 0; i < ammount-1; i++) {
 
             Circle c = new Circle(random.nextInt(width), random.nextInt(height), 3+ random.nextInt(4), Color.BLUE);
+            c.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+                //constellations.get(activeConstellation).addStar(c);
+            } );
 
             stars.add(c);
             /*for (int k = 0; k < stars.size()-1; k++){
@@ -114,7 +118,17 @@ public class NightSky extends Group{
                 }
             }*/
         }
-        this.getChildren().addAll(stars);
+        updateGroup();
+    }
+
+    private void updateGroup() {
+        getChildren().clear();
+
+        for(int i = 0; i < constellations.size(); i++) {
+            getChildren().addAll(constellations.get(i).getLines());
+        }
+
+        getChildren().addAll(stars);
     }
 
     double dist(double x1, double y1, double x2, double y2) {
