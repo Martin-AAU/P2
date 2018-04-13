@@ -107,7 +107,8 @@ public class NightSky extends Group{
 
             Circle c = new Circle(random.nextInt(width), random.nextInt(height), 3+ random.nextInt(4), Color.BLUE);
             c.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-                //constellations.get(activeConstellation).addStar(c);
+                this.constellations.get(activeConstellation).addStar(c);
+                updateGroup();
             } );
 
             stars.add(c);
@@ -122,7 +123,7 @@ public class NightSky extends Group{
     }
 
     private void updateGroup() {
-        getChildren().clear();
+        this.getChildren().clear();
 
         for(int i = 0; i < constellations.size(); i++) {
             getChildren().addAll(constellations.get(i).getLines());
