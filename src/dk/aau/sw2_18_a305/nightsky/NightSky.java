@@ -84,7 +84,6 @@ public class NightSky extends Group{
         if(!isHeightValid(height))
             throw new IllegalHeightException(height);
     }
-
     private void checkWidth(int width) {
         if(!isWidthValid(width))
             throw new IllegalWidthException(width);

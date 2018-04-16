@@ -3,7 +3,7 @@ package dk.aau.sw2_18_a305.nightsky;
 public class Star {
     private int xCoordinate, yCoordinate;
     private String starClass, apparantColour;
-    private double apparantMagnitude, magnitude, size, mass, temperature;
+    private double apparantMagnitude, magnitude, radius, mass, temperature;
 
     //GETTERS
     public int getxCoordinate() {
@@ -24,8 +24,8 @@ public class Star {
     public double getMagnitude() {
         return magnitude;
     }
-    public double getSize() {
-        return size;
+    public double getradius() {
+        return radius;
     }
     public double getMass() {
         return mass;
@@ -59,9 +59,9 @@ public class Star {
         //Make rules for input
         this.magnitude = magnitude;
     }
-    public void setSize(double size) {
+    public void setradius(double radius) {
         //Make rules for input
-        this.size = size;
+        this.radius = radius;
     }
     public void setMass(double mass) {
         //Make rules for input
