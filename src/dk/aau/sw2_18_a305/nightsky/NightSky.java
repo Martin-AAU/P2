@@ -67,7 +67,7 @@ public class NightSky extends Group{
         this.height = height;
     }
     public void setWidth(int width) {
-        checkHeight(height);
+        checkWidth(width);
         this.width = width;
     }
     public void setStars(ArrayList<Circle> stars) {
@@ -132,7 +132,7 @@ public class NightSky extends Group{
         getChildren().addAll(stars);
     }
 
-    double dist(double x1, double y1, double x2, double y2) {
+    private double dist(double x1, double y1, double x2, double y2) {
         return Math.sqrt((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2));
     }
 }
