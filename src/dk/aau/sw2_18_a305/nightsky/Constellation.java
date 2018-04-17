@@ -7,36 +7,28 @@ import javafx.scene.shape.Line;
 import java.util.ArrayList;
 
 public class Constellation extends Group{
-    private ArrayList<Circle> stars = new ArrayList<>();
-    private ArrayList<Line> lines = new ArrayList<>();
+    private String name;
+    private ArrayList<Star> stars = new ArrayList<>();
 
     //Constructors
-    public Constellation() {
+    public Constellation(String name) {
+        this.name = name;
     }
-    public Constellation(ArrayList<Circle> stars) {
+    public Constellation(String name, ArrayList<Star> stars) {
+        this.name = name;
         this.stars = stars;
     }
 
-    private void generateLines() {
-        if(stars.size() > 1) {
-            for (int i = 0; i < stars.size()-1; i++) {
-                Line l = new Line(this.stars.get(i).getCenterX(), this.stars.get(i).getCenterY(), this.stars.get(i+1).getCenterX(), this.stars.get(i+1).getCenterY());
-                lines.add(l);
-            }
-            getChildren().addAll(lines);
-        }
+    //Getter
+    public String getName() {
+        return name;
     }
-
-    public ArrayList<Circle> getStars() {
+    public ArrayList<Star> getStars() {
         return stars;
     }
 
-    public ArrayList<Line> getLines() {
-        return lines;
-    }
-
-    public void addStar(Circle c) {
-        this.stars.add(c);
-        generateLines();
+    //Add a star to the constellation
+    public void addStar(Star s) {
+        stars.add(s);
     }
 }
