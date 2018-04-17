@@ -2,7 +2,6 @@ package dk.aau.sw2_18_a305.nightsky;
 
 import dk.aau.sw2_18_a305.nightsky.exceptions.IllegalHeightException;
 import javafx.scene.shape.Circle;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -12,21 +11,21 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class NightSkyTest {
 
-    private NightSky nightSky;
+    private NightSky0 nightSky0;
 
     @BeforeEach
     void setUp() {
-        nightSky = new NightSky(100, 100);
+        nightSky0 = new NightSky0(100, 100);
     }
 
     @Test
     void getHeight() {
-        assertEquals(100, nightSky.getHeight());
+        assertEquals(100, nightSky0.getHeight());
     }
 
     @Test
     void getWidth() {
-        assertEquals(100, nightSky.getWidth());
+        assertEquals(100, nightSky0.getWidth());
     }
 
     @Test
@@ -43,12 +42,12 @@ class NightSkyTest {
 
     @Test
     void setHeight01() {
-        assertThrows(IllegalHeightException.class, ()->{nightSky.setHeight(0);});
+        assertThrows(IllegalHeightException.class, ()-> nightSky0.setHeight(0));
     }
 
     @Test
     void setWidth01() {
-        assertThrows(IllegalHeightException.class, ()->{nightSky.setWidth(0);});
+        assertThrows(IllegalHeightException.class, ()-> nightSky0.setWidth(0));
     }
 
     @Test
@@ -57,13 +56,13 @@ class NightSkyTest {
 
     @Test
     void setStars() {
-        ArrayList<Circle> stars = new ArrayList<Circle>();
+        ArrayList<Circle> stars = new ArrayList<>();
         stars.add(new Circle(10, 10, 5));
-        nightSky.setStars(stars);
+        nightSky0.setStars(stars);
 
-        assertEquals(10, nightSky.getStars().get(0).getCenterX());
-        assertEquals(10, nightSky.getStars().get(0).getCenterY());
-        assertEquals(5, nightSky.getStars().get(0).getRadius());
+        assertEquals(10, nightSky0.getStars().get(0).getCenterX());
+        assertEquals(10, nightSky0.getStars().get(0).getCenterY());
+        assertEquals(5, nightSky0.getStars().get(0).getRadius());
     }
 
     @Test

@@ -11,20 +11,20 @@ import javafx.scene.shape.Circle;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class NightSky extends Group{
+public class NightSky0 extends Group{
     private int height, width, activeConstellation = 0;
     private ArrayList<Circle> stars = new ArrayList<>();
     private ArrayList<Constellation> constellations = new ArrayList<>();
 
     //Constructors
-    public NightSky(int height, int width) {
+    public NightSky0(int height, int width) {
         checkHeight(height);
         checkWidth(width);
 
         this.height = height;
         this.width = width;
     }
-    public NightSky(int height, int width, ArrayList<Circle> stars) {
+    public NightSky0(int height, int width, ArrayList<Circle> stars) {
         checkHeight(height);
         checkWidth(width);
 
@@ -33,7 +33,7 @@ public class NightSky extends Group{
         this.stars = stars;
         this.getChildren().addAll(stars);
     }
-    public NightSky(int height, int width, ArrayList<Circle> stars, ArrayList<Constellation> constellations) {
+    public NightSky0(int height, int width, ArrayList<Circle> stars, ArrayList<Constellation> constellations) {
         checkHeight(height);
         checkWidth(width);
 
@@ -80,6 +80,7 @@ public class NightSky extends Group{
         this.activeConstellation = activeConstellation;
     }
 
+    //Checkers
     private void checkHeight(int height) {
         if(!isHeightValid(height))
             throw new IllegalHeightException(height);
@@ -98,7 +99,7 @@ public class NightSky extends Group{
     }
 
     public void generateStars(int ammount) {
-        constellations.add(new Constellation());
+        //constellations.add(new Constellation());
         Random random = new Random();
         stars.add(new Circle(random.nextInt(width), random.nextInt(height), 3+random.nextInt(4), Color.BLUE));
 
@@ -106,7 +107,7 @@ public class NightSky extends Group{
 
             Circle c = new Circle(random.nextInt(width), random.nextInt(height), 3+ random.nextInt(4), Color.BLUE);
             c.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-                this.constellations.get(activeConstellation).addStar(c);
+                //this.constellations.get(activeConstellation).addStar(c);
                 updateGroup();
             } );
 
@@ -125,7 +126,7 @@ public class NightSky extends Group{
         this.getChildren().clear();
 
         for(int i = 0; i < constellations.size(); i++) {
-            getChildren().addAll(constellations.get(i).getLines());
+            //getChildren().addAll(constellations.get(i).getLines());
         }
 
         getChildren().addAll(stars);
