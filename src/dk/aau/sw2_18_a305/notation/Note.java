@@ -9,7 +9,6 @@ public class Note {
     rootNote rootnote;
 
     public Note(int tempOctave, rootNote tempNote) {
-        this.octave = octave;
         this.rootnote = tempNote;
     }
 }
