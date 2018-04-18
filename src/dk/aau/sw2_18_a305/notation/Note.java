@@ -7,7 +7,6 @@ public class Note {
         C, Cs, D, Ds, E, F, Fs, G, Gs, A, As, B
     }
     rootNote rootnote;
-    int octave;
 
     public Note(int tempOctave, rootNote tempNote) {
         this.octave = octave;
