@@ -25,7 +25,6 @@ public class DrawGUI extends Application {
     ArrayList<Star> stars = new ArrayList<>();
     ArrayList<Star> chosenStars = new ArrayList<>();
     ArrayList<Circle> circles = new ArrayList<>();
-    ArrayList<Line> lines = new ArrayList<>();
     Random random = new Random();
     int amount = 50;
     int width = 1024;
@@ -43,26 +42,27 @@ public class DrawGUI extends Application {
         // generate constellation with empty arraylist of stars
         Constellation constellation = new Constellation("constellation", chosenStars);
 
-        // generates circles from the stars x and y positions
+        // make group
+        Group nightskyScene = new Group();
+
+        // generates circles and lines from the stars x and y positions
         for(int i = 0; i < amount; i++) {
             Circle c = new Circle(stars.get(i).getxCoordinate(), stars.get(i).getyCoordinate(), 7+ random.nextInt(8), Color.BLUE);
             int finalI = i;
             c.addEventHandler(MouseEvent.MOUSE_CLICKED, (MouseEvent event) -> {
                 constellation.addStar(stars.get(finalI));
                 System.out.println(constellation.getStars().size());
-                if(finalI > 2) {
-                    Line l = new Line(constellation.getStars().get(finalI-1).getxCoordinate(), constellation.getStars().get(finalI-1).getyCoordinate(), constellation.getStars().get(finalI).getxCoordinate(), constellation.getStars().get(finalI).getyCoordinate());
-                    lines.add(l);
+                if(constellation.getStars().size() > 1) {
+                    Line l = new Line(constellation.getStars().get(constellation.getStars().size()-2).getxCoordinate(), constellation.getStars().get(constellation.getStars().size()-2).getyCoordinate(), constellation.getStars().get(constellation.getStars().size()-1).getxCoordinate(), constellation.getStars().get(constellation.getStars().size()-1).getyCoordinate());
+                    nightskyScene.getChildren().add(l);
                 }
             } );
             circles.add(c);
         }
         System.out.println(stars.size());
 
-        // make group
-        Group nightskyScene = new Group();
+        // add circles to group
         nightskyScene.getChildren().addAll(circles);
-        nightskyScene.getChildren().addAll(lines);
 
         // create scene
         primaryStage.setTitle("NightSky");
