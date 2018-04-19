@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
@@ -24,6 +25,7 @@ public class DrawGUI extends Application {
     ArrayList<Star> stars = new ArrayList<>();
     ArrayList<Star> chosenStars = new ArrayList<>();
     ArrayList<Circle> circles = new ArrayList<>();
+    ArrayList<Line> lines = new ArrayList<>();
     Random random = new Random();
     int amount = 50;
     int width = 1024;
@@ -48,6 +50,10 @@ public class DrawGUI extends Application {
             c.addEventHandler(MouseEvent.MOUSE_CLICKED, (MouseEvent event) -> {
                 constellation.addStar(stars.get(finalI));
                 System.out.println(constellation.getStars().size());
+                if(finalI > 2) {
+                    Line l = new Line(constellation.getStars().get(finalI-1).getxCoordinate(), constellation.getStars().get(finalI-1).getyCoordinate(), constellation.getStars().get(finalI).getxCoordinate(), constellation.getStars().get(finalI).getyCoordinate());
+                    lines.add(l);
+                }
             } );
             circles.add(c);
         }
@@ -56,6 +62,7 @@ public class DrawGUI extends Application {
         // make group
         Group nightskyScene = new Group();
         nightskyScene.getChildren().addAll(circles);
+        nightskyScene.getChildren().addAll(lines);
 
         // create scene
         primaryStage.setTitle("NightSky");
