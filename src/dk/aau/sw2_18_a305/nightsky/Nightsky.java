@@ -24,12 +24,13 @@ public class Nightsky {
         return constellations;
     }
 
-    //SETTERS
-    public void setStars(ArrayList<Star> stars) {
-        this.stars = stars;
+    //METHODS
+    public void addStar(Star star) {
+        this.stars.add(star);
     }
-    public void setConstellations(ArrayList<Constellation> constellations) {
-        this.constellations = constellations;
+
+    public void addConstellation(Constellation constellation) {
+        this.constellations.add(constellation);
     }
 
 }

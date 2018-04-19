@@ -1,7 +1,5 @@
 package dk.aau.sw2_18_a305.nightsky;
 
-import dk.aau.sw2_18_a305.nightsky.exceptions.IllegalHeightException;
-import dk.aau.sw2_18_a305.nightsky.exceptions.IllegalWidthException;
 import javafx.scene.Group;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
