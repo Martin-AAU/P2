@@ -9,7 +9,7 @@ public class Sheet {
     public static int SIXTEENTH_NOTE = 16;
 
     private ArrayList<Note> notes = new ArrayList<>();
-    private ArrayList<Integer> timeStamps = new ArrayList();
+    private ArrayList<Integer> timeStamps = new ArrayList<>();
 
     private int timeDivision = QUARTER_NOTE;
 
@@ -20,14 +20,31 @@ public class Sheet {
         this.timeDivision = timeDivision;
     }
 
+    //Getters
+    public ArrayList<Note> getNotes() {
+        return notes;
+    }
+    public ArrayList<Integer> getTimeStamps() {
+        return timeStamps;
+    }
+    public int getTimeDivision() {
+        return timeDivision;
+    }
+
+    //Setters
+    public void setTimeDivision(int timeDivision) {
+        this.timeDivision = timeDivision;
+    }
+
+    //Methods
     public void addNote(Note n, int time) {
         notes.add(n);
         this.timeStamps.add(time);
     }
 
     public void addChord(Chord c, int timeStamp) {
-        addNote(c.note1, timeStamp);
-        addNote(c.note2, timeStamp);
-        addNote(c.note3, timeStamp);
+        for(int i = 0; i < c.getNotes().size(); i++) {
+            addNote(c.getNotes().get(i), timeStamp);
+        }
     }
 }

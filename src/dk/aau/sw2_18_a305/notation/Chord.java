@@ -1,32 +1,67 @@
 package dk.aau.sw2_18_a305.notation;
 
+import java.util.ArrayList;
+
 import static dk.aau.sw2_18_a305.notation.PitchClass.*;
+
 
 public class Chord {
 
-    // Spoken definition
-    public enum ChordType {
-        Major, Minor, Diminshed, Suspended2, Suspended4, Augmented;
-    }
-
-    // Program definition
-    Note note1;
-    Note note2;
-    Note note3;
-
-    private int interval1;
-    private int interval2;
+    private ArrayList<Note> notes = new ArrayList<>();
     private int length;
 
-    public Chord(PitchClass pitchClass, ChordType chordType, int length) {
-        standardChord(pitchClass, chordType, length);
+    //Constructors
+    public Chord(PitchClass rootNote, ChordType chordType, int length) {
+        //This constructor generates a chord by a rootnote (PitchClass) and a chordtype
+        standardChord(rootNote, chordType, length);
+    }
+    public Chord(PitchClass root, PitchClass second, PitchClass third, int length) {
+        notes.add(new Note(root, length));
+        notes.add(new Note(second, length));
+        notes.add(new Note(third, length));
+        this.length = length;
+    }
+    public Chord(PitchClass root, PitchClass second, PitchClass third, PitchClass fifth, int length) {
+        notes.add(new Note(root, length));
+        notes.add(new Note(second, length));
+        notes.add(new Note(third, length));
+        notes.add(new Note(fifth, length));
+        this.length = length;
+    }
+    public Chord(PitchClass root, PitchClass second, PitchClass third, PitchClass fifth, PitchClass sixth, int length) {
+        notes.add(new Note(root, length));
+        notes.add(new Note(second, length));
+        notes.add(new Note(third, length));
+        notes.add(new Note(fifth, length));
+        notes.add(new Note(sixth, length));
+        this.length = length;
+    }
+    public Chord(PitchClass root, PitchClass second, PitchClass third, PitchClass fifth, PitchClass sixth, PitchClass seventh, int length) {
+        notes.add(new Note(root, length));
+        notes.add(new Note(second, length));
+        notes.add(new Note(third, length));
+        notes.add(new Note(fifth, length));
+        notes.add(new Note(sixth, length));
+        notes.add(new Note(seventh, length));
+        this.length = length;
     }
 
+    //Getters
+    public ArrayList<Note> getNotes() {
+        return notes;
+    }
+    public int getLength() {
+        return length;
+    }
+
+    //Methods
+    //Generates 3 notes of a standard chord, and adds them to the notes list.
     private void standardChord(PitchClass pitchClass, ChordType chordType, int length) {
-        this.note1 = new Note(pitchClass, length);
+        notes.add(new Note(pitchClass, length));
 
         int i, j;
 
+        //Determines the two intervals of the given chord type
         switch (chordType) {
             case Major: i = 4; j = 3;
             case Minor: i = 3; j = 4;
@@ -34,15 +69,16 @@ public class Chord {
             case Augmented: i = 4; j = 4;
             case Suspended2: i = 5; j = 2;
             case Suspended4: i = 2; j = 4;
-            case default: i = 0; j = 0;
+            default: i = 0; j = 0;
         }
 
-        interval1 = i;
-        interval2 = j;
+        notes.add(new Note(intervalToNote(i), length));
+        notes.add(new Note(intervalToNote(j), length));
     }
 
+    //Returns a pitchClass depending on what
     private PitchClass intervalToNote(int interval) {
-        switch ((note1.pitchClass.number + interval) % 12) {
+        switch ((notes.get(0).getPitchClass().number + interval) % 12) {
             case 1: return C;
             case 2: return Cs;
             case 3: return D;

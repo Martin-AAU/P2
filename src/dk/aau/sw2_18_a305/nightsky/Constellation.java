@@ -19,7 +19,7 @@ public class Constellation extends Group{
         this.stars = stars;
     }
 
-    //Getter
+    //Getters
     public String getName() {
         return name;
     }
