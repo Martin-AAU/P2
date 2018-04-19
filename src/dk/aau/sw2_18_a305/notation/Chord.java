@@ -10,7 +10,7 @@ public class Chord {
     private ArrayList<Note> notes = new ArrayList<>();
     private int length;
 
-    //Constructors
+    //CONSTRUCTORS
     public Chord(PitchClass rootNote, ChordType chordType, int length) {
         //This constructor generates a chord by a rootnote (PitchClass) and a chordtype
         standardChord(rootNote, chordType, length);
@@ -46,7 +46,7 @@ public class Chord {
         this.length = length;
     }
 
-    //Getters
+    //GETTERS
     public ArrayList<Note> getNotes() {
         return notes;
     }

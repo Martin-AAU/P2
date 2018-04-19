@@ -1,5 +1,3 @@
-package dk.aau.sw2_18_a305;
-
 import dk.aau.sw2_18_a305.nightsky.Constellation;
 import dk.aau.sw2_18_a305.nightsky.Nightsky;
 import dk.aau.sw2_18_a305.nightsky.Star;
