@@ -83,11 +83,11 @@ public class NightSky0 extends Group{
     //Checkers
     private void checkHeight(int height) {
         if(!isHeightValid(height))
-            throw new IllegalHeightException(height);
+            //throw new IllegalHeightException(height);
     }
     private void checkWidth(int width) {
         if(!isWidthValid(width))
-            throw new IllegalWidthException(width);
+            //throw new IllegalWidthException(width);
     }
 
     private boolean isHeightValid(int height) {

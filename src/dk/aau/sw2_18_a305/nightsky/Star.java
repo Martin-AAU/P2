@@ -5,6 +5,21 @@ public class Star {
     private String starClass, apparantColour;
     private double apparantMagnitude, magnitude, radius, mass, temperature;
 
+    //Constructors
+    public Star(int xCoordinate, int yCoordinate) {
+        if (checkCoordinate(xCoordinate))
+            this.xCoordinate = xCoordinate;
+        if (checkCoordinate(yCoordinate))
+            this.yCoordinate = yCoordinate;
+    }
+    public Star(int xCoordinate, int yCoordinate, String apparantColour) {
+        if (checkCoordinate(xCoordinate))
+            this.xCoordinate = xCoordinate;
+        if (checkCoordinate(yCoordinate))
+            this.yCoordinate = yCoordinate;
+        this.apparantColour = apparantColour;
+    }
+
     //GETTERS
     public int getxCoordinate() {
         return xCoordinate;
@@ -70,21 +85,6 @@ public class Star {
     public void setTemperature(double temperature) {
         //Make rules for input
         this.temperature = temperature;
-    }
-
-    //Constructors
-    public Star(int xCoordinate, int yCoordinate) {
-        if (checkCoordinate(xCoordinate))
-            this.xCoordinate = xCoordinate;
-        if (checkCoordinate(yCoordinate))
-            this.yCoordinate = yCoordinate;
-    }
-    public Star(int xCoordinate, int yCoordinate, String apparantColour) {
-        if (checkCoordinate(xCoordinate))
-            this.xCoordinate = xCoordinate;
-        if (checkCoordinate(yCoordinate))
-            this.yCoordinate = yCoordinate;
-        this.apparantColour = apparantColour;
     }
 
     //Check methods
