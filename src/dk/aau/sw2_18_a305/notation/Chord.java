@@ -5,8 +5,9 @@ import java.util.ArrayList;
 import static dk.aau.sw2_18_a305.notation.PitchClass.*;
 
 
-public class Chord {
+public class Chord{
 
+    private DistanceMethod distanceMethod = new CircleOfFifths();
     private ArrayList<Note> notes = new ArrayList<>();
     private int length;
 
@@ -52,6 +53,11 @@ public class Chord {
     }
     public int getLength() {
         return length;
+    }
+
+    //SETTERS
+    public void setDistanceMethod(DistanceMethod distanceMethod) {
+        this.distanceMethod = distanceMethod;
     }
 
     //Methods
