@@ -4,6 +4,7 @@ public class Note {
 
     private PitchClass pitchClass;
     private int length;
+    private int octave;
 
     //Constructors
     public Note(PitchClass pitchClass) {
@@ -13,6 +14,16 @@ public class Note {
         this.pitchClass = pitchClass;
         this.length = length;
     }
+    public Note(int octave, PitchClass pitchClass) {
+        this.octave = octave;
+        this.pitchClass = pitchClass;
+    }
+    public Note(int octave, PitchClass pitchClass, int length) {
+        this.octave = octave;
+        this.pitchClass = pitchClass;
+        this.length = length;
+
+    }
 
     //Getters
     public PitchClass getPitchClass() {
@@ -20,5 +31,8 @@ public class Note {
     }
     public int getLength() {
         return length;
+    }
+    public int getOctave() {
+        return octave;
     }
 }
