@@ -59,8 +59,8 @@ public class Chord{
 
     //Methods
     private void finishNotes() {
-        for (int i = 0; i < intervals.size(); i++) {
-            notes.add(setNote(intervals.get(i)));
+        for (Integer interval : intervals) {
+            notes.add(setNote(interval));
         }
     }
 
@@ -84,11 +84,10 @@ public class Chord{
             case 10: p = A;
             case 11: p = As;
             case 12: p = B;
+            default: p = C;
         }
 
-        Note n = new Note(octave, p, length);
-
-        return n;
+        return new Note(octave, p, length);
     }
 }
 
