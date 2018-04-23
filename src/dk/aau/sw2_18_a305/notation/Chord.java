@@ -10,41 +10,38 @@ public class Chord{
     private DistanceMethod distanceMethod = new CircleOfFifths();
     private ArrayList<Note> notes = new ArrayList<>();
     private int length;
+    private ArrayList<Integer> intervals = new ArrayList<>();
 
     //CONSTRUCTORS
-    public Chord(PitchClass rootNote, ChordType chordType, int length) {
-        //This constructor generates a chord by a rootnote (PitchClass) and a chordtype
-        standardChord(rootNote, chordType, length);
+    public Chord(Note rootNote, int interval1, int interval2) {
+        notes.add(rootNote);
+        intervals.add(interval1);
+        intervals.add(interval2);
+        finishNotes();
     }
-    public Chord(PitchClass root, PitchClass second, PitchClass third, int length) {
-        notes.add(new Note(root, length));
-        notes.add(new Note(second, length));
-        notes.add(new Note(third, length));
-        this.length = length;
+    public Chord(Note rootNote, int interval1, int interval2, int interval3) {
+        notes.add(rootNote);
+        intervals.add(interval1);
+        intervals.add(interval2);
+        intervals.add(interval3);
+        finishNotes();
     }
-    public Chord(PitchClass root, PitchClass second, PitchClass third, PitchClass fifth, int length) {
-        notes.add(new Note(root, length));
-        notes.add(new Note(second, length));
-        notes.add(new Note(third, length));
-        notes.add(new Note(fifth, length));
-        this.length = length;
+    public Chord(Note rootNote, int interval1, int interval2, int interval3, int interval4) {
+        notes.add(rootNote);
+        intervals.add(interval1);
+        intervals.add(interval2);
+        intervals.add(interval3);
+        intervals.add(interval4);
+        finishNotes();
     }
-    public Chord(PitchClass root, PitchClass second, PitchClass third, PitchClass fifth, PitchClass sixth, int length) {
-        notes.add(new Note(root, length));
-        notes.add(new Note(second, length));
-        notes.add(new Note(third, length));
-        notes.add(new Note(fifth, length));
-        notes.add(new Note(sixth, length));
-        this.length = length;
-    }
-    public Chord(PitchClass root, PitchClass second, PitchClass third, PitchClass fifth, PitchClass sixth, PitchClass seventh, int length) {
-        notes.add(new Note(root, length));
-        notes.add(new Note(second, length));
-        notes.add(new Note(third, length));
-        notes.add(new Note(fifth, length));
-        notes.add(new Note(sixth, length));
-        notes.add(new Note(seventh, length));
-        this.length = length;
+    public Chord(Note rootNote, int interval1, int interval2, int interval3, int interval4, int interval5) {
+        notes.add(rootNote);
+        intervals.add(interval1);
+        intervals.add(interval2);
+        intervals.add(interval3);
+        intervals.add(interval4);
+        intervals.add(interval5);
+        finishNotes();
     }
 
     //GETTERS
@@ -61,7 +58,42 @@ public class Chord{
     }
 
     //Methods
-    //Generates 3 notes of a standard chord, and adds them to the notes list.
+    private void finishNotes() {
+        for (int i = 0; i < intervals.size(); i++) {
+            notes.add(setNote(intervals.get(i)));
+        }
+    }
+
+    private Note setNote(int interval) {
+
+        PitchClass p;
+        int length = notes.get(0).getLength();
+        int index = notes.get(0).getPitchClass().number + interval;
+        int octave = notes.get(0).getOctave() + (index/12);
+
+        switch ((index % 12) + 1) {
+            case 1: p = C;
+            case 2: p = Cs;
+            case 3: p = D;
+            case 4: p = Ds;
+            case 5: p = E;
+            case 6: p = F;
+            case 7: p = Fs;
+            case 8: p = G;
+            case 9: p = Gs;
+            case 10: p = A;
+            case 11: p = As;
+            case 12: p = B;
+        }
+
+        Note n = new Note(octave, p, length);
+
+        return n;
+    }
+}
+
+/*
+* //Generates 3 notes of a standard chord, and adds them to the notes list.
     private void standardChord(PitchClass pitchClass, ChordType chordType, int length) {
         notes.add(new Note(pitchClass, length));
 
@@ -100,4 +132,4 @@ public class Chord{
         }
         return C;
     }
-}
+* */
