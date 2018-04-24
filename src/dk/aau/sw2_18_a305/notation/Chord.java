@@ -66,24 +66,24 @@ public class Chord{
 
     private Note setNote(int interval) {
 
-        PitchClass p;
+        PitchClass p = null;
         int length = notes.get(0).getLength();
-        int index = notes.get(0).getPitchClass().number + interval;
+        int index = notes.get(notes.size()-1).getPitchClass().number + interval;
         int octave = notes.get(0).getOctave() + (index/12);
 
         switch ((index % 12) + 1) {
-            case 1: p = C;
-            case 2: p = Cs;
-            case 3: p = D;
-            case 4: p = Ds;
-            case 5: p = E;
-            case 6: p = F;
-            case 7: p = Fs;
-            case 8: p = G;
-            case 9: p = Gs;
-            case 10: p = A;
-            case 11: p = As;
-            case 12: p = B;
+            case 1: p = C; break;
+            case 2: p = Cs; break;
+            case 3: p = D;  break;
+            case 4: p = Ds; break;
+            case 5: p = E;  break;
+            case 6: p = F;  break;
+            case 7: p = Fs; break;
+            case 8: p = G;  break;
+            case 9: p = Gs; break;
+            case 10: p = A; break;
+            case 11: p = As;break;
+            case 12: p = B; break;
             default: p = C;
         }
 
