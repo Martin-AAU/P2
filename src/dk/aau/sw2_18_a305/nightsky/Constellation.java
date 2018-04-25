@@ -6,11 +6,11 @@ import javafx.scene.shape.Line;
 
 import java.util.ArrayList;
 
-public class Constellation extends Group{
+public class Constellation{
     private String name;
     private ArrayList<Star> stars = new ArrayList<>();
 
-    //Constructors
+    // CONSTRUCTOR
     public Constellation(String name) {
         this.name = name;
     }
@@ -19,7 +19,7 @@ public class Constellation extends Group{
         this.stars = stars;
     }
 
-    //Getters
+    // GETTERS
     public String getName() {
         return name;
     }

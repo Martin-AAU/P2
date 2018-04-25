@@ -13,15 +13,14 @@ public class Sheet {
     private int timeDivision = QUARTER_NOTE;
     private int totalPlaytime = 0;
 
-    //Constructors
+    // CONTRUCTORS
     public Sheet() {
     }
     public Sheet(int timeDivision) {
         this.timeDivision = timeDivision;
     }
 
-    //Getters
-
+    // GETTERS
     public LinkedList<TimedNote> getNotes() {
         return notes;
     }
@@ -32,12 +31,12 @@ public class Sheet {
         return totalPlaytime;
     }
 
-    //Setters
+    // SETTTERS
     public void setTimeDivision(int timeDivision) {
         this.timeDivision = timeDivision;
     }
 
-    //Methods
+    // METHODS
     public void addNote(TimedNote n) {
         int time = n.getTimeStamp();
 

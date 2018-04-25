@@ -12,7 +12,7 @@ public class TimedNote extends Note{
         this.length = length;
         this.timeStamp = timeStamp;
     }
-    public TimedNote(int octave, PitchClass pitchClass, int length, int timeStamp) {
+    public TimedNote(PitchClass pitchClass, int octave, int length, int timeStamp) {
         super(pitchClass, octave);
         this.length = length;
         this.timeStamp = timeStamp;

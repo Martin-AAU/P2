@@ -5,16 +5,17 @@ public class Note {
     private PitchClass pitchClass;
     private int octave;
 
-    //Constructors
+    // CONSTRUCTOR
     public Note(PitchClass pitchClass) {
         this.pitchClass = pitchClass;
+        this.octave = 3;
     }
     public Note(PitchClass pitchClass, int octave) {
         this.octave = octave;
         this.pitchClass = pitchClass;
     }
 
-    //Getters
+    // GETTER
     public PitchClass getPitchClass() {
         return pitchClass;
     }

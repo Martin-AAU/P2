@@ -1,25 +1,36 @@
+import dk.aau.sw2_18_a305.nightsky.Constellation;
+import dk.aau.sw2_18_a305.nightsky.Nightsky;
+import dk.aau.sw2_18_a305.notation.*;
+import javafx.scene.shape.Circle;
+
 import java.util.Vector;
+
+import static dk.aau.sw2_18_a305.notation.PitchClass.*;
 
 public class ConstToSheetConv {
 
-    public int calcLength(int x1, int y1, int x2, int y2) {
-        double result = Math.sqrt((x2-x1)*(x2-x1) + (y2-y1)*(y2-y1));
-        double maxDistance = Math.sqrt((width-0)*(width-0) + (height-0)*(height-0));
+    public Sheet convert(Constellation c) {
+        Sheet s = new Sheet();
+        Note firstNote = new Note(calPitchClass(c.getStars().get(0).getyCoordinate()));
+        Chord firstChord = new Chord(firstNote, 4, 3);
 
-        if(result < (maxDistance * 0.2)) {
-            return 1;
-        } else if(result < (maxDistance * 0.4)) {
-            return 2;
-        } if(result < (maxDistance * 0.6)) {
-            return 4;
-        } if(result < (maxDistance * 0.8)) {
-            return 8;
-        } else {
-            return 16;
+        s.addChord(firstChord, 16, 0);
+
+        for (int i = 1; i < c.getStars().size(); i++) {
+
         }
+
+        return s;
     }
 
-    public int calcPlayTime(int x1, int y1, int x2, int y2, int x3, int y3) {
+    private int calcLength(int x1, int y1, int x2, int y2) {
+        double result = Math.sqrt((x2-x1)*(x2-x1) + (y2-y1)*(y2-y1));
+        double maxDistance = Math.sqrt((DrawGUI.width-0)*(DrawGUI.width-0) + (DrawGUI.height-0)*(DrawGUI.height-0));
+
+        return determineTime(result, maxDistance);
+    }
+
+    private int calcPlayTime(int x1, int y1, int x2, int y2, int x3, int y3) {
         Vector<Integer> v1 = new Vector<>(Math.abs(x1-x2), Math.abs(y1-y2));
         Vector<Integer> v2 = new Vector<>(Math.abs(x2-x3), Math.abs(y2-y3));
 
@@ -29,17 +40,40 @@ public class ConstToSheetConv {
         if(angle > Math.PI) {
             angle = (2 * Math.PI) - angle;
         }
+        return determineTime(angle, Math.PI);
+    }
 
-        if(angle < (Math.PI * 0.2)) {
+    private int determineTime(double number, double range) {
+        if(number < range * 0.2) {
             return 1;
-        } else if(angle < (Math.PI * 0.4)) {
+        } else if(number < range * 0.4) {
             return 2;
-        } if(angle < (Math.PI * 0.6)) {
+        } if(number < range * 0.6) {
             return 4;
-        } if(angle < (Math.PI * 0.8)) {
+        } if(number < range * 0.8) {
             return 8;
         } else {
             return 16;
+        }
+    }
+
+    private PitchClass calPitchClass(int y) {
+        int index = y / (DrawGUI.height/12) + 1;
+
+        switch (index % 12) {
+            case 1: return C;
+            case 2: return Cs;
+            case 3: return D;
+            case 4: return Ds;
+            case 5: return E;
+            case 6: return F;
+            case 7: return Fs;
+            case 8: return G;
+            case 9: return Gs;
+            case 10: return A;
+            case 11: return As;
+            case 0: return B;
+            default: return C;
         }
     }
 }

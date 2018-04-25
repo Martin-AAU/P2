@@ -9,4 +9,22 @@ public enum PitchClass {
     PitchClass(int number) {
         this.number = number;
     }
+
+    public PitchClass readPitchClass(int index) {
+        switch (index % 12) {
+            case 1: return C;
+            case 2: return Cs;
+            case 3: return D;
+            case 4: return Ds;
+            case 5: return E;
+            case 6: return F;
+            case 7: return Fs;
+            case 8: return G;
+            case 9: return Gs;
+            case 10: return A;
+            case 11: return As;
+            case 0: return B;
+            default: return C;
+        }
+    }
 }

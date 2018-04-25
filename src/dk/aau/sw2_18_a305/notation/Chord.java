@@ -12,7 +12,7 @@ public class Chord{
     private int length;
     private ArrayList<Integer> intervals = new ArrayList<>();
 
-    //CONSTRUCTORS
+    // CONSTRUCTORS
     public Chord(Note rootNote, int interval1, int interval2) {
         notes.add(rootNote);
         intervals.add(interval1);
@@ -44,7 +44,7 @@ public class Chord{
         finishNotes();
     }
 
-    //GETTERS
+    // GETTERS
     public ArrayList<Note> getNotes() {
         return notes;
     }
@@ -52,12 +52,12 @@ public class Chord{
         return length;
     }
 
-    //SETTERS
+    // SETTERS
     public void setDistanceMethod(DistanceMethod distanceMethod) {
         this.distanceMethod = distanceMethod;
     }
 
-    //Methods
+    // METHODS
     private void finishNotes() {
         for (Integer interval : intervals) {
             notes.add(setNote(interval));
