@@ -67,7 +67,6 @@ public class Chord{
     private Note setNote(int interval) {
 
         PitchClass p = null;
-        int length = notes.get(0).getLength();
         int index = notes.get(notes.size()-1).getPitchClass().number + interval;
         int octave = notes.get(0).getOctave() + (index/12);
 
@@ -87,7 +86,12 @@ public class Chord{
             default: p = C;
         }
 
-        return new Note(octave, p, length);
+        return new Note(p, octave);
+    }
+
+    public int distanceTo(Chord c ) {
+        return distanceMethod.distanceto(this, c);
+
     }
 }
 

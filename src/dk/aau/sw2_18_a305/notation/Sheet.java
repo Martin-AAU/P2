@@ -1,6 +1,6 @@
 package dk.aau.sw2_18_a305.notation;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class Sheet {
 
@@ -8,8 +8,7 @@ public class Sheet {
     public static int EIGHTH_NOTE = 8;
     public static int SIXTEENTH_NOTE = 16;
 
-    private ArrayList<Note> notes = new ArrayList<>();
-    private ArrayList<Integer> timeStamps = new ArrayList<>();
+    private LinkedList<TimedNote> notes = new LinkedList<>();
 
     private int timeDivision = QUARTER_NOTE;
     private int totalPlaytime = 0;
@@ -22,11 +21,9 @@ public class Sheet {
     }
 
     //Getters
-    public ArrayList<Note> getNotes() {
+
+    public LinkedList<TimedNote> getNotes() {
         return notes;
-    }
-    public ArrayList<Integer> getTimeStamps() {
-        return timeStamps;
     }
     public int getTimeDivision() {
         return timeDivision;
@@ -41,15 +38,27 @@ public class Sheet {
     }
 
     //Methods
-    public void addNote(Note n, int time) {
-        notes.add(n);
-        this.timeStamps.add(time);
-        totalPlaytime = totalPlaytime + time;
+    public void addNote(TimedNote n) {
+        int time = n.getTimeStamp();
+
+        if(time >= totalPlaytime) {
+            notes.add(n);
+        }
+        else {
+            for (int i = 0; i < notes.size(); i++) {
+                if (time >= notes.get(i).getTimeStamp()) {
+                    notes.add(i, n);
+                }
+            }
+        }
+
+        totalPlaytime = totalPlaytime < time ? time : totalPlaytime;
     }
 
-    public void addChord(Chord c, int timeStamp) {
+    public void addChord(Chord c, int length, int timeStamp) {
         for(int i = 0; i < c.getNotes().size(); i++) {
-            addNote(c.getNotes().get(i), timeStamp);
+            TimedNote n = new TimedNote(c.getNotes().get(i), length, timeStamp);
+            addNote(n);
         }
     }
 }
