@@ -12,6 +12,7 @@ public class Sheet {
     private ArrayList<Integer> timeStamps = new ArrayList<>();
 
     private int timeDivision = QUARTER_NOTE;
+    private int totalPlaytime = 0;
 
     //Constructors
     public Sheet() {
@@ -30,6 +31,9 @@ public class Sheet {
     public int getTimeDivision() {
         return timeDivision;
     }
+    public int getTotalPlaytime() {
+        return totalPlaytime;
+    }
 
     //Setters
     public void setTimeDivision(int timeDivision) {
@@ -40,6 +44,7 @@ public class Sheet {
     public void addNote(Note n, int time) {
         notes.add(n);
         this.timeStamps.add(time);
+        totalPlaytime = totalPlaytime + time;
     }
 
     public void addChord(Chord c, int timeStamp) {
