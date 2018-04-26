@@ -85,7 +85,7 @@ public class Chord{
         return new Note(p, octave);
     }
 
-    public int distanceTo(Chord c ) {
+    public int distanceTo(Chord c) {
         return distanceStrategy.distanceto(this, c);
 
     }

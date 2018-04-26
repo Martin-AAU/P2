@@ -10,14 +10,16 @@ class NoteTest {
 
     @BeforeEach
     void setUp() {
-        note = new Note(PitchClass.C);
+        note = new Note(PitchClass.C, 4);
     }
 
     @Test
     void getPitchClass() {
+        assertEquals(PitchClass.C, note.getPitchClass());
     }
 
     @Test
-    void getLength() {
+    void getOctave() {
+        assertEquals(4, note.getOctave());
     }
 }
