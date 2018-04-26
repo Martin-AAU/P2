@@ -1,6 +1,7 @@
 package dk.aau.sw2_18_a305.notation;
 
 import java.util.LinkedList;
+import java.util.stream.IntStream;
 
 public class Sheet {
 
@@ -44,11 +45,7 @@ public class Sheet {
             notes.add(n);
         }
         else {
-            for (int i = 0; i < notes.size(); i++) {
-                if (time >= notes.get(i).getTimeStamp()) {
-                    notes.add(i, n);
-                }
-            }
+            IntStream.range(0, notes.size()).filter(i -> time >= notes.get(i).getTimeStamp()).forEach(i -> notes.add(i, n));
         }
 
         totalPlaytime = totalPlaytime < time ? time : totalPlaytime;

@@ -1,5 +1,6 @@
 import dk.aau.sw2_18_a305.nightsky.Constellation;
 import dk.aau.sw2_18_a305.nightsky.Nightsky;
+import dk.aau.sw2_18_a305.nightsky.Star;
 import dk.aau.sw2_18_a305.notation.*;
 import javafx.scene.shape.Circle;
 
@@ -10,17 +11,44 @@ import static dk.aau.sw2_18_a305.notation.PitchClass.*;
 public class ConstToSheetConv {
 
     public Sheet convert(Constellation c) {
-        Sheet s = new Sheet();
-        Note firstNote = new Note(calPitchClass(c.getStars().get(0).getyCoordinate()));
-        Chord firstChord = new Chord(firstNote, 4, 3);
 
-        s.addChord(firstChord, 16, 0);
+        Sheet sheet = new Sheet();
 
-        for (int i = 1; i < c.getStars().size(); i++) {
+        //Initialize the Note and chord in the first end of the sheet (Beginning) and add it to the sheet as a dur chord
+        Note endNote = new Note(calPitchClass(c.getStars().get(0).getyCoordinate()));
+        Chord endChord = new Chord(endNote, 4, 3);
+        Chord latestChord = endChord;
+        sheet.addChord(endChord, 16, 0);
+
+        for (int i = 1; i < c.getStars().size() -1 ; i++) {
+            Star star = c.getStars().get(i);
+            Note n = new Note(calPitchClass(star.getyCoordinate()));
+
+            //calculate the space between the latest and current chord, and playtime of current chord
+            int space = calcLength(c.getStars().get(i-1).getxCoordinate(), c.getStars().get(i-1).getyCoordinate(), star.getxCoordinate(), star.getyCoordinate());
+            int playtime = calcPlayTime(c.getStars().get(i-1).getxCoordinate(), c.getStars().get(i-1).getyCoordinate(),
+                                        star.getxCoordinate(), star.getyCoordinate(), c.getStars().get(i+1).getxCoordinate(),
+                                        c.getStars().get(i+1).getyCoordinate());
+
+            //Make the mol and dur chords
+            Chord dur = new Chord(n, 4, 3);
+            Chord mol = new Chord(n, 3, 4);
+
+            //Add the closest of the dur or mol chords to sheet
+            sheet.addChord(checkClosestChord(latestChord, mol, dur), playtime, space + sheet.getTotalPlaytime());
 
         }
+        Star endStar = c.getStars().get(c.getStars().size() - 1);
+        Star lastStar = c.getStars().get(c.getStars().size() - 2);
+        int space = calcLength(lastStar.getxCoordinate(), lastStar.getyCoordinate(), endStar.getxCoordinate(), endStar.getyCoordinate());
 
-        return s;
+        //Calculate the end note and chord (Last) and add it to sheet
+        endNote = new Note(calPitchClass(c.getStars().get(c.getStars().size() - 1).getyCoordinate()));
+        Chord dur = new Chord(endNote, 4, 3);
+        Chord mol = new Chord(endNote, 3, 4);
+        sheet.addChord(checkClosestChord(latestChord, mol, dur), 16, space + sheet.getTotalPlaytime());
+
+        return sheet;
     }
 
     private int calcLength(int x1, int y1, int x2, int y2) {
@@ -75,5 +103,11 @@ public class ConstToSheetConv {
             case 0: return B;
             default: return C;
         }
+    }
+
+    private Chord checkClosestChord(Chord ref, Chord a, Chord b) {
+        if(ref.distanceTo(a) < ref.distanceTo(b))
+            return a;
+        return b;
     }
 }
