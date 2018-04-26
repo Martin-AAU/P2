@@ -9,7 +9,6 @@ public class Chord{
 
     private DistanceStrategy distanceStrategy = new CircleOfFifths();
     private ArrayList<Note> notes = new ArrayList<>();
-    private int length;
     private ArrayList<Integer> intervals = new ArrayList<>();
 
     // CONSTRUCTORS
@@ -47,9 +46,6 @@ public class Chord{
     // GETTERS
     public ArrayList<Note> getNotes() {
         return notes;
-    }
-    public int getLength() {
-        return length;
     }
 
     // SETTERS
@@ -90,7 +86,7 @@ public class Chord{
     }
 
     public int distanceTo(Chord c ) {
-        return distanceStrategy.distanceto(this, c);
+        return distanceStrategy.distanceTo(this, c);
 
     }
 }
