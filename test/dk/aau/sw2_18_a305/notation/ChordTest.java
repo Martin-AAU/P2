@@ -33,11 +33,4 @@ class ChordTest {
 
         assertEquals(PitchClass.G, presumedG.getPitchClass());
     }
-
-    @Test
-    void getLength01() {
-        Note c = new Note(C, 2);
-        Chord cChord2 = new Chord(c, 4, 3);
-        assertEquals(2, c.getLength());
-    }
 }

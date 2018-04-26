@@ -90,7 +90,7 @@ public class Chord{
     }
 
     public int distanceTo(Chord c ) {
-        return distanceStrategy.distanceTo(this, c);
+        return distanceStrategy.distanceto(this, c);
 
     }
 }
