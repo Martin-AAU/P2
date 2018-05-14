@@ -10,20 +10,20 @@ public enum PitchClass {
         this.number = number;
     }
 
-    public PitchClass readPitchClass(int index) {
-        switch (index % 12) {
-            case 1: return C;
-            case 2: return Cs;
-            case 3: return D;
-            case 4: return Ds;
-            case 5: return E;
-            case 6: return F;
-            case 7: return Fs;
-            case 8: return G;
-            case 9: return Gs;
-            case 10: return A;
-            case 11: return As;
-            case 0: return B;
+    public static PitchClass readPitchClass(int index) {
+        switch (index) {
+            case 0: return C;
+            case 1: return Cs;
+            case 2: return D;
+            case 3: return Ds;
+            case 4: return E;
+            case 5: return F;
+            case 6: return Fs;
+            case 7: return G;
+            case 8: return Gs;
+            case 9: return A;
+            case 10: return As;
+            case 11: return B;
             default: return C;
         }
     }

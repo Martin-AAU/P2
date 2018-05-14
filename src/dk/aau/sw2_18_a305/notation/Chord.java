@@ -66,28 +66,13 @@ public class Chord{
         int index = notes.get(notes.size()-1).getPitchClass().number + interval;
         int octave = notes.get(0).getOctave() + (index/12);
 
-        switch ((index % 12) + 1) {
-            case 1: p = C; break;
-            case 2: p = Cs; break;
-            case 3: p = D;  break;
-            case 4: p = Ds; break;
-            case 5: p = E;  break;
-            case 6: p = F;  break;
-            case 7: p = Fs; break;
-            case 8: p = G;  break;
-            case 9: p = Gs; break;
-            case 10: p = A; break;
-            case 11: p = As;break;
-            case 12: p = B; break;
-            default: p = C;
-        }
+        p = PitchClass.readPitchClass(index % 12);
 
         return new Note(p, octave);
     }
 
     public int distanceTo(Chord c ) {
         return distanceStrategy.distanceTo(this, c);
-
     }
 }
 

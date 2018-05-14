@@ -1,6 +1,7 @@
 package dk.aau.sw2_18_a305.nightsky;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Nightsky {
     private ArrayList<Star> stars = new ArrayList<>();
@@ -32,5 +33,4 @@ public class Nightsky {
     public void addConstellation(Constellation constellation) {
         this.constellations.add(constellation);
     }
-
 }

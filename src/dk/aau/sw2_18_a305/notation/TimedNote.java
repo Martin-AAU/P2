@@ -1,6 +1,6 @@
 package dk.aau.sw2_18_a305.notation;
 
-public class TimedNote extends Note{
+public class TimedNote extends Note {
     private int length, timeStamp;
 
     // CONSTRUCTORS
