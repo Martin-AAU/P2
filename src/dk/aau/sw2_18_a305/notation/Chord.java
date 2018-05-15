@@ -55,9 +55,8 @@ public class Chord{
 
     // METHODS
     private void finishNotes() {
-        for (Integer interval : intervals) {
+        for (Integer interval : intervals)
             notes.add(setNote(interval));
-        }
     }
 
     private Note setNote(int interval) {
