@@ -32,29 +32,34 @@ public class Sheet {
         return totalPlaytime;
     }
 
-    // SETTTERS
+    // SETTERS
     public void setTimeDivision(int timeDivision) {
         this.timeDivision = timeDivision;
     }
 
     // METHODS
-    public void addNote(TimedNote n) {
+    public void addTimedNote(TimedNote n) {
         int time = n.getTimeStamp();
 
-        if(time >= totalPlaytime) {
+        if(time >= totalPlaytime)
             notes.add(n);
-        }
-        else {
-            IntStream.range(0, notes.size()).filter(i -> time >= notes.get(i).getTimeStamp()).forEach(i -> notes.add(i, n));
-        }
+        else
+            IntStream.range(0, notes.size()).filter(i -> time >= notes.get(i).getTimeStamp()).forEach(i -> {
+                notes.add(i, n);
+            });
 
         totalPlaytime = totalPlaytime < time ? time : totalPlaytime;
+    }
+
+    public void addNote(Note n, int lenth, int timeStamp) {
+        TimedNote timedNote = new TimedNote(n, lenth, timeStamp);
+        addTimedNote(timedNote);
     }
 
     public void addChord(Chord c, int length, int timeStamp) {
         for(int i = 0; i < c.getNotes().size(); i++) {
             TimedNote n = new TimedNote(c.getNotes().get(i), length, timeStamp);
-            addNote(n);
+            addTimedNote(n);
         }
     }
 }
