@@ -2,6 +2,7 @@ package dk.aau.sw2_18_a305.notation;
 
 import org.junit.jupiter.api.Test;
 
+import static dk.aau.sw2_18_a305.notation.PitchClass.*;
 import static dk.aau.sw2_18_a305.notation.PitchClass.C;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -13,7 +14,7 @@ class ChordTest {
         Chord cChord = new Chord(c, 4, 3);
         Note presumedC = cChord.getNotes().get(0);
 
-        assertEquals(PitchClass.C, presumedC.getPitchClass());
+        assertEquals(C, presumedC.getPitchClass());
     }
 
     @Test
@@ -22,7 +23,7 @@ class ChordTest {
         Chord cChord = new Chord(c, 4, 3);
         Note presumedE = cChord.getNotes().get(1);
 
-        assertEquals(PitchClass.E, presumedE.getPitchClass());
+        assertEquals(E, presumedE.getPitchClass());
     }
 
     @Test
@@ -31,6 +32,6 @@ class ChordTest {
         Chord cChord = new Chord(c, 4, 3);
         Note presumedG = cChord.getNotes().get(2);
 
-        assertEquals(PitchClass.G, presumedG.getPitchClass());
+        assertEquals(G, presumedG.getPitchClass());
     }
 }
