@@ -10,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
@@ -50,14 +51,13 @@ public class DrawGUI extends Application {
         // Make group
         Group nightskyScene = new Group();
 
-        HBox UI = new HBox();
-        UI.setAlignment(Pos.BOTTOM_LEFT);
-        UI.setPadding(new Insets(15, 12, 15, 12));
-        UI.setSpacing(10);
-        UI.setStyle("-fx-background-color: #336699;");
-        UI.getChildren().add(button1);
-        UI.getChildren().add(button2);
-        //nightskyScene.getChildren().add(UI);
+        VBox UI = new VBox();
+        HBox buttons = new HBox();
+        buttons.setPadding(new Insets(15, 12, 15, 12));
+        buttons.setSpacing(10);
+        buttons.setStyle("-fx-background-color: #336699;");
+        buttons.getChildren().add(button1);
+        buttons.getChildren().add(button2);
 
         // Generate stars in arraylist
         for(int i = 0; i < amount; i++) {
@@ -90,6 +90,7 @@ public class DrawGUI extends Application {
         nightskyScene.getChildren().addAll(circles);
 
         UI.getChildren().add(nightskyScene);
+        UI.getChildren().add(buttons);
 
         // create scene
         primaryStage.setTitle("NightSky");
