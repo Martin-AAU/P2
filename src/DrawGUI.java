@@ -57,7 +57,7 @@ public class DrawGUI extends Application {
         UI.setStyle("-fx-background-color: #336699;");
         UI.getChildren().add(button1);
         UI.getChildren().add(button2);
-        nightskyScene.getChildren().add(UI);
+        //nightskyScene.getChildren().add(UI);
 
         // Generate stars in arraylist
         for(int i = 0; i < amount; i++) {
@@ -89,9 +89,11 @@ public class DrawGUI extends Application {
         // add circles to group
         nightskyScene.getChildren().addAll(circles);
 
+        UI.getChildren().add(nightskyScene);
+
         // create scene
         primaryStage.setTitle("NightSky");
-        primaryStage.setScene(new Scene(nightskyScene, width, height));
+        primaryStage.setScene(new Scene(UI, width, height));
 
         // show scene
         primaryStage.show();

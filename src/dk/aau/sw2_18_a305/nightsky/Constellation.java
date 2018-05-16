@@ -28,7 +28,8 @@ public class Constellation{
     }
 
     //Add a star to the constellation
-    public void addStar(Star s) {
+    public Constellation addStar(Star s) {
         stars.add(s);
+        return this;
     }
 }
