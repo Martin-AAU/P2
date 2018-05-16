@@ -10,8 +10,18 @@ public enum PitchClass {
         this.number = number;
     }
 
+    // We handle "invalid" index'es by % 12 in order to allow
+    // the users of this enum to be able to fill in as high index as
+    // they want, since it will just wrap around
     public static PitchClass readPitchClass(int index) {
-        switch (index) {
+        int i;
+
+        // Check for invalid index
+        if (index < 0 || index > 11){
+            i = index % 12;
+        } else i = index;
+
+        switch (i) {
             case 0: return C;
             case 1: return Cs;
             case 2: return D;
@@ -23,8 +33,7 @@ public enum PitchClass {
             case 8: return Gs;
             case 9: return A;
             case 10: return As;
-            case 11: return B;
-            default: return C;
+            default: return B; // Case 11
         }
     }
 }
