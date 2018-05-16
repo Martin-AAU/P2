@@ -68,7 +68,7 @@ public class DrawGUI extends Application {
 
         // Background image
         ImageView iv = new ImageView();
-        Image image = new Image("NightskyBG.png");
+        Image image = new Image("NightskyBG.jpg");
         iv.setImage(image);
         iv.setFitHeight(height);
         iv.setFitWidth(width);
