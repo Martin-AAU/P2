@@ -9,16 +9,27 @@ class CircleOfFifthsTest {
     @Test
     void getPosition01() {
         CircleOfFifths tester = new CircleOfFifths();
+        Chord chordC = new Chord(new Note(PitchClass.C), 4,3);
+        Chord chordDs = new Chord(new Note(PitchClass.Ds), 4,3);
+
+        Chord chordAm = new Chord(new Note(PitchClass.A), 3,4);
+        Chord chordCm = new Chord(new Note(PitchClass.C), 3,4);
 
         // Test Outer ring
-        assertEquals(tester.getPosition("C"), 0);
-        assertEquals(tester.getPosition("Eb"), 9);
+        assertEquals(tester.getPosition(chordC), 0);
+        assertEquals(tester.getPosition(chordDs), 9);
 
         // Test inner ring
-        assertEquals(tester.getPosition("Am"), 0);
-        assertEquals(tester.getPosition("Cm"), 9);
+        assertEquals(tester.getPosition(chordAm), 0);
+        assertEquals(tester.getPosition(chordCm), 9);
+    }
 
-        // Test invalid
-        assertEquals(tester.getPosition("INVALID"), -1);
+    @Test
+    void testDistanceTo(){
+        CircleOfFifths tester = new CircleOfFifths();
+        Chord chordC = new Chord(new Note(PitchClass.C), 4,3);
+        Chord chordCm = new Chord(new Note(PitchClass.C), 3,4);
+
+        assertEquals(tester.distanceTo(chordC, chordCm),9);
     }
 }

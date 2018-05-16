@@ -47,6 +47,7 @@ public class Chord{
     public ArrayList<Note> getNotes() {
         return notes;
     }
+    public PitchClass getMainPitchClass() {return notes.get(0).getPitchClass();}
 
     // Looks through every interval and returns the type of chord
     // Source of intervals: https://www.edmprod.com/different-chord-types/
