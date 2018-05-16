@@ -122,7 +122,7 @@ public final class ConstToSheetConv {
         Vector<Integer> v1 = new Vector<>(Math.abs(x1-x2), Math.abs(y1-y2));
         Vector<Integer> v2 = new Vector<>(Math.abs(x2-x3), Math.abs(y2-y3));
 
-        double angle = Math.atan2(v2.get(1), v2.get(0)) - Math.atan2(v1.get(1), v1.get(0));
+        double angle = Math.atan2(Math.abs(y2-y3), Math.abs(x2-x3)) - Math.atan2(Math.abs(y1-y2), Math.abs(x1-x2));
         if (angle < 0) angle += 2 * Math.PI;
 
         if(angle > Math.PI) {

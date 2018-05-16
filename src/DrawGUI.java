@@ -79,7 +79,7 @@ public class DrawGUI extends Application {
 
     private static ArrayList<Circle> generateCircles(Nightsky nightsky, Group nightskyScene) {
         ArrayList<Circle> circles = new ArrayList<>();
-        ArrayList<Star> stars = new ArrayList<>();
+        ArrayList<Star> stars = nightsky.getStars();
         Random random = new Random();
 
         // Generates circles and lines from the stars x and y positions
