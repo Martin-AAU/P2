@@ -1,5 +1,9 @@
 package dk.aau.sw2_18_a305.nightsky;
 
+/**
+ * This class represents a star
+ */
+
 public class Star {
     private int xCoordinate, yCoordinate;
     private String starClass, apparantColour;
