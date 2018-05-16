@@ -10,53 +10,90 @@ import static dk.aau.sw2_18_a305.notation.PitchClass.*;
 
 public final class ConstToSheetConv {
 
+    /**
+     * @param constellation The given constellation to be converted into a note sheet
+     * @return Returns a Sheet as a result from the constellation
+     */
     public static Sheet convert(Constellation constellation) {
 
         Sheet sheet = new Sheet();
-        Star star = constellation.getStars().get(0);
+        Chord latestChord;
 
-        //Initialize the Note and chord in the first end of the sheet (Beginning) and add it to the sheet as a major chord
-        Note note = new Note(calPitchClass(star.getyCoordinate()));
-        Chord major = new Chord(note, 4, 3);
-        Chord minor;
-        Chord latestChord = major;
-        sheet.addChord(major, 16, 0);
+        latestChord = FirstStar(sheet, constellation);
 
-        int numberOfStars = constellation.getStars().size();
+        latestChord = mostStars(sheet, constellation, latestChord);
 
-        // Go through the second to the second last star, and add them as notes to the sheet
-        for (int i = 1; i < numberOfStars - 1 ; i++) {
-            star = constellation.getStars().get(i);
-            note = new Note(calPitchClass(star.getyCoordinate()));
-
-            //calculate the distance between the latest and current chord, and playtime of current chord
-            int distance = calcLength(constellation.getStars().get(i-1).getxCoordinate(), constellation.getStars().get(i-1).getyCoordinate(), star.getxCoordinate(), star.getyCoordinate());
-            int playtime = calcPlayTime(constellation.getStars().get(i-1).getxCoordinate(), constellation.getStars().get(i-1).getyCoordinate(),
-                                        star.getxCoordinate(), star.getyCoordinate(), constellation.getStars().get(i+1).getxCoordinate(),
-                                        constellation.getStars().get(i+1).getyCoordinate());
-
-            //Make the mol and dur chords
-            major = new Chord(note, 4, 3);
-            minor = new Chord(note, 3, 4);
-
-            //Add the closest of the dur or mol chords to sheet
-            sheet.addChord(checkClosestChord(latestChord, minor, major), playtime, distance + sheet.getTotalPlaytime());
-
-        }
-
-        star = constellation.getStars().get(constellation.getStars().size() - 1);
-        Star lastStar = constellation.getStars().get(constellation.getStars().size() - 2);
-        int space = calcLength(lastStar.getxCoordinate(), lastStar.getyCoordinate(), star.getxCoordinate(), star.getyCoordinate());
-
-        //Calculate the end note and chord (Last) and add it to sheet
-        note = new Note(calPitchClass(constellation.getStars().get(constellation.getStars().size() - 1).getyCoordinate()));
-        Chord dur = new Chord(note, 4, 3);
-        Chord mol = new Chord(note, 3, 4);
-        sheet.addChord(checkClosestChord(latestChord, mol, dur), 16, space + sheet.getTotalPlaytime());
+        lastStar(sheet, constellation, latestChord);
 
         return sheet;
     }
 
+    /**
+     * @param sheet The sheet that is being created
+     * @param constellation The constellation that is being converted
+     * @return returns the latest chord that was added
+     */
+    private static Chord FirstStar(Sheet sheet, Constellation constellation) {
+        Star star = constellation.getStars().get(0);
+
+        //Make the first star a Major chord, and add it to the sheet
+        Note note = new Note(calPitchClass(star.getyCoordinate()));
+        Chord major = new Chord(note, 4, 3);
+        sheet.addChord(major, 16, 0);
+
+        return major;
+    }
+
+    /**
+     * @param sheet The sheet that is being created
+     * @param constellation The constellation that is being converted
+     * @param latestChord The latest chord to be added to the sheet
+     * @return returns the latest chord that was added
+     */
+    private static Chord mostStars(Sheet sheet, Constellation constellation, Chord latestChord) {
+        // Go through the second to the second last star, and add them as notes to the sheet
+        int numberOfStars = constellation.getStars().size();
+
+        for (int i = 1; i < numberOfStars - 1 ; i++) {
+            Star star = constellation.getStars().get(i);
+            Note note = new Note(calPitchClass(star.getyCoordinate()));
+
+            //calculate the distance between the latest and current chord, and playtime of current chord
+            int distance = calcLength(constellation.getStars().get(i-1).getxCoordinate(), constellation.getStars().get(i-1).getyCoordinate(), star.getxCoordinate(), star.getyCoordinate());
+            int playtime = calcPlayTime(constellation.getStars().get(i-1).getxCoordinate(), constellation.getStars().get(i-1).getyCoordinate(),
+                    star.getxCoordinate(), star.getyCoordinate(), constellation.getStars().get(i+1).getxCoordinate(),
+                    constellation.getStars().get(i+1).getyCoordinate());
+
+            //Make the mol and dur chords
+            Chord major = new Chord(note, 4, 3);
+            Chord minor = new Chord(note, 3, 4);
+            Chord nextChord = checkClosestChord(latestChord, minor, major);
+
+            //Add the closest of the dur or mol chords to sheet
+            sheet.addChord(nextChord, playtime, distance + sheet.getTotalPlaytime());
+
+            latestChord = nextChord;
+        }
+
+        return latestChord;
+    }
+
+    /**
+     * @param sheet The sheet that is being created
+     * @param constellation The constellation that is being converted
+     * @param latestChord The latest chord to be added to the sheet
+     */
+    private static void lastStar(Sheet sheet, Constellation constellation, Chord latestChord) {
+        Star star = constellation.getStars().get(constellation.getStars().size() - 1);
+        Star lastStar = constellation.getStars().get(constellation.getStars().size() - 2);
+        int space = calcLength(lastStar.getxCoordinate(), lastStar.getyCoordinate(), star.getxCoordinate(), star.getyCoordinate());
+
+        //Calculate the end note and chord (Last) and add it to sheet
+        Note note = new Note(calPitchClass(constellation.getStars().get(constellation.getStars().size() - 1).getyCoordinate()));
+        Chord dur = new Chord(note, 4, 3);
+        Chord mol = new Chord(note, 3, 4);
+        sheet.addChord(checkClosestChord(latestChord, mol, dur), 16, space + sheet.getTotalPlaytime());
+    }
 
     /**
      * @param x1 x coordinate of first point
@@ -97,7 +134,7 @@ public final class ConstToSheetConv {
     /**
      * @param number The number of which is to be converted to a lenght in time, in a music piece
      * @param range The max value the number parameter can acheive. The range is used to measure
-     * @return
+     * @return Returns either 1, 2, 4, 8, or 16 compared to how close number is to range
      */
     private static int determineTime(double number, double range) {
         if(number < range * 0.2) {
@@ -113,26 +150,22 @@ public final class ConstToSheetConv {
         }
     }
 
+    /**
+     * @param y The y coordinate
+     * @return returns a pitchclass depending on the coordinate and how large the window of DrawGUI is
+     */
     private static PitchClass calPitchClass(int y) {
-        int index = y / (DrawGUI.height/12) + 1;
+        int index = y / (DrawGUI.height/12);
 
-        switch (index % 12) {
-            case 1: return C;
-            case 2: return Cs;
-            case 3: return D;
-            case 4: return Ds;
-            case 5: return E;
-            case 6: return F;
-            case 7: return Fs;
-            case 8: return G;
-            case 9: return Gs;
-            case 10: return A;
-            case 11: return As;
-            case 0: return B;
-            default: return C;
-        }
+        return PitchClass.readPitchClass(index);
     }
 
+    /**
+     * @param ref The reference Chord
+     * @param a A chord where the distance to ref is to be determined
+     * @param b A chord where the distance to ref is to be determined
+     * @return Returns the chord a or b that is closest to ref, using the distance strategy that is assigned in the ref chord
+     */
     private static Chord checkClosestChord(Chord ref, Chord a, Chord b) {
         if(ref.distanceTo(a) < ref.distanceTo(b))
             return a;
