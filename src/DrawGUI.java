@@ -16,6 +16,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 
+import java.awt.*;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Random;
@@ -28,8 +29,8 @@ public class DrawGUI extends Application {
     }
 
     private int amount = 50;
-    public static int width = 1024;
-    public static int height = 768;
+    public static int width = (int) (Toolkit.getDefaultToolkit().getScreenSize().width/1.5);
+    public static int height = (int) (Toolkit.getDefaultToolkit().getScreenSize().height/1.5);
 
     public void start(Stage primaryStage) {
 
@@ -94,7 +95,7 @@ public class DrawGUI extends Application {
 
         // create scene
         primaryStage.setTitle("NightSky");
-        primaryStage.setScene(new Scene(UI, width, height));
+        primaryStage.setScene(new Scene(UI));
 
         // show scene
         primaryStage.show();

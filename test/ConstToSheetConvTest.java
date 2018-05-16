@@ -8,11 +8,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ConstToSheetConvTest {
 
+    Constellation constellation = null;
     Sheet sheet = null;
 
     @BeforeEach
     void setup() {
-        Constellation constellation = new Constellation("Carlsvognen");
+        constellation = new Constellation("Carlsvognen");
         constellation.addStar(new Star(0,4))
                      .addStar(new Star(0,0))
                      .addStar(new Star(4,0))
