@@ -28,7 +28,6 @@ public class DrawGUI extends Application {
         launch(args);
     }
 
-    private int amount = 50;
     public static int width = (int) (Toolkit.getDefaultToolkit().getScreenSize().width/1.5);
     public static int height = (int) (Toolkit.getDefaultToolkit().getScreenSize().height/1.5);
 
@@ -40,7 +39,7 @@ public class DrawGUI extends Application {
         Nightsky nightsky = new Nightsky();
         nightsky.addConstellation(new Constellation("Music Constellation"));
 
-        for(int i = 0; i < amount; i++)
+        for(int i = 0; i < 50; i++)
             nightsky.addStar(new Star(random.nextInt(width), random.nextInt(height)));
 
         // Creating buttons
@@ -80,12 +79,12 @@ public class DrawGUI extends Application {
 
     private static ArrayList<Circle> generateCircles(Nightsky nightsky, Group nightskyScene) {
         ArrayList<Circle> circles = new ArrayList<>();
-        ArrayList<Star> allStars = new ArrayList<>();
+        ArrayList<Star> stars = new ArrayList<>();
         Random random = new Random();
 
         // Generates circles and lines from the stars x and y positions
-        for(int i = 0; i < 50; i++) {
-            Circle c = new Circle(allStars.get(i).getxCoordinate(), allStars.get(i).getyCoordinate(), 7+ random.nextInt(8), Color.BLUE);
+        for(int i = 0; i < stars.size(); i++) {
+            Circle c = new Circle(stars.get(i).getxCoordinate(), stars.get(i).getyCoordinate(), 7+ random.nextInt(8), Color.BLUE);
             int finalI = i;
 
             c.addEventHandler(MouseEvent.MOUSE_CLICKED, (MouseEvent event) -> {
