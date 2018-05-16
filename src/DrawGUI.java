@@ -96,8 +96,10 @@ public class DrawGUI extends Application {
         // create scene
         primaryStage.setTitle("NightSky");
         primaryStage.setScene(new Scene(UI));
+        primaryStage.setResizable(false);
 
         // show scene
         primaryStage.show();
+
     }
 }
