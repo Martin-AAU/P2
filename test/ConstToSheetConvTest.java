@@ -1,9 +1,6 @@
 import dk.aau.sw2_18_a305.nightsky.Constellation;
 import dk.aau.sw2_18_a305.nightsky.Star;
-import dk.aau.sw2_18_a305.notation.Note;
-import dk.aau.sw2_18_a305.notation.PitchClass;
-import dk.aau.sw2_18_a305.notation.Sheet;
-import dk.aau.sw2_18_a305.notation.TimedNote;
+import dk.aau.sw2_18_a305.notation.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -31,6 +28,9 @@ class ConstToSheetConvTest {
     @Test
     void test01() {
         Note note = new Note(readPitchClass(constellation.getStars().get(0).getyCoordinate() / (DrawGUI.height/12)));
+        Chord c = new Chord(new Note(C), 4, 3);
+        System.out.println(sheet.getTotalPlaytime());
+
         int i = 1;
         for (TimedNote timedNote : sheet.getNotes()) {
             System.out.println("Note "+i+": "+timedNote.getPitchClass() + " Length: " + timedNote.getLength() + " Timestamp: " + timedNote.getTimeStamp());

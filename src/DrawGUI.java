@@ -48,7 +48,7 @@ public class DrawGUI extends Application {
         nightsky.addConstellation(new Constellation("Music Constellation"));
 
         for(int i = 0; i < 50; i++) {
-            nightsky.addStar(new Star(random.nextInt(width), random.nextInt(height)));
+            nightsky.addStar(new Star(random.nextInt(width-8), random.nextInt(height-8)));
         }
 
         // Creating buttons

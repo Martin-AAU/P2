@@ -167,8 +167,11 @@ public final class ConstToSheetConv {
      * @return Returns the chord a or b that is closest to ref, using the distance strategy that is assigned in the ref chord
      */
     private static Chord checkClosestChord(Chord ref, Chord a, Chord b) {
-        if(ref.distanceTo(a) < ref.distanceTo(b))
+        if(ref.distanceTo(a) < ref.distanceTo(b)) {
+            System.out.println("A was closest");
             return a;
+        }
+        System.out.println("B was closest");
         return b;
     }
 }

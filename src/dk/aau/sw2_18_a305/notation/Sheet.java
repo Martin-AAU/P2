@@ -41,12 +41,13 @@ public class Sheet {
     public void addTimedNote(TimedNote n) {
         int time = n.getTimeStamp();
 
-        if(time >= totalPlaytime)
+        if(time >= totalPlaytime) {
             notes.add(n);
-        else
+        }else {
             IntStream.range(0, notes.size()).filter(i -> time >= notes.get(i).getTimeStamp()).forEach(i -> {
                 notes.add(i, n);
             });
+        }
 
         totalPlaytime = totalPlaytime < time ? time : totalPlaytime;
     }

@@ -1,6 +1,7 @@
 package dk.aau.sw2_18_a305.notation;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import static dk.aau.sw2_18_a305.notation.PitchClass.*;
 
@@ -110,6 +111,22 @@ public class Chord{
 
     public int distanceTo(Chord c ) {
         return distanceStrategy.distanceTo(this, c);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Chord chord = (Chord) o;
+        return Objects.equals(distanceStrategy, chord.distanceStrategy) &&
+                Objects.equals(notes, chord.notes) &&
+                Objects.equals(intervals, chord.intervals);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(distanceStrategy, notes, intervals);
     }
 }
 
