@@ -40,9 +40,6 @@ public class CircleOfFifths implements DistanceStrategy {
     }
 
     // Public method for getting the distance between two chords
-    //
-    // (THIS IS THE ONE WHO SHALL BE INTEGRATED)
-    //
     // Return of -1 is invalid
     @Override
     public int distanceTo(Chord from, Chord to) {
