@@ -12,6 +12,9 @@ public class Chord{
     private ArrayList<Integer> intervals = new ArrayList<>();
 
     // CONSTRUCTORS
+    public Chord(Note rootNote){
+        notes.add(rootNote);
+    }
     public Chord(Note rootNote, int interval1, int interval2) {
         notes.add(rootNote);
         intervals.add(interval1);
@@ -80,6 +83,12 @@ public class Chord{
     // SETTERS
     public void setDistanceStrategy(DistanceStrategy distanceStrategy) {
         this.distanceStrategy = distanceStrategy;
+    }
+
+    // Adds a note to the chord
+    public Chord addNoteToChord(Note n){
+        notes.add(n);
+        return this;
     }
 
     // METHODS
