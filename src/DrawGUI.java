@@ -7,7 +7,10 @@ import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -16,7 +19,13 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.awt.image.ImageObserver;
+import java.awt.image.ImageProducer;
+import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Random;
@@ -32,15 +41,15 @@ public class DrawGUI extends Application {
     public static int height = (int) (Toolkit.getDefaultToolkit().getScreenSize().height/1.5);
 
     public void start(Stage primaryStage) {
-
         Random random = new Random();
 
         // Generate nightsky
         Nightsky nightsky = new Nightsky();
         nightsky.addConstellation(new Constellation("Music Constellation"));
 
-        for(int i = 0; i < 50; i++)
+        for(int i = 0; i < 50; i++) {
             nightsky.addStar(new Star(random.nextInt(width), random.nextInt(height)));
+        }
 
         // Creating buttons
         Button button1 = new Button("Generate MIDI file");
@@ -56,6 +65,14 @@ public class DrawGUI extends Application {
 
         // Make group
         Group nightskyScene = new Group();
+
+        // Background image
+        ImageView iv = new ImageView();
+        Image image = new Image("NightskyBG.png");
+        iv.setImage(image);
+        iv.setFitHeight(height);
+        iv.setFitWidth(width);
+        nightskyScene.getChildren().add(iv);
 
         // Generate circles
         ArrayList<Circle> circles = generateCircles(nightsky, nightskyScene);
