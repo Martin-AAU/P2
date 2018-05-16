@@ -2,9 +2,14 @@ import dk.aau.sw2_18_a305.nightsky.Constellation;
 import dk.aau.sw2_18_a305.nightsky.Nightsky;
 import dk.aau.sw2_18_a305.nightsky.Star;
 import javafx.application.Application;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
@@ -38,8 +43,21 @@ public class DrawGUI extends Application {
         nightsky.addConstellation(new Constellation("Music Constellation"));
         ArrayList<Star> conStars = nightsky.getConstellations().get(0).getStars();
 
+        // Creating buttons
+        Button button1 = new Button("Generate MIDI file");
+        Button button2 = new Button("Exit");
+
         // Make group
         Group nightskyScene = new Group();
+
+        HBox UI = new HBox();
+        UI.setAlignment(Pos.BOTTOM_LEFT);
+        UI.setPadding(new Insets(15, 12, 15, 12));
+        UI.setSpacing(10);
+        UI.setStyle("-fx-background-color: #336699;");
+        UI.getChildren().add(button1);
+        UI.getChildren().add(button2);
+        nightskyScene.getChildren().add(UI);
 
         // Generate stars in arraylist
         for(int i = 0; i < amount; i++) {

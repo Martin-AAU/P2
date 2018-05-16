@@ -24,34 +24,6 @@ class StarTest {
     }
 
     @Test
-    void getStarClass() {
-    }
-
-    @Test
-    void getApparantColour() {
-    }
-
-    @Test
-    void getApparantMagnitude() {
-    }
-
-    @Test
-    void getMagnitude() {
-    }
-
-    @Test
-    void getradius() {
-    }
-
-    @Test
-    void getMass() {
-    }
-
-    @Test
-    void getTemperature() {
-    }
-
-    @Test
     void setxCoordinate() {
         star.setxCoordinate(500);
         assertEquals(500, star.getxCoordinate());
@@ -61,33 +33,5 @@ class StarTest {
     void setyCoordinate() {
         star.setyCoordinate(500);
         assertEquals(500, star.getyCoordinate());
-    }
-
-    @Test
-    void setStarClass() {
-    }
-
-    @Test
-    void setApparantColour() {
-    }
-
-    @Test
-    void setApparantMagnitude() {
-    }
-
-    @Test
-    void setMagnitude() {
-    }
-
-    @Test
-    void setradius() {
-    }
-
-    @Test
-    void setMass() {
-    }
-
-    @Test
-    void setTemperature() {
     }
 }
