@@ -25,6 +25,5 @@ class ConstToSheetConvTest {
 
     @Test
     void Test01() {
-        sheet.getNotes();
     }
 }
