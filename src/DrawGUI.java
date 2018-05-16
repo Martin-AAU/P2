@@ -28,29 +28,23 @@ public class DrawGUI extends Application {
         launch(args);
     }
 
-    private int amount = 50;
     public static int width = (int) (Toolkit.getDefaultToolkit().getScreenSize().width/1.5);
     public static int height = (int) (Toolkit.getDefaultToolkit().getScreenSize().height/1.5);
 
     public void start(Stage primaryStage) {
 
-        ArrayList<Circle> circles = new ArrayList<>();
         Random random = new Random();
 
         // Generate nightsky
         Nightsky nightsky = new Nightsky();
-        ArrayList<Star> allStars = nightsky.getStars();
-
-        // Add a constellation to the Nightsky
         nightsky.addConstellation(new Constellation("Music Constellation"));
-        ArrayList<Star> conStars = nightsky.getConstellations().get(0).getStars();
+
+        for(int i = 0; i < 50; i++)
+            nightsky.addStar(new Star(random.nextInt(width), random.nextInt(height)));
 
         // Creating buttons
         Button button1 = new Button("Generate MIDI file");
         Button button2 = new Button("Exit");
-
-        // Make group
-        Group nightskyScene = new Group();
 
         VBox UI = new VBox();
         HBox buttons = new HBox();
@@ -60,20 +54,43 @@ public class DrawGUI extends Application {
         buttons.getChildren().add(button1);
         buttons.getChildren().add(button2);
 
-        // Generate stars in arraylist
-        for(int i = 0; i < amount; i++) {
-            nightsky.addStar(new Star(random.nextInt(width), random.nextInt(height), "BLUE"));
-        }
-        System.out.println(allStars.size());
+        // Make group
+        Group nightskyScene = new Group();
+
+        // Generate circles
+        ArrayList<Circle> circles = generateCircles(nightsky, nightskyScene);
+
+        // Add circles to group
+        nightskyScene.getChildren().addAll(circles);
+
+        // Add nightsky and buttons to the UI
+        UI.getChildren().add(nightskyScene);
+        UI.getChildren().add(buttons);
+
+        // Setup the Scene
+        primaryStage.setTitle("NightSky");
+        primaryStage.setScene(new Scene(UI));
+        primaryStage.setResizable(false);
+
+        // show scene
+        primaryStage.show();
+
+    }
+
+    private static ArrayList<Circle> generateCircles(Nightsky nightsky, Group nightskyScene) {
+        ArrayList<Circle> circles = new ArrayList<>();
+        ArrayList<Star> stars = new ArrayList<>();
+        Random random = new Random();
 
         // Generates circles and lines from the stars x and y positions
-        for(int i = 0; i < amount; i++) {
-            Circle c = new Circle(allStars.get(i).getxCoordinate(), allStars.get(i).getyCoordinate(), 7+ random.nextInt(8), Color.BLUE);
+        for(int i = 0; i < stars.size(); i++) {
+            Circle c = new Circle(stars.get(i).getxCoordinate(), stars.get(i).getyCoordinate(), 7+ random.nextInt(8), Color.BLUE);
             int finalI = i;
 
             c.addEventHandler(MouseEvent.MOUSE_CLICKED, (MouseEvent event) -> {
                 nightsky.getConstellations().get(0).addStar(nightsky.getStars().get(finalI));
-                System.out.println(conStars.size());
+
+                ArrayList<Star> conStars = nightsky.getConstellations().get(0).getStars();
 
                 if(conStars.size() > 1) {
                     int size = nightsky.getConstellations().get(0).getStars().size();
@@ -85,21 +102,7 @@ public class DrawGUI extends Application {
             } );
             circles.add(c);
         }
-        System.out.println(allStars.size());
 
-        // add circles to group
-        nightskyScene.getChildren().addAll(circles);
-
-        UI.getChildren().add(nightskyScene);
-        UI.getChildren().add(buttons);
-
-        // create scene
-        primaryStage.setTitle("NightSky");
-        primaryStage.setScene(new Scene(UI));
-        primaryStage.setResizable(false);
-
-        // show scene
-        primaryStage.show();
-
+        return circles;
     }
 }
