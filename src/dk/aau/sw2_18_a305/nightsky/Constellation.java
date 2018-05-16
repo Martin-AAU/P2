@@ -6,6 +6,10 @@ import javafx.scene.shape.Line;
 
 import java.util.ArrayList;
 
+/**
+ * This class represents a constellation of stars
+ */
+
 public class Constellation{
     private String name;
     private ArrayList<Star> stars = new ArrayList<>();
