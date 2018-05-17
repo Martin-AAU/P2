@@ -1,5 +1,8 @@
 package dk.aau.sw2_18_a305.notation;
 
+import javax.sound.midi.InvalidMidiDataException;
+import javax.sound.midi.MidiEvent;
+import javax.sound.midi.Sequence;
 import javax.sound.midi.Track;
 import java.util.LinkedList;
 import java.util.stream.IntStream;
@@ -71,6 +74,15 @@ public class Sheet {
     }
 
     public void convertToMidiTrack() {
-        //Track track = new Track();
+        try {
+            Sequence sequence = new Sequence(Sequence.PPQ, this.timeDivision);
+            Track track = sequence.createTrack();
+
+            for (TimedNote note : notes) {
+                //track.add(new MidiEvent());
+            }
+        } catch (InvalidMidiDataException e) {
+            System.out.println("ERROR: Could not Make a sequence for some reason :c");
+        }
     }
 }
