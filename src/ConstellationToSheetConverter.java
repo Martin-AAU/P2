@@ -2,7 +2,7 @@ import dk.aau.sw2_18_a305.nightsky.Constellation;
 import dk.aau.sw2_18_a305.nightsky.Star;
 import dk.aau.sw2_18_a305.notation.*;
 
-public final class ConstToSheetConv {
+public final class ConstellationToSheetConverter {
 
     /**
      * This method takes a constellation and converts all the stars to chords and puts it into a sheet

@@ -5,7 +5,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-import static dk.aau.sw2_18_a305.notation.PitchClass.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ConstToSheetConvTest {
@@ -23,7 +22,7 @@ class ConstToSheetConvTest {
                      .addStar(new Star(6,5))
                      .addStar(new Star(10,6));
 
-        sheet = ConstToSheetConv.convert(constellation);
+        sheet = ConstellationToSheetConverter.convert(constellation);
     }
 
     @Disabled
