@@ -76,15 +76,44 @@ public class DrawGUI extends Application {
         ArrayList<Circle> circles = new ArrayList<>();
         ArrayList<Star> stars = nightsky.getStars();
         Random random = new Random();
-        // Setup star picture
+        // Setup star pictures
         Image star01 = new Image("Star01.png");
+        Image star02 = new Image("Star02.png");
+        Image star03 = new Image("Star03.png");
+        Image star04 = new Image("Star04.png");
+        Image star05 = new Image("Star05.png");
+        Image star06 = new Image("Star06.png");
 
         // Generates circles and lines from the stars x and y positions
         for(int i = 0; i < stars.size(); i++) {
 
             // Create a new circle on the same coordinates of a star, and a random radius
-            Circle c = new Circle(stars.get(i).getxCoordinate(), stars.get(i).getyCoordinate(), 7 + random.nextInt(8), Color.LIGHTBLUE);
-            c.setFill(new ImagePattern(star01));
+            Circle c = new Circle(stars.get(i).getxCoordinate(), stars.get(i).getyCoordinate(), 10 + random.nextInt(10), Color.LIGHTBLUE);
+
+            // Small chance not to use the white texture
+            switch (random.nextInt(25)){
+                case 1:
+                    c.setFill(new ImagePattern(star01));
+                    break;
+                case 2:
+                    c.setFill(new ImagePattern(star02));
+                    break;
+                case 3:
+                    c.setFill(new ImagePattern(star03));
+                    break;
+                case 4:
+                    c.setFill(new ImagePattern(star04));
+                    break;
+                case 5:
+                    c.setFill(new ImagePattern(star05));
+                    break;
+                case 6:
+                    c.setFill(new ImagePattern(star06));
+                    break;
+                default:
+                    c.setFill(new ImagePattern(star01));
+                    break;
+            }
 
             int finalI = i;
 
