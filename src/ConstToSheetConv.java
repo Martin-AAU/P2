@@ -64,12 +64,12 @@ public final class ConstToSheetConv {
                     star.getxCoordinate(), star.getyCoordinate(), constellation.getStars().get(i+1).getxCoordinate(),
                     constellation.getStars().get(i+1).getyCoordinate());
 
-            //Make the mol and dur chords
+            //Make the minor and major chords
             Chord major = new Chord(note, 4, 3);
             Chord minor = new Chord(note, 3, 4);
             Chord nextChord = checkClosestChord(latestChord, minor, major);
 
-            //Add the closest of the dur or mol chords to sheet
+            //Add the closest of the major or minor chords to sheet
             sheet.addChord(nextChord, playtime, distance + sheet.getTotalPlaytime());
 
             latestChord = nextChord;

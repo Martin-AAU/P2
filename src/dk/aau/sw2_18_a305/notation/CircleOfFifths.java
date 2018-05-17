@@ -8,13 +8,11 @@ public class CircleOfFifths implements DistanceStrategy {
     private ArrayList<PitchClass> InnerRow = new ArrayList<>();
 
     // CONSTRUCTORS
-    CircleOfFifths(){
-        fillArrayLists();
-    }
+    CircleOfFifths(){fillArrayLists();}
 
     // GETTERS
-    public ArrayList<PitchClass> getOuterRow() {return OuterRow;}
-    public ArrayList<PitchClass> getInnerRow() {return InnerRow;}
+    public ArrayList<PitchClass> getOuterRow() {return new ArrayList<>(OuterRow);}
+    public ArrayList<PitchClass> getInnerRow() {return new ArrayList<>(InnerRow);}
 
     // METHODS
     private void fillArrayLists(){
