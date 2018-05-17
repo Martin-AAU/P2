@@ -2,6 +2,8 @@ import dk.aau.sw2_18_a305.nightsky.Constellation;
 import dk.aau.sw2_18_a305.nightsky.Nightsky;
 import dk.aau.sw2_18_a305.nightsky.Star;
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
@@ -15,6 +17,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -116,15 +119,42 @@ public class DrawGUI extends Application {
 
     private void generateButtons(HBox buttons){
         // Creating buttons
-        Button button1 = new Button("Generate MIDI file");
-        Button button2 = new Button("Exit");
+        Button buttonGen = new Button("Generate MIDI file");
+        Button buttonUndo = new Button("Undo");
+        Button buttonExit = new Button("Exit");
+        ArrayList<Button> buttonArray = new ArrayList<>();
 
+        // Fill arrayList
+        buttonArray.add(buttonGen);
+        buttonArray.add(buttonUndo);
+        buttonArray.add(buttonExit);
+
+        // Setup buttons GUI
         buttons.setPadding(new Insets(15, 12, 15, 12));
         buttons.setSpacing(10);
-        buttons.setStyle("-fx-background-color: #336699;");
-        buttons.getChildren().add(button1);
-        buttons.getChildren().add(button2);
+        buttons.setStyle("-fx-background-color: #0d1a26;");
+        buttons.getChildren().add(buttonGen);
+        buttons.getChildren().add(buttonUndo);
+        buttons.getChildren().add(buttonExit);
+        styleButtons(buttonArray);
+
+        // Exit functionality
+        buttonExit.setOnMouseClicked(e -> Platform.exit());
     }
+
+    // Function that loops through every button and sets their style
+    private void styleButtons(ArrayList<Button> bA){
+        Button b;
+
+        // Loop through every button and set style
+        for (int i = 0; i < bA.size(); i++){
+            b = bA.get(i);
+
+            b.setPrefSize((width / bA.size()) - 15, height / 13);
+            b.setStyle("-fx-background-color: #0d0d0d, linear-gradient(#0d1a26, #1a344c); -fx-text-fill: linear-gradient(white, #d0d0d0); -fx-font-size: 14px;");
+        }
+    }
+
 
     private void addSkyBackgroundImage(Group nightskyScene){
         // Background image sky
