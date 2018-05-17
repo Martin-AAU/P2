@@ -38,18 +38,20 @@ public class DrawGUI extends Application {
         HBox buttons = new HBox();
         // The scene for the night-sky (where stars are placed)
         Group nightskyScene = new Group();
+        // All of the lines drawn between the stars
+        ArrayList<Line> lineArray = new ArrayList<>();
 
         // Add stars to the nightsky
         addStarsToNightsky(nightsky, random);
 
         // Create the buttons on the bottom of the GUI
-        generateButtons(buttons);
+        generateButtons(buttons, lineArray, nightsky, nightskyScene);
 
         // Add a picture as the background of the nightskyScene
         addSkyBackgroundImage(nightskyScene);
 
         // Generate circles
-        ArrayList<Circle> circles = generateCircles(nightsky, nightskyScene);
+        ArrayList<Circle> circles = generateCircles(nightsky, nightskyScene, lineArray);
 
         // Add circles to group
         nightskyScene.getChildren().addAll(circles);
@@ -68,12 +70,11 @@ public class DrawGUI extends Application {
 
     }
 
-    private static ArrayList<Circle> generateCircles(Nightsky nightsky, Group nightskyScene) {
-        // circles is to be returned, stars is used as a shortcut
+    private static ArrayList<Circle> generateCircles(Nightsky nightsky, Group nightskyScene, ArrayList<Line> lineArray) {
+        // Circles is to be returned, stars is used as a shortcut
         ArrayList<Circle> circles = new ArrayList<>();
         ArrayList<Star> stars = nightsky.getStars();
         Random random = new Random();
-
 
         // Generates circles and lines from the stars x and y positions
         for(int i = 0; i < stars.size(); i++) {
@@ -95,6 +96,7 @@ public class DrawGUI extends Application {
                     // Draw a line between current and previous star
                     Line l = new Line(conStars.get(size-2).getxCoordinate(), conStars.get(size-2).getyCoordinate(), conStars.get(size-1).getxCoordinate(), conStars.get(size-1).getyCoordinate());
                     l.setStroke(Color.YELLOW);
+                    lineArray.add(l);
                     nightskyScene.getChildren().add(l);
                 }
             } );
@@ -113,7 +115,7 @@ public class DrawGUI extends Application {
         }
     }
 
-    private void generateButtons(HBox buttons){
+    private void generateButtons(HBox buttons, ArrayList<Line> lineArray, Nightsky nightsky, Group nightskyScene){
         // Creating buttons
         Button buttonGen = new Button("Generate .MIDI file");
         Button buttonPlay = new Button("Play");
@@ -137,8 +139,17 @@ public class DrawGUI extends Application {
         buttons.getChildren().add(buttonExit);
         styleButtons(buttonArray);
 
-        // Exit functionality
+        // Setup functionality
         buttonExit.setOnMouseClicked(e -> Platform.exit());
+        buttonUndo.setOnMouseClicked(e -> undoStarChoice(lineArray, nightsky, nightskyScene));
+    }
+
+    private void undoStarChoice(ArrayList<Line> lineArray, Nightsky nightsky, Group nightskyScene){
+        if (lineArray.size() > 0){
+            nightskyScene.getChildren().remove(lineArray.get(lineArray.size() - 1));
+            lineArray.remove(lineArray.size() - 1);
+            nightsky.getConstellations().get(0).removeLastStar();
+        }
     }
 
     // Function that loops through every button and sets their style
