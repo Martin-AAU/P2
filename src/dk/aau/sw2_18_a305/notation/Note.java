@@ -30,6 +30,9 @@ public class Note {
     public int getOctave() {
         return octave;
     }
+    public int getMidiValue() {
+        return midiValue;
+    }
 
     // Methods
     private void calPitch() {

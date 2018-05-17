@@ -1,9 +1,6 @@
 package dk.aau.sw2_18_a305.notation;
 
-import javax.sound.midi.InvalidMidiDataException;
-import javax.sound.midi.MidiEvent;
-import javax.sound.midi.Sequence;
-import javax.sound.midi.Track;
+import javax.sound.midi.*;
 import java.util.LinkedList;
 import java.util.stream.IntStream;
 
@@ -73,16 +70,32 @@ public class Sheet {
         }
     }
 
-    public void convertToMidiTrack() {
+    public Sequence convertToMidiTrack() {
         try {
             Sequence sequence = new Sequence(Sequence.PPQ, this.timeDivision);
             Track track = sequence.createTrack();
 
             for (TimedNote note : notes) {
-                //track.add(new MidiEvent());
+                // Create Midi messages
+                ShortMessage messageOn = new ShortMessage();
+                ShortMessage messageOff = new ShortMessage();
+                messageOn.setMessage(ShortMessage.NOTE_ON, 0, note.getMidiValue(), 100);
+                messageOn.setMessage(ShortMessage.NOTE_OFF, 0, note.getMidiValue(), 100);
+
+                // Create 4 MidiEvents (class) and add the messages to them
+                MidiEvent noteOn = new MidiEvent(messageOn, note.getTimeStamp());
+                MidiEvent noteOff = new MidiEvent(messageOff, note.getLength() + note.getTimeStamp());
+
+                // Add the notes to the track
+                track.add(noteOn);
+                track.add(noteOff);
             }
+
+            return sequence;
         } catch (InvalidMidiDataException e) {
             System.out.println("ERROR: Could not Make a sequence for some reason :c");
         }
+
+        return null;
     }
 }
