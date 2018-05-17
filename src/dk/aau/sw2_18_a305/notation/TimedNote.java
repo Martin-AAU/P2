@@ -4,8 +4,10 @@ public class TimedNote extends Note {
     private int length, timeStamp;
 
     // CONSTRUCTORS
-    public TimedNote(Note note, int lenght, int timeStamp) {
+    public TimedNote(Note note, int length, int timeStamp) {
         super(note.getPitchClass(), note.getOctave());
+        this.length = length;
+        this.timeStamp = timeStamp;
     }
     public TimedNote(PitchClass pitchClass, int length, int timeStamp) {
         super(pitchClass);

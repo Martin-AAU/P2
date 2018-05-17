@@ -39,7 +39,7 @@ public class Sheet {
 
     // METHODS
     public void addTimedNote(TimedNote n) {
-        int time = n.getTimeStamp();
+        int time = n.getTimeStamp() + n.getLength();
 
         if(time >= totalPlaytime) {
             notes.add(n);

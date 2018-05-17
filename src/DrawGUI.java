@@ -45,7 +45,7 @@ public class DrawGUI extends Application {
         nightsky.addConstellation(new Constellation("Music Constellation"));
 
         for(int i = 0; i < 50; i++) {
-            nightsky.addStar(new Star(random.nextInt(width-8), random.nextInt(height-8)));
+            nightsky.addStar(new Star(random.nextInt(width-16)+8, random.nextInt(height-16)+8));
         }
 
         // Creating buttons
@@ -98,7 +98,7 @@ public class DrawGUI extends Application {
 
         // Generates circles and lines from the stars x and y positions
         for(int i = 0; i < stars.size(); i++) {
-            Circle c = new Circle(stars.get(i).getxCoordinate(), stars.get(i).getyCoordinate(), 7+ random.nextInt(8), Color.BLUE);
+            Circle c = new Circle(stars.get(i).getxCoordinate(), stars.get(i).getyCoordinate(), 7+ random.nextInt(8), Color.WHITE);
             int finalI = i;
 
             c.addEventHandler(MouseEvent.MOUSE_CLICKED, (MouseEvent event) -> {
@@ -111,6 +111,7 @@ public class DrawGUI extends Application {
                     //ArrayList<Star> stars = nightsky.getConstellations().get(0).getStars();
 
                     Line l = new Line(conStars.get(size-2).getxCoordinate(), conStars.get(size-2).getyCoordinate(), conStars.get(size-1).getxCoordinate(), conStars.get(size-1).getyCoordinate());
+                    l.setStroke(Color.YELLOW);
                     nightskyScene.getChildren().add(l);
                 }
             } );
