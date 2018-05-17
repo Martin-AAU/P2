@@ -47,11 +47,8 @@ public class DrawGUI extends Application {
         // The scene for the night-sky (where stars are placed)
         Group nightskyScene = new Group();
 
-        // Generate nightsky and add stars to it
-        nightsky.addConstellation(new Constellation("Music Constellation"));
-        for(int i = 0; i < 50; i++) {
-            nightsky.addStar(new Star(random.nextInt(width-30)+15, random.nextInt(height-30)+15));
-        }
+        // Add stars to the nightsky
+        addStarsToNightsky(nightsky, random);
 
         // Create the buttons on the bottom of the GUI
         generateButtons(buttons);
@@ -107,6 +104,14 @@ public class DrawGUI extends Application {
         }
 
         return circles;
+    }
+
+    private void addStarsToNightsky(Nightsky nightsky, Random random){
+        // Generate nightsky and add stars to it
+        nightsky.addConstellation(new Constellation("Music Constellation"));
+        for(int i = 0; i < 50; i++) {
+            nightsky.addStar(new Star(random.nextInt(width-30)+15, random.nextInt(height-30)+15));
+        }
     }
 
     private void generateButtons(HBox buttons){
