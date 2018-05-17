@@ -98,7 +98,7 @@ public class DrawGUI extends Application {
 
         // Generates circles and lines from the stars x and y positions
         for(int i = 0; i < stars.size(); i++) {
-            Circle c = new Circle(stars.get(i).getxCoordinate(), stars.get(i).getyCoordinate(), 7 + random.nextInt(8), Color.WHITE);
+            Circle c = new Circle(stars.get(i).getxCoordinate(), stars.get(i).getyCoordinate(), 7 + random.nextInt(8), Color.LIGHTBLUE);
             int finalI = i;
 
             c.addEventHandler(MouseEvent.MOUSE_CLICKED, (MouseEvent event) -> {
