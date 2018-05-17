@@ -41,6 +41,9 @@ public class DrawGUI extends Application {
         Group nightskyScene = new Group();
         // All of the lines drawn between the stars
         ArrayList<Line> lineArray = new ArrayList<>();
+        // Generate and set icon
+        Image icon = new Image("icon.png");
+        primaryStage.getIcons().add(icon);
 
         // Add stars to the nightsky
         addStarsToNightsky(nightsky, random);
@@ -77,6 +80,7 @@ public class DrawGUI extends Application {
         ArrayList<Star> stars = nightsky.getStars();
         Random random = new Random();
         // Setup star pictures
+        int randomColorNumber;
         Image star01 = new Image("Star01.png");
         Image star02 = new Image("Star02.png");
         Image star03 = new Image("Star03.png");
@@ -86,12 +90,13 @@ public class DrawGUI extends Application {
 
         // Generates circles and lines from the stars x and y positions
         for(int i = 0; i < stars.size(); i++) {
+            randomColorNumber = random.nextInt(25);
 
             // Create a new circle on the same coordinates of a star, and a random radius
             Circle c = new Circle(stars.get(i).getxCoordinate(), stars.get(i).getyCoordinate(), 10 + random.nextInt(10), Color.LIGHTBLUE);
 
             // Small chance not to use the white texture
-            switch (random.nextInt(25)){
+            switch (randomColorNumber){
                 case 1:
                     c.setFill(new ImagePattern(star01));
                     break;
@@ -129,7 +134,9 @@ public class DrawGUI extends Application {
 
                     // Draw a line between current and previous star
                     Line l = new Line(conStars.get(size-2).getxCoordinate(), conStars.get(size-2).getyCoordinate(), conStars.get(size-1).getxCoordinate(), conStars.get(size-1).getyCoordinate());
+
                     l.setStroke(Color.WHITESMOKE);
+
                     lineArray.add(l);
                     nightskyScene.getChildren().add(l);
                 }
