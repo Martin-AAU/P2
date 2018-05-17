@@ -157,9 +157,8 @@ public class DrawGUI extends Application {
             b.setPrefSize((width / bA.size()) - 15, height / 13);
             b.setStyle("-fx-background-color: #21415f, " +
                        "linear-gradient(#0d1a26, #1a344c); " +
-                       "-fx-text-fill: linear-gradient(white, #d0d0d0); " +
-                       "-fx-font-size: 18px; " +
-                       "-fx-font-weight: bold; " +
+                       "-fx-text-fill: linear-gradient(#ffffff, #c6d9eb); " +
+                       "-fx-font-size: 20px; " +
                        "-fx-background-insets: 0,1.5,5,5,5;" +
                     "-fx-font-family: "+ "Tahoma"+";");
         }
