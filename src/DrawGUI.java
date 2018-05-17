@@ -34,42 +34,30 @@ public class DrawGUI extends Application {
         launch(args);
     }
 
+    // Global variables for half width and height of screen
     public static int width = (int) (Toolkit.getDefaultToolkit().getScreenSize().width/1.5);
     public static int height = (int) (Toolkit.getDefaultToolkit().getScreenSize().height/1.5);
 
     public void start(Stage primaryStage) {
         Random random = new Random();
-
-        // Generate nightsky
         Nightsky nightsky = new Nightsky();
-        nightsky.addConstellation(new Constellation("Music Constellation"));
+        // Box'es for bottom row
+        VBox UI = new VBox();
+        HBox buttons = new HBox();
+        // The scene for the night-sky (where stars are placed)
+        Group nightskyScene = new Group();
 
+        // Generate nightsky and add stars to it
+        nightsky.addConstellation(new Constellation("Music Constellation"));
         for(int i = 0; i < 50; i++) {
             nightsky.addStar(new Star(random.nextInt(width-30)+15, random.nextInt(height-30)+15));
         }
 
-        // Creating buttons
-        Button button1 = new Button("Generate MIDI file");
-        Button button2 = new Button("Exit");
+        // Create the buttons on the bottom of the GUI
+        generateButtons(buttons);
 
-        VBox UI = new VBox();
-        HBox buttons = new HBox();
-        buttons.setPadding(new Insets(15, 12, 15, 12));
-        buttons.setSpacing(10);
-        buttons.setStyle("-fx-background-color: #336699;");
-        buttons.getChildren().add(button1);
-        buttons.getChildren().add(button2);
-
-        // Make group
-        Group nightskyScene = new Group();
-
-        // Background image sky
-        ImageView ivSky = new ImageView();
-        Image imageS = new Image("NightskyBG.jpg");
-        ivSky.setImage(imageS);
-        ivSky.setFitHeight(height);
-        ivSky.setFitWidth(width);
-        nightskyScene.getChildren().add(ivSky);
+        // Add a picture as the background of the nightskyScene
+        addSkyBackgroundImage(nightskyScene);
 
         // Generate circles
         ArrayList<Circle> circles = generateCircles(nightsky, nightskyScene);
@@ -119,5 +107,27 @@ public class DrawGUI extends Application {
         }
 
         return circles;
+    }
+
+    private void generateButtons(HBox buttons){
+        // Creating buttons
+        Button button1 = new Button("Generate MIDI file");
+        Button button2 = new Button("Exit");
+
+        buttons.setPadding(new Insets(15, 12, 15, 12));
+        buttons.setSpacing(10);
+        buttons.setStyle("-fx-background-color: #336699;");
+        buttons.getChildren().add(button1);
+        buttons.getChildren().add(button2);
+    }
+
+    private void addSkyBackgroundImage(Group nightskyScene){
+        // Background image sky
+        ImageView ivSky = new ImageView();
+        Image imageS = new Image("NightskyBG.jpg");
+        ivSky.setImage(imageS);
+        ivSky.setFitHeight(height);
+        ivSky.setFitWidth(width);
+        nightskyScene.getChildren().add(ivSky);
     }
 }
