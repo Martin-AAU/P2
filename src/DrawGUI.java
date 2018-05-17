@@ -10,10 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.BackgroundImage;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
@@ -66,13 +63,13 @@ public class DrawGUI extends Application {
         // Make group
         Group nightskyScene = new Group();
 
-        // Background image
-        ImageView iv = new ImageView();
-        Image image = new Image("NightskyBG.jpg");
-        iv.setImage(image);
-        iv.setFitHeight(height);
-        iv.setFitWidth(width);
-        nightskyScene.getChildren().add(iv);
+        // Background image sky
+        ImageView ivSky = new ImageView();
+        Image imageS = new Image("NightskyBG.jpg");
+        ivSky.setImage(imageS);
+        ivSky.setFitHeight(height);
+        ivSky.setFitWidth(width);
+        nightskyScene.getChildren().add(ivSky);
 
         // Generate circles
         ArrayList<Circle> circles = generateCircles(nightsky, nightskyScene);
