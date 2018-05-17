@@ -38,8 +38,8 @@ public class DrawGUI extends Application {
     }
 
     // Global variables for half width and height of screen
-    public static int width = (int) (Toolkit.getDefaultToolkit().getScreenSize().width/1.5);
-    public static int height = (int) (Toolkit.getDefaultToolkit().getScreenSize().height/1.5);
+    public static int width = (int) (Toolkit.getDefaultToolkit().getScreenSize().width/1.15);
+    public static int height = (int) (Toolkit.getDefaultToolkit().getScreenSize().height/1.25);
 
     public void start(Stage primaryStage) {
         Random random = new Random();
@@ -151,7 +151,7 @@ public class DrawGUI extends Application {
             b = bA.get(i);
 
             b.setPrefSize((width / bA.size()) - 15, height / 13);
-            b.setStyle("-fx-background-color: #0d0d0d, linear-gradient(#0d1a26, #1a344c); -fx-text-fill: linear-gradient(white, #d0d0d0); -fx-font-size: 14px;");
+            b.setStyle("-fx-background-color: #0d0d0d, linear-gradient(#0d1a26, #1a344c); -fx-text-fill: linear-gradient(white, #d0d0d0); -fx-font-size: 16px;");
         }
     }
 
@@ -159,7 +159,7 @@ public class DrawGUI extends Application {
     private void addSkyBackgroundImage(Group nightskyScene){
         // Background image sky
         ImageView ivSky = new ImageView();
-        Image imageS = new Image("NightskyBG.jpg");
+        Image imageS = new Image("NightskyBG.png");
         ivSky.setImage(imageS);
         ivSky.setFitHeight(height);
         ivSky.setFitWidth(width);
