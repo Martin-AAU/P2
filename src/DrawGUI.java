@@ -161,7 +161,7 @@ public class DrawGUI extends Application {
                        "-fx-font-size: 18px; " +
                        "-fx-font-weight: bold; " +
                        "-fx-background-insets: 0,1.5,5,5,5;" +
-                    "-fx-font-family: "+ "Georgia"+";");
+                    "-fx-font-family: "+ "Tahoma"+";");
         }
     }
 
