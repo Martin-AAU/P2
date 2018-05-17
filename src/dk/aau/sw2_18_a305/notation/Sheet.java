@@ -1,5 +1,6 @@
 package dk.aau.sw2_18_a305.notation;
 
+import javax.sound.midi.Track;
 import java.util.LinkedList;
 import java.util.stream.IntStream;
 
@@ -67,5 +68,9 @@ public class Sheet {
             TimedNote n = new TimedNote(c.getNotes().get(i), length, timeStamp);
             addTimedNote(n);
         }
+    }
+
+    public void convertToMidiTrack() {
+        //Track track = new Track();
     }
 }
