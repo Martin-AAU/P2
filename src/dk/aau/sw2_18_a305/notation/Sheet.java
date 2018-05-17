@@ -39,9 +39,14 @@ public class Sheet {
 
     // METHODS
     public void addTimedNote(TimedNote n) {
-        int time = n.getTimeStamp() + n.getLength();
+        int time = n.getTimeStamp();
+        int latestStamp = 0;
 
-        if(time >= totalPlaytime) {
+        if (notes.size() != 0) {
+            latestStamp = notes.get(notes.size() - 1).getTimeStamp();
+        }
+
+        if(time >= latestStamp) {
             notes.add(n);
         }else {
             IntStream.range(0, notes.size()).filter(i -> time >= notes.get(i).getTimeStamp()).forEach(i -> {
@@ -49,11 +54,11 @@ public class Sheet {
             });
         }
 
-        totalPlaytime = totalPlaytime < time ? time : totalPlaytime;
+        this.totalPlaytime = this.totalPlaytime < time ? time: this.totalPlaytime;
     }
 
-    public void addNote(Note n, int lenth, int timeStamp) {
-        TimedNote timedNote = new TimedNote(n, lenth, timeStamp);
+    public void addNote(Note n, int length, int timeStamp) {
+        TimedNote timedNote = new TimedNote(n, length, timeStamp);
         addTimedNote(timedNote);
     }
 

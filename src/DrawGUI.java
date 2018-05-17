@@ -69,30 +69,36 @@ public class DrawGUI extends Application {
     }
 
     private static ArrayList<Circle> generateCircles(Nightsky nightsky, Group nightskyScene) {
+        // circles is to be returned, stars is used as a shortcut
         ArrayList<Circle> circles = new ArrayList<>();
         ArrayList<Star> stars = nightsky.getStars();
+        ArrayList<Star> conStars = nightsky.getConstellations().get(0).getStars();
         Random random = new Random();
 
 
         // Generates circles and lines from the stars x and y positions
         for(int i = 0; i < stars.size(); i++) {
+
+            // Create a new circle on the same coordinates of a star, and a random radius
             Circle c = new Circle(stars.get(i).getxCoordinate(), stars.get(i).getyCoordinate(), 7 + random.nextInt(8), Color.LIGHTBLUE);
             int finalI = i;
 
+            // Add an eventhandler to the circle, that triggers when you click on the circle
             c.addEventHandler(MouseEvent.MOUSE_CLICKED, (MouseEvent event) -> {
-                nightsky.getConstellations().get(0).addStar(nightsky.getStars().get(finalI));
 
-                ArrayList<Star> conStars = nightsky.getConstellations().get(0).getStars();
+                // Add the star represented as a circle to the constellation
+                nightsky.getConstellations().get(0).addStar(stars.get(finalI));
 
                 if(conStars.size() > 1) {
                     int size = nightsky.getConstellations().get(0).getStars().size();
-                    //ArrayList<Star> stars = nightsky.getConstellations().get(0).getStars();
 
+                    // Draw a line between current and previous star
                     Line l = new Line(conStars.get(size-2).getxCoordinate(), conStars.get(size-2).getyCoordinate(), conStars.get(size-1).getxCoordinate(), conStars.get(size-1).getyCoordinate());
                     l.setStroke(Color.YELLOW);
                     nightskyScene.getChildren().add(l);
                 }
             } );
+
             circles.add(c);
         }
 

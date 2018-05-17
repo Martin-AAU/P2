@@ -26,14 +26,30 @@ class ConstToSheetConvTest {
     }
 
     @Test
-    void test01() {
-        Note note = new Note(readPitchClass(constellation.getStars().get(0).getyCoordinate() / (DrawGUI.height/12)));
-        Chord c = new Chord(new Note(C), 4, 3);
-        System.out.println(sheet.getTotalPlaytime());
-
+    void printTest() {
         int i = 1;
         for (TimedNote timedNote : sheet.getNotes()) {
             System.out.println("Note "+i+": "+timedNote.getPitchClass() + " Length: " + timedNote.getLength() + " Timestamp: " + timedNote.getTimeStamp());
         }
+    }
+
+    @Test
+    void test01() {
+        assertEquals(16, sheet.getNotes().get(0).getLength());
+    }
+
+    @Test
+    void test02() {
+        assertEquals(4, sheet.getNotes().get(3).getLength());
+    }
+
+    @Test
+    void test03() {
+        assertEquals(5, sheet.getTotalPlaytime());
+    }
+
+    @Test
+    void test04() {
+        assertEquals(8, sheet.getNotes().get(10).getLength());
     }
 }

@@ -1,12 +1,8 @@
 import dk.aau.sw2_18_a305.nightsky.Constellation;
-import dk.aau.sw2_18_a305.nightsky.Nightsky;
 import dk.aau.sw2_18_a305.nightsky.Star;
 import dk.aau.sw2_18_a305.notation.*;
-import javafx.scene.shape.Circle;
 
 import java.util.Vector;
-
-import static dk.aau.sw2_18_a305.notation.PitchClass.*;
 
 public final class ConstToSheetConv {
 
@@ -59,10 +55,8 @@ public final class ConstToSheetConv {
             Note note = new Note(calPitchClass(star.getyCoordinate()));
 
             //calculate the distance between the latest and current chord, and playtime of current chord
-            int distance = calcLength(constellation.getStars().get(i-1).getxCoordinate(), constellation.getStars().get(i-1).getyCoordinate(), star.getxCoordinate(), star.getyCoordinate());
-            int playtime = calcPlayTime(constellation.getStars().get(i-1).getxCoordinate(), constellation.getStars().get(i-1).getyCoordinate(),
-                    star.getxCoordinate(), star.getyCoordinate(), constellation.getStars().get(i+1).getxCoordinate(),
-                    constellation.getStars().get(i+1).getyCoordinate());
+            int distance = calcLength(constellation.getStars().get(i-1), star);
+            int playtime = calcPlayTime(constellation.getStars().get(i-1), star, constellation.getStars().get(i+1));
 
             //Make the minor and major chords
             Chord major = new Chord(note, 4, 3);
@@ -86,7 +80,7 @@ public final class ConstToSheetConv {
     private static void lastStar(Sheet sheet, Constellation constellation, Chord latestChord) {
         Star star = constellation.getStars().get(constellation.getStars().size() - 1);
         Star lastStar = constellation.getStars().get(constellation.getStars().size() - 2);
-        int space = calcLength(lastStar.getxCoordinate(), lastStar.getyCoordinate(), star.getxCoordinate(), star.getyCoordinate());
+        int space = calcLength(lastStar, star);
 
         //Calculate the end note and chord (Last) and add it to sheet
         Note note = new Note(calPitchClass(constellation.getStars().get(constellation.getStars().size() - 1).getyCoordinate()));
@@ -102,7 +96,12 @@ public final class ConstToSheetConv {
      * @param y2 y coordinate of second point
      * @return returns the lenght between two points in 16 parts of a note
      */
-    private static int calcLength(int x1, int y1, int x2, int y2) {
+    private static int calcLength(Star a, Star b) {
+        int x1 = a.getxCoordinate();
+        int x2 = b.getxCoordinate();
+        int y1 = a.getyCoordinate();
+        int y2 = b.getyCoordinate();
+
         double result = Math.sqrt((x2-x1)*(x2-x1) + (y2-y1)*(y2-y1));
         double maxDistance = Math.sqrt((DrawGUI.width)*(DrawGUI.width) + (DrawGUI.height)*(DrawGUI.height));
 
@@ -118,16 +117,22 @@ public final class ConstToSheetConv {
      * @param y3 y coordinate of third point
      * @return returns the playtime of a note by calculating an angle between three points
      */
-    private static int calcPlayTime(int x1, int y1, int x2, int y2, int x3, int y3) {
-        Vector<Integer> v1 = new Vector<>(Math.abs(x1-x2), Math.abs(y1-y2));
-        Vector<Integer> v2 = new Vector<>(Math.abs(x2-x3), Math.abs(y2-y3));
+    private static int calcPlayTime(Star a, Star b, Star c) {
+        int x1 = a.getxCoordinate();
+        int x2 = b.getxCoordinate();
+        int x3 = c.getxCoordinate();
+        int y1 = a.getyCoordinate();
+        int y2 = b.getyCoordinate();
+        int y3 = c.getyCoordinate();
 
-        double angle = Math.atan2(Math.abs(y2-y3), Math.abs(x2-x3)) - Math.atan2(Math.abs(y1-y2), Math.abs(x1-x2));
+        double angle = Math.atan2(y2-y1,x2-x1) - Math.atan2(y2-y3,x2-x3);
+
         if (angle < 0) angle += 2 * Math.PI;
 
         if(angle > Math.PI) {
             angle = (2 * Math.PI) - angle;
         }
+
         return determineTime(angle, Math.PI);
     }
 
@@ -168,10 +173,8 @@ public final class ConstToSheetConv {
      */
     private static Chord checkClosestChord(Chord ref, Chord a, Chord b) {
         if(ref.distanceTo(a) < ref.distanceTo(b)) {
-            System.out.println("A was closest");
             return a;
         }
-        System.out.println("B was closest");
         return b;
     }
 }
