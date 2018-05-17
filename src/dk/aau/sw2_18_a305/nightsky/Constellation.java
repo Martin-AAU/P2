@@ -35,5 +35,12 @@ public class Constellation{
         return this;
     }
 
+    public Constellation removeLastStar(){
+        if (stars.size() > 0){
+            stars.remove(stars.size() - 1);
+            return this;
+        } else return this;
+    }
+
     //
 }

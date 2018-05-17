@@ -33,4 +33,34 @@ class ConstellationTest {
        assertEquals(20, c.getStars().get(0).getyCoordinate());
    }
 
+   @Test
+    void removeLastStar01(){
+       Star s1 = new Star(50, 20, "red");
+       Star s2 = new Star(45, 20, "red");
+       Star s3 = new Star(10, 20, "red");
+       Constellation c = new Constellation("c");
+       c.addStar(s1);
+       c.addStar(s2);
+       c.addStar(s3);
+
+       assertEquals(c.getStars().get(c.getStars().size() -1).getxCoordinate(), 10);
+
+       c.removeLastStar();
+
+       assertEquals(c.getStars().get(c.getStars().size() -1).getxCoordinate(), 45);
+
+       c.removeLastStar();
+
+       assertEquals(c.getStars().get(c.getStars().size() -1).getxCoordinate(), 50);
+
+       c.removeLastStar();
+
+       assertEquals(c.getStars().size(), 0);
+
+       c.removeLastStar();
+
+       assertEquals(c.getStars().size(), 0);
+
+   }
+
 }
