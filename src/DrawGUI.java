@@ -120,21 +120,24 @@ public class DrawGUI extends Application {
 
     private void generateButtons(HBox buttons){
         // Creating buttons
-        Button buttonGen = new Button("Generate MIDI file");
+        Button buttonGen = new Button("Generate .MIDI file");
+        Button buttonPlay = new Button("Play");
         Button buttonUndo = new Button("Undo");
         Button buttonExit = new Button("Exit");
         ArrayList<Button> buttonArray = new ArrayList<>();
 
         // Fill arrayList
         buttonArray.add(buttonGen);
+        buttonArray.add(buttonPlay);
         buttonArray.add(buttonUndo);
         buttonArray.add(buttonExit);
 
         // Setup buttons GUI
         buttons.setPadding(new Insets(15, 12, 15, 12));
         buttons.setSpacing(10);
-        buttons.setStyle("-fx-background-color: #0d1a26;");
+        buttons.setStyle("-fx-background-color: linear-gradient(#0d1a26, #070d13);");
         buttons.getChildren().add(buttonGen);
+        buttons.getChildren().add(buttonPlay);
         buttons.getChildren().add(buttonUndo);
         buttons.getChildren().add(buttonExit);
         styleButtons(buttonArray);
@@ -158,7 +161,7 @@ public class DrawGUI extends Application {
                        "-fx-font-size: 18px; " +
                        "-fx-font-weight: bold; " +
                        "-fx-background-insets: 0,1.5,5,5,5;" +
-                    "-fx-font-family: "+ "'Comic Sans MS'"+";");
+                    "-fx-font-family: "+ "Georgia"+";");
         }
     }
 
