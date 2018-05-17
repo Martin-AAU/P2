@@ -159,7 +159,7 @@ public class DrawGUI extends Application {
     private void addSkyBackgroundImage(Group nightskyScene){
         // Background image sky
         ImageView ivSky = new ImageView();
-        Image imageS = new Image("NightskyBG.png");
+        Image imageS = new Image("NightskyBG.jpg");
         ivSky.setImage(imageS);
         ivSky.setFitHeight(height);
         ivSky.setFitWidth(width);
