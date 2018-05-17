@@ -3,9 +3,7 @@ import dk.aau.sw2_18_a305.nightsky.Nightsky;
 import dk.aau.sw2_18_a305.nightsky.Star;
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -17,20 +15,10 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import javafx.stage.WindowEvent;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.awt.image.ImageObserver;
-import java.awt.image.ImageProducer;
-import java.io.File;
-import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.Vector;
 
 public class DrawGUI extends Application {
 
@@ -84,6 +72,7 @@ public class DrawGUI extends Application {
         ArrayList<Circle> circles = new ArrayList<>();
         ArrayList<Star> stars = nightsky.getStars();
         Random random = new Random();
+
 
         // Generates circles and lines from the stars x and y positions
         for(int i = 0; i < stars.size(); i++) {
@@ -160,7 +149,8 @@ public class DrawGUI extends Application {
                        "-fx-text-fill: linear-gradient(#ffffff, #c6d9eb); " +
                        "-fx-font-size: 20px; " +
                        "-fx-background-insets: 0,1.5,5,5,5;" +
-                    "-fx-font-family: "+ "Tahoma"+";");
+                       "-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );" +
+                       "-fx-font-family: "+ "Tahoma"+";");
         }
     }
 

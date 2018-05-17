@@ -27,13 +27,13 @@ public class Constellation{
     public String getName() {
         return name;
     }
-    public ArrayList<Star> getStars() {
-        return stars;
-    }
+    public ArrayList<Star> getStars() {return new ArrayList<>(stars);}
 
-    //Add a star to the constellation
+    // Add a star to the constellation
     public Constellation addStar(Star s) {
         stars.add(s);
         return this;
     }
+
+    //
 }
