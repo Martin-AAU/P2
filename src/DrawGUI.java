@@ -95,7 +95,7 @@ public class DrawGUI extends Application {
 
                     // Draw a line between current and previous star
                     Line l = new Line(conStars.get(size-2).getxCoordinate(), conStars.get(size-2).getyCoordinate(), conStars.get(size-1).getxCoordinate(), conStars.get(size-1).getyCoordinate());
-                    l.setStroke(Color.YELLOW);
+                    l.setStroke(Color.WHITESMOKE);
                     lineArray.add(l);
                     nightskyScene.getChildren().add(l);
                 }
@@ -145,9 +145,13 @@ public class DrawGUI extends Application {
     }
 
     private void undoStarChoice(ArrayList<Line> lineArray, Nightsky nightsky, Group nightskyScene){
-        if (lineArray.size() > 0){
+        if (lineArray.size() > 1){
             nightskyScene.getChildren().remove(lineArray.get(lineArray.size() - 1));
             lineArray.remove(lineArray.size() - 1);
+            nightsky.getConstellations().get(0).removeLastStar();
+        } else if (lineArray.size() == 1){
+            nightskyScene.getChildren().remove(lineArray.get(lineArray.size() - 1));
+            lineArray.clear();
             nightsky.getConstellations().get(0).removeLastStar();
         }
     }
