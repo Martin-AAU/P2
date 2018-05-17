@@ -12,6 +12,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.stage.Stage;
@@ -75,12 +76,16 @@ public class DrawGUI extends Application {
         ArrayList<Circle> circles = new ArrayList<>();
         ArrayList<Star> stars = nightsky.getStars();
         Random random = new Random();
+        // Setup star picture
+        Image star01 = new Image("Star01.png");
 
         // Generates circles and lines from the stars x and y positions
         for(int i = 0; i < stars.size(); i++) {
 
             // Create a new circle on the same coordinates of a star, and a random radius
             Circle c = new Circle(stars.get(i).getxCoordinate(), stars.get(i).getyCoordinate(), 7 + random.nextInt(8), Color.LIGHTBLUE);
+            c.setFill(new ImagePattern(star01));
+
             int finalI = i;
 
             // Add an eventhandler to the circle, that triggers when you click on the circle
