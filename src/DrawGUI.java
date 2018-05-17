@@ -17,6 +17,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 
 import javax.imageio.ImageIO;
@@ -151,10 +152,9 @@ public class DrawGUI extends Application {
             b = bA.get(i);
 
             b.setPrefSize((width / bA.size()) - 15, height / 13);
-            b.setStyle("-fx-background-color: #0d0d0d, linear-gradient(#0d1a26, #1a344c); -fx-text-fill: linear-gradient(white, #d0d0d0); -fx-font-size: 16px;");
+            b.setStyle("-fx-background-color: #21415f, linear-gradient(#0d1a26, #1a344c); -fx-text-fill: linear-gradient(white, #d0d0d0); -fx-font-size: 16px; -fx-font-weight: bold; -fx-background-insets: 0,1.5,5,5,5;");
         }
     }
-
 
     private void addSkyBackgroundImage(Group nightskyScene){
         // Background image sky
