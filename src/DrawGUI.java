@@ -72,7 +72,6 @@ public class DrawGUI extends Application {
         // circles is to be returned, stars is used as a shortcut
         ArrayList<Circle> circles = new ArrayList<>();
         ArrayList<Star> stars = nightsky.getStars();
-        ArrayList<Star> conStars = nightsky.getConstellations().get(0).getStars();
         Random random = new Random();
 
 
@@ -88,6 +87,7 @@ public class DrawGUI extends Application {
 
                 // Add the star represented as a circle to the constellation
                 nightsky.getConstellations().get(0).addStar(stars.get(finalI));
+                ArrayList<Star> conStars = nightsky.getConstellations().get(0).getStars();
 
                 if(conStars.size() > 1) {
                     int size = nightsky.getConstellations().get(0).getStars().size();
