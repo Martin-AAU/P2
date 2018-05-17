@@ -2,8 +2,6 @@ import dk.aau.sw2_18_a305.nightsky.Constellation;
 import dk.aau.sw2_18_a305.nightsky.Star;
 import dk.aau.sw2_18_a305.notation.*;
 
-import java.util.Vector;
-
 public final class ConstToSheetConv {
 
     /**
@@ -55,8 +53,8 @@ public final class ConstToSheetConv {
             Note note = new Note(calPitchClass(star.getyCoordinate()));
 
             //calculate the distance between the latest and current chord, and playtime of current chord
-            int distance = calcLength(constellation.getStars().get(i-1), star);
-            int playtime = calcPlayTime(constellation.getStars().get(i-1), star, constellation.getStars().get(i+1));
+            int distance = calLength(constellation.getStars().get(i-1), star);
+            int playtime = calPlayTime(constellation.getStars().get(i-1), star, constellation.getStars().get(i+1));
 
             //Make the minor and major chords
             Chord major = new Chord(note, 4, 3);
@@ -80,7 +78,7 @@ public final class ConstToSheetConv {
     private static void lastStar(Sheet sheet, Constellation constellation, Chord latestChord) {
         Star star = constellation.getStars().get(constellation.getStars().size() - 1);
         Star lastStar = constellation.getStars().get(constellation.getStars().size() - 2);
-        int space = calcLength(lastStar, star);
+        int space = calLength(lastStar, star);
 
         //Calculate the end note and chord (Last) and add it to sheet
         Note note = new Note(calPitchClass(constellation.getStars().get(constellation.getStars().size() - 1).getyCoordinate()));
@@ -96,7 +94,7 @@ public final class ConstToSheetConv {
      * @param y2 y coordinate of second point
      * @return returns the lenght between two points in 16 parts of a note
      */
-    private static int calcLength(Star a, Star b) {
+    private static int calLength(Star a, Star b) {
         int x1 = a.getxCoordinate();
         int x2 = b.getxCoordinate();
         int y1 = a.getyCoordinate();
@@ -117,7 +115,7 @@ public final class ConstToSheetConv {
      * @param y3 y coordinate of third point
      * @return returns the playtime of a note by calculating an angle between three points
      */
-    private static int calcPlayTime(Star a, Star b, Star c) {
+    private static int calPlayTime(Star a, Star b, Star c) {
         int x1 = a.getxCoordinate();
         int x2 = b.getxCoordinate();
         int x3 = c.getxCoordinate();
