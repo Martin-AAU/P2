@@ -43,6 +43,6 @@ public class Note {
         this.octave = midiValue / 12 - 1;
     }
     private void calMidiValue() {
-        midiValue = pitchClass.number + octave+1 * 12;
+        midiValue = pitchClass.number + (octave+1) * 12;
     }
 }

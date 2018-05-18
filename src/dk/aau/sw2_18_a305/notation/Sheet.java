@@ -72,16 +72,16 @@ public class Sheet {
 
     public Sequence convertToMidiTrack() {
         try {
-            Sequence sequence = new Sequence(Sequence.PPQ, this.timeDivision);
+            Sequence sequence = new Sequence(Sequence.PPQ, this.timeDivision/4);
             Track track = sequence.createTrack();
 
             for (TimedNote note : notes) {
-                System.out.println("Note added: "+note.getPitchClass() + " Length: " + note.getLength() + " Timestamp: " + note.getTimeStamp() + "Midi: " + note.getMidiValue());
+                System.out.println("Note added: "+note.getPitchClass() + " Length: " + note.getLength() + " Timestamp: " + note.getTimeStamp() + " Midi: " + note.getMidiValue() + " octave: "+note.getOctave());
                 // Create Midi messages
                 ShortMessage messageOn = new ShortMessage();
                 ShortMessage messageOff = new ShortMessage();
                 messageOn.setMessage(ShortMessage.NOTE_ON, 0, note.getMidiValue(), 100);
-                messageOn.setMessage(ShortMessage.NOTE_OFF, 0, note.getMidiValue(), 100);
+                messageOff.setMessage(ShortMessage.NOTE_OFF, 0, note.getMidiValue(), 100);
 
                 // Create 4 MidiEvents (class) and add the messages to them
                 MidiEvent noteOn = new MidiEvent(messageOn, note.getTimeStamp());
