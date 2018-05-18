@@ -53,7 +53,7 @@ public class DrawGUI extends Application {
 
         // Create a midi player
         MidiPlayer midiPlayer = new MidiPlayer();
-        midiPlayer.playMidiFile("Resources/test.mid");
+        midiPlayer.playMidiFile("AwesomeSong.mid");
 
         // Add stars to the nightsky
         addStarsToNightsky(nightsky, random);
@@ -196,7 +196,7 @@ public class DrawGUI extends Application {
         // Setup functionality
         buttonExit.setOnMouseClicked(e -> Platform.exit());
         buttonUndo.setOnMouseClicked(e -> undoStarChoice(lineArray, nightsky, nightskyScene));
-        buttonPlay.setOnMouseClicked(e -> midiPlayer.playMidiFile("Resources/test.mid"));
+        buttonPlay.setOnMouseClicked(e -> midiPlayer.playMidiFile("StarSound.mid"));
         buttonGen.setOnMouseClicked(e -> generateMidiFile(nightsky.getConstellations().get(0)));
     }
 
