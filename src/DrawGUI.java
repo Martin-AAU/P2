@@ -166,7 +166,7 @@ public class DrawGUI extends Application {
         MidiPlayer midiPlayer = new MidiPlayer();
 
         // Creating buttons
-        Button buttonGen = new Button("Save");
+        Button buttonGen = new Button("Save to MIDI");
         Button buttonPlay = new Button("Play");
         Button buttonUndo = new Button("Undo");
         Button buttonExit = new Button("Exit");
@@ -232,7 +232,7 @@ public class DrawGUI extends Application {
             b.setStyle("-fx-background-color: #21415f, " +
                        "linear-gradient(#0d1a26, #1a344c); " +
                        "-fx-text-fill: linear-gradient(#ffffff, #c6d9eb); " +
-                       "-fx-font-size: 20px; " +
+                       "-fx-font-size: 22px; " +
                        "-fx-background-insets: 0,1.5,5,5,5;" +
                        "-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );" +
                        "-fx-font-family: "+ "Tahoma"+";");
