@@ -5,23 +5,52 @@ import java.util.Objects;
 
 import static dk.aau.sw2_18_a305.notation.PitchClass.*;
 
-// NOTE: Interval is defined as distance from prior note
+/**
+ * Represents a Chord that has a number of {@link Note}s
+ */
 public class Chord{
 
+    /**
+     * Used in the <code>distanceTo(Chord)</code> method. Per standard the assigned distance strategy is {@link CircleOfFifths}
+     */
     private DistanceStrategy distanceStrategy = new CircleOfFifths();
+    /**
+     * A list of all notes in the chord
+     */
     private ArrayList<Note> notes = new ArrayList<>();
+    /**
+     * A list of intervals, representing the distance between the notes in the chord
+     */
     private ArrayList<Integer> intervals = new ArrayList<>();
 
-    // CONSTRUCTORS
+    /**
+     * Constructs a chord with only one note. Notes can be added with the <code>addNoteToChord(Note)</code> method
+     * @param rootNote The first note in the chord. Is considered the rootnote
+     */
     public Chord(Note rootNote){
         notes.add(rootNote);
     }
+
+    /**
+     * Constructs a chord with 2 intervals. Each interval is used to assign notes to the chord
+     * @param rootNote The first note in the chord. Is considered the rootnote
+     * @param interval1 First interval of the chord
+     * @param interval2 Second interval of the chord
+     */
     public Chord(Note rootNote, int interval1, int interval2) {
         notes.add(rootNote);
         intervals.add(interval1);
         intervals.add(interval2);
         finishNotes();
     }
+
+    /**
+     * Constructs a chord with 3 intervals. Each interval is used to assign notes to the chord
+     * @param rootNote The first note in the chord. Is considered the rootnote
+     * @param interval1 First interval of the chord
+     * @param interval2 Second interval of the chord
+     * @param interval3 Third interval of the chord
+     */
     public Chord(Note rootNote, int interval1, int interval2, int interval3) {
         notes.add(rootNote);
         intervals.add(interval1);
@@ -29,6 +58,15 @@ public class Chord{
         intervals.add(interval3);
         finishNotes();
     }
+
+    /**
+     * Constructs a chord with 4 intervals. Each interval is used to assign notes to the chord
+     * @param rootNote The first note in the chord. Is considered the rootnote
+     * @param interval1 First interval of the chord
+     * @param interval2 Second interval of the chord
+     * @param interval3 Third interval of the chord
+     * @param interval4 Fourth interval of the chord
+     */
     public Chord(Note rootNote, int interval1, int interval2, int interval3, int interval4) {
         notes.add(rootNote);
         intervals.add(interval1);
@@ -37,6 +75,16 @@ public class Chord{
         intervals.add(interval4);
         finishNotes();
     }
+
+    /**
+     * Constructs a chord with 5 intervals. Each interval is used to assign notes to the chord
+     * @param rootNote The first note in the chord. Is considered the rootnote
+     * @param interval1 First interval of the chord
+     * @param interval2 Second interval of the chord
+     * @param interval3 Third interval of the chord
+     * @param interval4 Fourth interval of the chord
+     * @param interval5 Fifth interval of the chord
+     */
     public Chord(Note rootNote, int interval1, int interval2, int interval3, int interval4, int interval5) {
         notes.add(rootNote);
         intervals.add(interval1);
@@ -47,13 +95,25 @@ public class Chord{
         finishNotes();
     }
 
-    // GETTERS
+    /**
+     * Retreives the list of notes in the chord
+     * @return A list of all notes in the chord
+     */
     public ArrayList<Note> getNotes() {
         return notes;
     }
+
+    /**
+     * Retrieves the pitch class of the first note in the chord
+     * @return The pitch class of the first note in the chord
+     */
     public PitchClass getMainPitchClass() {return notes.get(0).getPitchClass();}
 
-    // Looks through every interval and returns the type of chord
+    /**
+     * Retreives the chord type by looking at all the intervals, and matching them up with the intervals of the chord types
+     * in the enumeration {@link ChordType}
+     * @return returns a chord type based on the intervals of the chord
+     */
     // Source of intervals: https://www.edmprod.com/different-chord-types/
     public ChordType getChordType() {
         if (intervals.size() == 2 && intervals.get(0) == 4 && intervals.get(1) == 3){
@@ -112,62 +172,4 @@ public class Chord{
     public int distanceTo(Chord c ) {
         return distanceStrategy.distanceTo(this, c);
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Chord chord = (Chord) o;
-        return Objects.equals(distanceStrategy, chord.distanceStrategy) &&
-                Objects.equals(notes, chord.notes) &&
-                Objects.equals(intervals, chord.intervals);
-    }
-
-    @Override
-    public int hashCode() {
-
-        return Objects.hash(distanceStrategy, notes, intervals);
-    }
 }
-
-/*
-* //Generates 3 notes of a standard chord, and adds them to the notes list.
-    private void standardChord(PitchClass pitchClass, ChordType chordType, int length) {
-        notes.add(new Note(pitchClass, length));
-
-        int i, j;
-
-        //Determines the two intervals of the given chord type
-        switch (chordType) {
-            case Major: i = 4; j = 3;
-            case Minor: i = 3; j = 4;
-            case Diminshed: i = 3; j = 3;
-            case Augmented: i = 4; j = 4;
-            case Suspended2: i = 5; j = 2;
-            case Suspended4: i = 2; j = 4;
-            default: i = 0; j = 0;
-        }
-
-        notes.add(new Note(intervalToNote(i), length));
-        notes.add(new Note(intervalToNote(j), length));
-    }
-
-    //Returns a pitchClass depending on what
-    private PitchClass intervalToNote(int interval) {
-        switch ((notes.get(0).getPitchClass().number + interval) % 12) {
-            case 1: return C;
-            case 2: return Cs;
-            case 3: return D;
-            case 4: return Ds;
-            case 5: return E;
-            case 6: return F;
-            case 7: return Fs;
-            case 8: return G;
-            case 9: return Gs;
-            case 10: return A;
-            case 11: return As;
-            case 12: return B;
-        }
-        return C;
-    }
-* */

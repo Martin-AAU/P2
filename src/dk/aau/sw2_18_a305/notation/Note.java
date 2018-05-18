@@ -11,7 +11,7 @@ public class Note {
      */
     private PitchClass pitchClass;
     /**
-     * represents in which octave the note is in
+     * Represents in which octave the note is in
      */
     private int octave;
     /**
