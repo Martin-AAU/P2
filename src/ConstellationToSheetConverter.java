@@ -5,13 +5,16 @@ import dk.aau.sw2_18_a305.notation.*;
 import java.awt.*;
 import java.util.Random;
 
+/**
+ * Final class used purely to convert a constellation to a sheet
+ */
 public final class ConstellationToSheetConverter {
 
     /**
-     * This method takes a constellation and converts all the stars to chords and puts it into a sheet
+     * Takes a constellation and converts all the stars to chords and puts it into a sheet
      *
      * @param constellation The given constellation to be converted into a note sheet
-     * @return Returns a Sheet as a result from the constellation
+     * @return A Sheet as a result from the constellation
      */
     public static Sheet convert(Constellation constellation) {
 
@@ -28,12 +31,12 @@ public final class ConstellationToSheetConverter {
     }
 
     /**
-     * This method is used to find the first star in a constellation and make a chord out of it,
+     * Finds the first star in a constellation and makes a chord out of it,
      * and adds it to the given sheet
      *
      * @param sheet The sheet that is being created
      * @param constellation The constellation that is being converted
-     * @return returns the latest chord that was added
+     * @return The latest chord that was added
      */
     private static Chord FirstStar(Sheet sheet, Constellation constellation) {
         Star star = constellation.getStars().get(0);
@@ -47,13 +50,13 @@ public final class ConstellationToSheetConverter {
     }
 
     /**
-     * This method takes all stars between the first and last from a constellation
+     * Takes all stars between the first and last from a constellation
      * and then convert them into chords and add the chords to the given sheet
      *
      * @param sheet The sheet that is being created
      * @param constellation The constellation that is being converted
      * @param latestChord The latest chord to be added to the sheet
-     * @return returns the latest chord that was added
+     * @return The latest chord that was added
      */
     private static Chord mostStars(Sheet sheet, Constellation constellation, Chord latestChord) {
         // Go through the second to the second last star, and add them as notes to the sheet
@@ -82,7 +85,7 @@ public final class ConstellationToSheetConverter {
     }
 
     /**
-     * This method takes the last star in a constellation and adds it to a sheet as a chord
+     * Takes the last star in a constellation and adds it to a sheet as a chord
      *
      * @param sheet The sheet that is being created
      * @param constellation The constellation that is being converted
@@ -101,12 +104,12 @@ public final class ConstellationToSheetConverter {
     }
 
     /**
-     * This method takes two stars, and calculates the length between them.
+     * Takes two stars, and calculates the length between them.
      * it uses the determineTime(double, double) method to return a time in 16th parts of a note
      *
      * @param a The star that the distance is calculated from
      * @param b The star that the distance is calculated to
-     * @return returns the lenght between two points in 16 parts of a note
+     * @return The lenght between two points in 16 parts of a note
      */
     private static int calLength(Star a, Star b) {
         int width = (int) (Toolkit.getDefaultToolkit().getScreenSize().width/3.4);
@@ -123,13 +126,13 @@ public final class ConstellationToSheetConverter {
     }
 
     /**
-     * This method returns the playtime of a note by calculating the angle between three stars.
+     * Calculates the playtime of a note by calculating the angle between three stars.
      * the angle that is calculated is between 0 and PI, and then converted into time with the determineTime(double, double) method
      *
      * @param a One of the stars the angle is calculated between
      * @param b One of the stars the angle is calculated between
      * @param c One of the stars the angle is calculated between
-     * @return returns the playtime of a note by calculating an angle between three points
+     * @return The playtime of a note by calculating an angle between three points
      */
     private static int calPlayTime(Star a, Star b, Star c) {
         int x1 = a.getxCoordinate();
@@ -153,13 +156,13 @@ public final class ConstellationToSheetConverter {
     }
 
     /**
-     * This method converts a number in a specific range into either 1, 2, 4, 8, or 16.
+     * Converts a number in a specific range into either 1, 2, 4, 8, or 16.
      * the number represents 16th parts of a note. The closer the number is to the range (max value)
      * the higher the returned value is.
      *
      * @param number The number of which is to be converted to a lenght in time, in a music piece
      * @param range The max value the number parameter can acheive. The range is used to measure
-     * @return Returns either 1, 2, 4, 8, or 16 compared to how close number is to range
+     * @return Either 1, 2, 4, 8, or 16 compared to how close number is to range
      */
     private static int determineTime(double number, double range) {
         if(number < range * 0.2) {
@@ -176,11 +179,11 @@ public final class ConstellationToSheetConverter {
     }
 
     /**
-     * This method takes a coordinate that it converts into a pitchclass depending on how large the given coordinate is
+     * Takes a coordinate that it converts into a pitchclass depending on how large the given coordinate is
      * compared to the static height value in DrawGUI
      *
      * @param y The y coordinate
-     * @return returns a pitchclass depending on the coordinate and how large the window of DrawGUI is
+     * @return A pitchclass depending on the coordinate and how large the window of DrawGUI is
      */
     private static PitchClass calPitchClass(int y) {
         int index = y / ((int)((Toolkit.getDefaultToolkit().getScreenSize().height/1.25)/12));
@@ -189,13 +192,13 @@ public final class ConstellationToSheetConverter {
     }
 
     /**
-     * This method checks whether the given Chord a or b, is closest to the ref Chord,
+     * Checks whether the given Chord a or b, is closest to the ref Chord,
      * using the distanceStrategy that the ref chord has implemented
      *
      * @param ref The reference Chord
      * @param a A chord where the distance to ref is to be determined
      * @param b A chord where the distance to ref is to be determined
-     * @return Returns the chord a or b that is closest to ref, using the distance strategy that is assigned in the ref chord
+     * @return The chord a or b that is closest to ref, using the distance strategy that is assigned in the ref chord
      */
     private static Chord checkClosestChord(Chord ref, Chord a, Chord b) {
         if(ref.distanceTo(a) < ref.distanceTo(b)) {

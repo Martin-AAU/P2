@@ -16,8 +16,7 @@ public class Sheet {
     private int totalPlaytime = 0;
 
     // CONTRUCTORS
-    public Sheet() {
-    }
+    public Sheet() {}
     public Sheet(int timeDivision) {
         this.timeDivision = timeDivision;
     }
@@ -72,7 +71,7 @@ public class Sheet {
 
     public Sequence convertToMidiTrack() {
         try {
-            Sequence sequence = new Sequence(Sequence.PPQ, this.timeDivision);
+            Sequence sequence = new Sequence(Sequence.PPQ, this.timeDivision/2);
             Track track = sequence.createTrack();
 
             for (TimedNote note : notes) {
