@@ -8,7 +8,7 @@ public class MidiPlayer {
 
 
     public void playMidiFile(String fileName){
-        String path = new String("StarSound.mid");
+        String path = "AwesomeSong.mid";
         File midiFile = new File(path);
 
         if (!midiFile.canRead()){
