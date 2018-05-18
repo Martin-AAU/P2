@@ -1,6 +1,7 @@
 import dk.aau.sw2_18_a305.nightsky.Constellation;
 import dk.aau.sw2_18_a305.nightsky.Nightsky;
 import dk.aau.sw2_18_a305.nightsky.Star;
+import dk.aau.sw2_18_a305.notation.Sheet;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
@@ -15,9 +16,11 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
+import javafx.scene.shape.Path;
 import javafx.stage.Stage;
 
 import java.awt.*;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -224,5 +227,11 @@ public class DrawGUI extends Application {
         ivSky.setFitHeight(height);
         ivSky.setFitWidth(width);
         nightskyScene.getChildren().add(ivSky);
+    }
+
+    private void generateMidiFile(Constellation constellation) {
+        Sheet sheet = ConstellationToSheetConverter.convert(constellation);
+        java.nio.file.Path file = Paths.get("StarSound.mid");
+
     }
 }
