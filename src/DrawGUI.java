@@ -197,6 +197,7 @@ public class DrawGUI extends Application {
         buttonExit.setOnMouseClicked(e -> Platform.exit());
         buttonUndo.setOnMouseClicked(e -> undoStarChoice(lineArray, nightsky, nightskyScene));
         buttonPlay.setOnMouseClicked(e -> midiPlayer.playMidiFile("Resources/test.mid"));
+        buttonGen.setOnMouseClicked(e -> generateMidiFile(nightsky.getConstellations().get(0)));
     }
 
     private void undoStarChoice(ArrayList<Line> lineArray, Nightsky nightsky, Group nightskyScene){
