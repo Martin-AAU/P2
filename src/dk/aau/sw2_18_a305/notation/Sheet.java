@@ -72,7 +72,7 @@ public class Sheet {
 
     public Sequence convertToMidiTrack() {
         try {
-            Sequence sequence = new Sequence(Sequence.PPQ, this.timeDivision/4);
+            Sequence sequence = new Sequence(Sequence.PPQ, this.timeDivision);
             Track track = sequence.createTrack();
 
             for (TimedNote note : notes) {

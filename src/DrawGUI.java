@@ -18,7 +18,11 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 
+import javax.sound.midi.MidiSystem;
+import javax.sound.midi.Sequence;
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Random;
@@ -237,8 +241,18 @@ public class DrawGUI extends Application {
     }
 
     private void generateMidiFile(Constellation constellation) {
+        // Create a sheet from the constellation and a sequence from the sheet
         Sheet sheet = ConstellationToSheetConverter.convert(constellation);
-        java.nio.file.Path file = Paths.get("StarSound.mid");
+        Sequence sequence = sheet.convertToMidiTrack();
 
+        File file = new File("StarSound.mid");
+        // Get the midi file type, and write the sequence to the Midi file
+        int[] type = MidiSystem.getMidiFileTypes(sequence);
+
+        try {
+            MidiSystem.write(sequence, type[0], file);
+        } catch (IOException e) {
+            System.out.println("Could not write sequence onto the file");
+        }
     }
 }

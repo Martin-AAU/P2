@@ -3,6 +3,7 @@ import dk.aau.sw2_18_a305.nightsky.Star;
 import dk.aau.sw2_18_a305.notation.*;
 
 import java.awt.*;
+import java.util.Random;
 
 public final class ConstellationToSheetConverter {
 
@@ -108,13 +109,15 @@ public final class ConstellationToSheetConverter {
      * @return returns the lenght between two points in 16 parts of a note
      */
     private static int calLength(Star a, Star b) {
+        int width = (int) (Toolkit.getDefaultToolkit().getScreenSize().width/3.4);
+        int height = (int) (Toolkit.getDefaultToolkit().getScreenSize().height/3.7);
         int x1 = a.getxCoordinate();
         int x2 = b.getxCoordinate();
         int y1 = a.getyCoordinate();
         int y2 = b.getyCoordinate();
 
         double result = Math.sqrt((x2-x1)*(x2-x1) + (y2-y1)*(y2-y1));
-        double maxDistance = Math.sqrt((DrawGUI.width)*(DrawGUI.width) + (DrawGUI.height)*(DrawGUI.height));
+        double maxDistance = Math.sqrt((width)*(width) + (height)*(height));
 
         return determineTime(result, maxDistance);
     }
@@ -143,6 +146,8 @@ public final class ConstellationToSheetConverter {
         if(angle > Math.PI) {
             angle = (2 * Math.PI) - angle;
         }
+
+        angle = Math.PI - angle;
 
         return determineTime(angle, Math.PI);
     }
@@ -178,7 +183,7 @@ public final class ConstellationToSheetConverter {
      * @return returns a pitchclass depending on the coordinate and how large the window of DrawGUI is
      */
     private static PitchClass calPitchClass(int y) {
-        int index = y / ((int)(Toolkit.getDefaultToolkit().getScreenSize().height/1.25/12));
+        int index = y / ((int)((Toolkit.getDefaultToolkit().getScreenSize().height/1.25)/12));
 
         return PitchClass.readPitchClass(index);
     }
