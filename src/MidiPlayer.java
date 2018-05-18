@@ -1,7 +1,4 @@
-import javax.sound.midi.InvalidMidiDataException;
-import javax.sound.midi.MidiSystem;
-import javax.sound.midi.MidiUnavailableException;
-import javax.sound.midi.Sequencer;
+import javax.sound.midi.*;
 import java.io.*;
 
 public class MidiPlayer {
@@ -11,7 +8,7 @@ public class MidiPlayer {
 
 
     public void playMidiFile(String fileName){
-        File midiFile = new File("Resources/test.mid");
+        File midiFile = new File("Resources/AwesomeSong.mid");
 
         if (!midiFile.canRead()){
             System.out.println("UNABLE TO READ FILE!");
@@ -19,13 +16,14 @@ public class MidiPlayer {
         }
 
         try{
+            Sequence sequence = MidiSystem.getSequence(new File("Resources/AwesomeSong.mid"));
+
+            // Create a sequencer for the sequence
             Sequencer sequencer = MidiSystem.getSequencer();
             sequencer.open();
+            sequencer.setSequence(sequence);
 
-
-
-            InputStream is = new BufferedInputStream(new FileInputStream(new File("Resources/Star01.png")));
-            sequencer.setSequence(is);
+            // Start playing
             sequencer.start();
         } catch(MidiUnavailableException mue) {
             System.out.println("Midi device unavailable!");
