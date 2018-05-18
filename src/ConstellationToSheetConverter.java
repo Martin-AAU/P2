@@ -2,6 +2,8 @@ import dk.aau.sw2_18_a305.nightsky.Constellation;
 import dk.aau.sw2_18_a305.nightsky.Star;
 import dk.aau.sw2_18_a305.notation.*;
 
+import java.awt.*;
+
 public final class ConstellationToSheetConverter {
 
     /**
@@ -176,7 +178,7 @@ public final class ConstellationToSheetConverter {
      * @return returns a pitchclass depending on the coordinate and how large the window of DrawGUI is
      */
     private static PitchClass calPitchClass(int y) {
-        int index = y / (DrawGUI.height/12);
+        int index = y / ((int)(Toolkit.getDefaultToolkit().getScreenSize().height/1.25/12));
 
         return PitchClass.readPitchClass(index);
     }

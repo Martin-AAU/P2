@@ -20,17 +20,18 @@ class ConstToSheetConvTest {
                      .addStar(new Star(4,0))
                      .addStar(new Star(4,4))
                      .addStar(new Star(6,5))
-                     .addStar(new Star(10,6));
+                     .addStar(new Star(10,6))
+                     .addStar(new Star(300, 300));
 
         sheet = ConstellationToSheetConverter.convert(constellation);
     }
 
-    @Disabled
+    //@Disabled
     @Test // This test is purely to print out the notes that was added to the sheet
     void printTest() {
         int i = 1;
         for (TimedNote timedNote : sheet.getNotes()) {
-            System.out.println("Note "+i+": "+timedNote.getPitchClass() + " Length: " + timedNote.getLength() + " Timestamp: " + timedNote.getTimeStamp());
+            System.out.println("Note "+i+": "+timedNote.getPitchClass() + " Length: " + timedNote.getLength() + " Timestamp: " + timedNote.getTimeStamp() + "Midi: " + timedNote.getMidiValue());
         }
     }
 
