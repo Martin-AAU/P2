@@ -8,7 +8,8 @@ public class MidiPlayer {
 
 
     public void playMidiFile(String fileName){
-        File midiFile = new File("Resources/AwesomeSong.mid");
+        String path = new String("StarSound.mid");
+        File midiFile = new File(path);
 
         if (!midiFile.canRead()){
             System.out.println("UNABLE TO READ FILE!");
@@ -16,7 +17,7 @@ public class MidiPlayer {
         }
 
         try{
-            Sequence sequence = MidiSystem.getSequence(new File("Resources/AwesomeSong.mid"));
+            Sequence sequence = MidiSystem.getSequence(new File(path));
 
             // Create a sequencer for the sequence
             Sequencer sequencer = MidiSystem.getSequencer();
