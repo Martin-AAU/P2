@@ -16,14 +16,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
-import javafx.scene.shape.Path;
 import javafx.stage.Stage;
 
-import javax.sound.midi.MidiSystem;
-import javax.sound.midi.Sequence;
 import java.awt.*;
-import java.io.File;
-import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Random;
@@ -35,7 +30,7 @@ public class DrawGUI extends Application {
     }
 
     // Global variables for half width and height of screen
-    public static int width = (int) (Toolkit.getDefaultToolkit().getScreenSize().width/1.15);
+    public static int width = (int) (Toolkit.getDefaultToolkit().getScreenSize().width/1.10);
     public static int height = (int) (Toolkit.getDefaultToolkit().getScreenSize().height/1.25);
 
     public void start(Stage primaryStage) {
@@ -49,8 +44,12 @@ public class DrawGUI extends Application {
         // All of the lines drawn between the stars
         ArrayList<Line> lineArray = new ArrayList<>();
         // Generate and set icon
-        Image icon = new Image("icon.png");
+        Image icon = new Image("Resources/icon.png");
         primaryStage.getIcons().add(icon);
+
+        // Create a midi player
+        MidiPlayer midiPlayer = new MidiPlayer();
+        midiPlayer.playMidiFile("Resources/test.mid");
 
         // Add stars to the nightsky
         addStarsToNightsky(nightsky, random);
@@ -88,12 +87,12 @@ public class DrawGUI extends Application {
         Random random = new Random();
         // Setup star pictures
         int randomColorNumber;
-        Image star01 = new Image("Star01.png");
-        Image star02 = new Image("Star02.png");
-        Image star03 = new Image("Star03.png");
-        Image star04 = new Image("Star04.png");
-        Image star05 = new Image("Star05.png");
-        Image star06 = new Image("Star06.png");
+        Image star01 = new Image("Resources/Star01.png");
+        Image star02 = new Image("Resources/Star02.png");
+        Image star03 = new Image("Resources/Star03.png");
+        Image star04 = new Image("Resources/Star04.png");
+        Image star05 = new Image("Resources/Star05.png");
+        Image star06 = new Image("Resources/Star06.png");
 
         // Generates circles and lines from the stars x and y positions
         for(int i = 0; i < stars.size(); i++) {
@@ -164,8 +163,11 @@ public class DrawGUI extends Application {
     }
 
     private void generateButtons(HBox buttons, ArrayList<Line> lineArray, Nightsky nightsky, Group nightskyScene){
+        // Create a midi player
+        MidiPlayer midiPlayer = new MidiPlayer();
+
         // Creating buttons
-        Button buttonGen = new Button("Generate .MIDI file");
+        Button buttonGen = new Button("Save");
         Button buttonPlay = new Button("Play");
         Button buttonUndo = new Button("Undo");
         Button buttonExit = new Button("Exit");
@@ -190,7 +192,7 @@ public class DrawGUI extends Application {
         // Setup functionality
         buttonExit.setOnMouseClicked(e -> Platform.exit());
         buttonUndo.setOnMouseClicked(e -> undoStarChoice(lineArray, nightsky, nightskyScene));
-        buttonGen.setOnMouseClicked(e -> generateMidiFile(nightsky.getConstellations().get(0)));
+        buttonPlay.setOnMouseClicked(e -> midiPlayer.playMidiFile("Resources/test.mid"));
     }
 
     private void undoStarChoice(ArrayList<Line> lineArray, Nightsky nightsky, Group nightskyScene){
@@ -227,7 +229,7 @@ public class DrawGUI extends Application {
     private void addSkyBackgroundImage(Group nightskyScene){
         // Background image sky
         ImageView ivSky = new ImageView();
-        Image imageS = new Image("NightskyBG.jpg");
+        Image imageS = new Image("Resources/NightskyBG.jpg");
         ivSky.setImage(imageS);
         ivSky.setFitHeight(height);
         ivSky.setFitWidth(width);
@@ -235,18 +237,8 @@ public class DrawGUI extends Application {
     }
 
     private void generateMidiFile(Constellation constellation) {
-        // Create a sheet from the constellation and a sequence from the sheet
         Sheet sheet = ConstellationToSheetConverter.convert(constellation);
-        Sequence sequence = sheet.convertToMidiTrack();
+        java.nio.file.Path file = Paths.get("StarSound.mid");
 
-        File file = new File("StarSound.mid");
-        // Get the midi file type, and write the sequence to the Midi file
-        int[] type = MidiSystem.getMidiFileTypes(sequence);
-
-        try {
-            MidiSystem.write(sequence, type[0], file);
-        } catch (IOException e) {
-            System.out.println("Could not write sequence onto the file");
-        }
     }
 }
