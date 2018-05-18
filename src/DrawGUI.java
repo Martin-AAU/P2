@@ -34,8 +34,8 @@ public class DrawGUI extends Application {
     }
 
     // Global variables for half width and height of screen
-    public static int width = (int) (Toolkit.getDefaultToolkit().getScreenSize().width/1.10);
-    public static int height = (int) (Toolkit.getDefaultToolkit().getScreenSize().height/1.25);
+    private static int width = (int) (Toolkit.getDefaultToolkit().getScreenSize().width/1.10);
+    private static int height = (int) (Toolkit.getDefaultToolkit().getScreenSize().height/1.25);
 
     public void start(Stage primaryStage) {
         Random random = new Random();
@@ -50,10 +50,6 @@ public class DrawGUI extends Application {
         // Generate and set icon
         Image icon = new Image("Resources/icon.png");
         primaryStage.getIcons().add(icon);
-
-        // Create a midi player
-        MidiPlayer midiPlayer = new MidiPlayer();
-        midiPlayer.playMidiFile("AwesomeSong.mid");
 
         // Add stars to the nightsky
         addStarsToNightsky(nightsky, random);
@@ -81,7 +77,6 @@ public class DrawGUI extends Application {
 
         // show scene
         primaryStage.show();
-
     }
 
     private static ArrayList<Circle> generateCircles(Nightsky nightsky, Group nightskyScene, ArrayList<Line> lineArray) {
@@ -187,17 +182,30 @@ public class DrawGUI extends Application {
         buttons.setPadding(new Insets(15, 12, 15, 12));
         buttons.setSpacing(10);
         buttons.setStyle("-fx-background-color: linear-gradient(#0d1a26, #070d13);");
-        buttons.getChildren().add(buttonGen);
         buttons.getChildren().add(buttonPlay);
+        buttons.getChildren().add(buttonGen);
         buttons.getChildren().add(buttonUndo);
         buttons.getChildren().add(buttonExit);
         styleButtons(buttonArray);
 
         // Setup functionality
-        buttonExit.setOnMouseClicked(e -> Platform.exit());
-        buttonUndo.setOnMouseClicked(e -> undoStarChoice(lineArray, nightsky, nightskyScene));
-        buttonPlay.setOnMouseClicked(e -> midiPlayer.playMidiFile("StarSound.mid"));
+        buttonExit.setOnMouseClicked(e -> exitFunctionality());
         buttonGen.setOnMouseClicked(e -> generateMidiFile(nightsky.getConstellations().get(0)));
+        buttonUndo.setOnMouseClicked(e -> undoStarChoice(lineArray, nightsky, nightskyScene));
+        buttonPlay.setOnMouseClicked(e -> playFunctionality(midiPlayer, nightsky));
+    }
+
+    private void exitFunctionality(){
+        Platform.exit();
+        System.exit(0);
+    }
+
+    private void playFunctionality(MidiPlayer mPlayer, Nightsky nightsky){
+        // Generate and save .mid file
+        generateMidiFile(nightsky.getConstellations().get(0));
+
+        // Then play file
+        mPlayer.playMidiFile("StarSound.mid");
     }
 
     private void undoStarChoice(ArrayList<Line> lineArray, Nightsky nightsky, Group nightskyScene){

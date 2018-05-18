@@ -2,10 +2,8 @@ import javax.sound.midi.*;
 import java.io.*;
 
 public class MidiPlayer {
-
     // CONSTRUCTOR
     MidiPlayer(){}
-
 
     public void playMidiFile(String fileName){
         File midiFile = new File(fileName);
@@ -15,8 +13,9 @@ public class MidiPlayer {
             return;
         }
 
+        // Get the sequencer, set the song and play it
         try{
-            Sequence sequence = MidiSystem.getSequence(new File(fileName));
+            Sequence sequence = MidiSystem.getSequence(midiFile);
 
             // Create a sequencer for the sequence
             Sequencer sequencer = MidiSystem.getSequencer();
@@ -33,9 +32,4 @@ public class MidiPlayer {
             System.out.println("I/O Error!");
         }
     }
-
-
-
-
-
 }
