@@ -46,21 +46,15 @@ class ConstellationTest {
        assertEquals(c.getStars().get(c.getStars().size() -1).getxCoordinate(), 10);
 
        c.removeLastStar();
-
        assertEquals(c.getStars().get(c.getStars().size() -1).getxCoordinate(), 45);
 
        c.removeLastStar();
-
        assertEquals(c.getStars().get(c.getStars().size() -1).getxCoordinate(), 50);
 
        c.removeLastStar();
-
        assertEquals(c.getStars().size(), 0);
 
        c.removeLastStar();
-
        assertEquals(c.getStars().size(), 0);
-
    }
-
 }
