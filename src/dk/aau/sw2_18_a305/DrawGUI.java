@@ -253,7 +253,7 @@ public class DrawGUI extends Application {
     private void generateMidiFile(Constellation constellation) {
         // Create a sheet from the constellation and a sequence from the sheet
         Sheet sheet = ConstellationToSheetConverter.convert(constellation);
-        Sequence sequence = sheet.convertToMidiTrack();
+        Sequence sequence = sheet.convertToMidiSequence();
 
         File file = new File("StarSound.mid");
         // Get the midi file type, and write the sequence to the Midi file
