@@ -166,6 +166,8 @@ public class DrawGUI extends Application {
         // Create a midi player
         MidiPlayer midiPlayer = new MidiPlayer();
 
+        midiPlayer.playMidiFile("AwesomeSong.mid");
+
         // Creating buttons
         Button buttonPlay = new Button("Play");
         Button buttonGen = new Button("Save to MIDI");
