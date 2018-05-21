@@ -1,15 +1,12 @@
 package dk.aau.sw2_18_a305.notation;
 
 import java.util.ArrayList;
-import java.util.Objects;
-
-import static dk.aau.sw2_18_a305.notation.PitchClass.*;
 
 /**
  * Represents a Chord that has a number of {@link Note}s
  */
 public class Chord{
-
+    // FIELDS
     /**
      * Used in the <code>distanceTo(Chord)</code> method. Per standard the assigned distance strategy is {@link CircleOfFifths}
      */
@@ -23,12 +20,13 @@ public class Chord{
      */
     private ArrayList<Integer> intervals = new ArrayList<>();
 
+    // CONSTRUCTORS
     /**
      * Constructs a chord with only one note. Notes can be added with the <code>addNoteToChord(Note)</code> method
      * @param rootNote The first note in the chord. Is considered the rootnote
      */
     public Chord(Note rootNote){
-        notes.add(rootNote);
+        this.notes.add(rootNote);
     }
 
     /**
@@ -38,10 +36,10 @@ public class Chord{
      * @param interval2 Second interval of the chord
      */
     public Chord(Note rootNote, int interval1, int interval2) {
-        notes.add(rootNote);
-        intervals.add(interval1);
-        intervals.add(interval2);
-        finishNotes();
+        this.notes.add(rootNote);
+        this.intervals.add(interval1);
+        this.intervals.add(interval2);
+        this.finishNotes();
     }
 
     /**
@@ -52,11 +50,11 @@ public class Chord{
      * @param interval3 Third interval of the chord
      */
     public Chord(Note rootNote, int interval1, int interval2, int interval3) {
-        notes.add(rootNote);
-        intervals.add(interval1);
-        intervals.add(interval2);
-        intervals.add(interval3);
-        finishNotes();
+        this.notes.add(rootNote);
+        this.intervals.add(interval1);
+        this.intervals.add(interval2);
+        this.intervals.add(interval3);
+        this.finishNotes();
     }
 
     /**
@@ -68,12 +66,12 @@ public class Chord{
      * @param interval4 Fourth interval of the chord
      */
     public Chord(Note rootNote, int interval1, int interval2, int interval3, int interval4) {
-        notes.add(rootNote);
-        intervals.add(interval1);
-        intervals.add(interval2);
-        intervals.add(interval3);
-        intervals.add(interval4);
-        finishNotes();
+        this.notes.add(rootNote);
+        this.intervals.add(interval1);
+        this.intervals.add(interval2);
+        this.intervals.add(interval3);
+        this.intervals.add(interval4);
+        this.finishNotes();
     }
 
     /**
@@ -86,21 +84,22 @@ public class Chord{
      * @param interval5 Fifth interval of the chord
      */
     public Chord(Note rootNote, int interval1, int interval2, int interval3, int interval4, int interval5) {
-        notes.add(rootNote);
-        intervals.add(interval1);
-        intervals.add(interval2);
-        intervals.add(interval3);
-        intervals.add(interval4);
-        intervals.add(interval5);
-        finishNotes();
+        this.notes.add(rootNote);
+        this.intervals.add(interval1);
+        this.intervals.add(interval2);
+        this.intervals.add(interval3);
+        this.intervals.add(interval4);
+        this.intervals.add(interval5);
+        this.finishNotes();
     }
 
+    // GETTERS
     /**
      * Retreives the list of notes in the chord
      * @return A list of all notes in the chord
      */
     public ArrayList<Note> getNotes() {
-        return notes;
+        return new ArrayList<>(notes);
     }
 
     /**
@@ -148,7 +147,7 @@ public class Chord{
 
     // Adds a note to the chord
     public Chord addNoteToChord(Note n){
-        notes.add(n);
+        this.notes.add(n);
         return this;
     }
 
@@ -159,7 +158,6 @@ public class Chord{
     }
 
     private Note setNote(int interval) {
-
         PitchClass p;
         int index = notes.get(notes.size()-1).getPitchClass().number + interval;
         int octave = notes.get(0).getOctave() + (index/12);
