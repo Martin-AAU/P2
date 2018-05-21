@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="NightSky">
+    <output-path>$PROJECT_DIR$/out/artifacts/NightSky</output-path>
+    <root id="archive" name="NightSky.jar">
+      <element id="module-output" name="P2" />
+    </root>
+  </artifact>
+</component>

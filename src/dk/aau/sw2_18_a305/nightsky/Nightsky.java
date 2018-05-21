@@ -30,7 +30,6 @@ public class Nightsky {
     }
 
     //METHODS
-
     /**
      * This method adds new stars to the ArrayList
      * @param star Added to the ArrayList
