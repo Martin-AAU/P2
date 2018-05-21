@@ -141,22 +141,38 @@ public class Chord{
     }
 
     // SETTERS
+    /**
+     * Sets the distanceStrategy to a new one
+     * @param distanceStrategy A class that implements {@link DistanceStrategy}. Is assigned as the chords distanceStrategy
+     */
     public void setDistanceStrategy(DistanceStrategy distanceStrategy) {
         this.distanceStrategy = distanceStrategy;
     }
 
-    // Adds a note to the chord
-    public Chord addNoteToChord(Note n){
-        this.notes.add(n);
+    /**
+     * Adds a note to the chord
+     * @param note The {@link Note} that is to be added to the chord
+     * @return Returns this chord, so the method can be called consecutively
+     */
+    public Chord addNoteToChord(Note note){
+        this.notes.add(note);
         return this;
     }
 
     // METHODS
+    /**
+     * Private method, used to convert the assigned intervals to notes in the chord
+     */
     private void finishNotes() {
         for (Integer interval : intervals)
             notes.add(setNote(interval));
     }
 
+    /**
+     * Private method used by <code>finishNotes()</code> to convert a single interval to a single {@link Note}
+     * @param interval The interval that is to be converted to a {@link Note}
+     * @return A noted based on the interval and the latest {@link Note} in the ArrayList of Notes
+     */
     private Note setNote(int interval) {
         PitchClass p;
         int index = notes.get(notes.size()-1).getPitchClass().number + interval;
@@ -167,7 +183,12 @@ public class Chord{
         return new Note(p, octave);
     }
 
-    public int distanceTo(Chord c ) {
-        return distanceStrategy.distanceTo(this, c);
+    /**
+     * Determines the distance from this Chord to another chord, based on the assigned distance strategy
+     * @param chord The chord to which the distance is determined to
+     * @return An integer based on how the distance strategy implements the distanceTo method
+     */
+    public int distanceTo(Chord chord ) {
+        return distanceStrategy.distanceTo(this, chord);
     }
 }

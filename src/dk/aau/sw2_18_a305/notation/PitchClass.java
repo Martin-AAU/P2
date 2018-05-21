@@ -1,27 +1,33 @@
 package dk.aau.sw2_18_a305.notation;
 
-// "s" for Sharp
+/**
+ * Represents the pitch of a note (C, D, E, F, G, A, B). The 's' represents #.
+ */
 public enum PitchClass {
     C(0), Cs(1), D(2), Ds(3), E(4), F(5), Fs(6), G(7), Gs(8), A(9), As(10), B(11);
 
+    /**
+     * Used to represent the numbering of the pitch class from the default constructor.
+     * The number represents a pitch class' placement in relation to each other
+     */
     public int number;
 
+    /**
+     * Constructs a pitch class with a number assigned
+     * @param number The number of the pitch class
+     */
     PitchClass(int number) {
         this.number = number;
     }
 
-    // We handle "invalid" index'es by % 12 in order to allow
-    // the users of this enum to be able to fill in as high index as
-    // they want, since it will just wrap around
+    /**
+     * Used to identify a pitch class, by an index. Switches on index modulo 12,
+     * and retrieves the pitch class with that number
+     * @param index The index that is used to retrieve a specific pitch class
+     * @return A pitch class based on the index provided. For example index = 0 or 13 returns C
+     */
     public static PitchClass readPitchClass(int index) {
-        int i;
-
-        // Check for invalid index
-        if (index < 0 || index > 11){
-            i = index % 12;
-        } else i = index;
-
-        switch (i) {
+        switch (index % 12) {
             case 0: return C;
             case 1: return Cs;
             case 2: return D;
