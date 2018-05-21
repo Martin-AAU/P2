@@ -120,7 +120,7 @@ public class Chord{
         } else if (intervals.size() == 2 && intervals.get(0) == 3 && intervals.get(1) == 4){
             return ChordType.Minor;
         } else if (intervals.size() == 2 && intervals.get(0) == 3 && intervals.get(1) == 3){
-            return ChordType.Diminshed;
+            return ChordType.Diminished;
         } else if (intervals.size() == 3 && intervals.get(0) == 4 && intervals.get(1) == 3 && intervals.get(2) == 7){
             return ChordType.Major7;
         } else if (intervals.size() == 3 && intervals.get(0) == 3 && intervals.get(1) == 4 && intervals.get(2) == 3){
