@@ -13,6 +13,7 @@ class NightskyTest {
         Nightsky n = new Nightsky();
         assertEquals(0, n.getStars().size());
     }
+
     @Test
     void getStars02() {
         ArrayList<Star> stars = new ArrayList<>();
