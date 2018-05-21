@@ -4,6 +4,7 @@ package dk.aau.sw2_18_a305.notation;
  * A {@link Note} with length and a timestamp. Used in {@link Sheet} to represent notes in relation to time
  */
 public class TimedNote extends Note {
+    // FIELDS
     /**
      * Used to determine how long the note is played. The unit used depends on the {@link Sheet}s time division setting
      */
@@ -13,6 +14,7 @@ public class TimedNote extends Note {
      */
     private int timeStamp;
 
+    // CONSTRUCTOR
     /**
      * Constructs a TimedNote from an existing {@link Note} a length and a time stamp
      * @param note A note used to construct a TimedNote
@@ -64,6 +66,7 @@ public class TimedNote extends Note {
         this.timeStamp = timeStamp;
     }
 
+    // GETTERS
     /**
      * Retreives the length (playtime) of the TimedNote
      * @return the length of the TimedNote
