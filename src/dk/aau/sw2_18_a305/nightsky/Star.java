@@ -12,15 +12,15 @@ public class Star {
 
     // CONSTRUCTORS
     public Star(int xCoordinate, int yCoordinate) {
-        if (checkCoordinate(xCoordinate))
+        if (isVaild(xCoordinate))
             this.xCoordinate = xCoordinate;
-        if (checkCoordinate(yCoordinate))
+        if (isVaild(yCoordinate))
             this.yCoordinate = yCoordinate;
     }
     public Star(int xCoordinate, int yCoordinate, String apparentColour) {
-        if (checkCoordinate(xCoordinate))
+        if (isVaild(xCoordinate))
             this.xCoordinate = xCoordinate;
-        if (checkCoordinate(yCoordinate))
+        if (isVaild(yCoordinate))
             this.yCoordinate = yCoordinate;
         this.apparentColour = apparentColour;
     }
@@ -56,44 +56,47 @@ public class Star {
 
     // SETTERS
     public void setxCoordinate(int xCoordinate) {
-        if (checkCoordinate(xCoordinate))
+        if (isVaild(xCoordinate)) {
             this.xCoordinate = xCoordinate;
+        }
     }
     public void setyCoordinate(int yCoordinate) {
-        if (checkCoordinate(yCoordinate))
+        if (isVaild(yCoordinate)) {
             this.yCoordinate = yCoordinate;
+        }
     }
     public void setStarClass(String starClass) {
-        //Make rules for starClass  ex. "B5V"
         this.starClass = starClass;
     }
     public void setApparentColour(String apparentColour) {
-        //Make rules for input
         this.apparentColour = apparentColour;
     }
     public void setApparentMagnitude(double apparentMagnitude) {
-        //Make Rules for input
-        this.apparentMagnitude = apparentMagnitude;
+        if (isVaild(apparentMagnitude)){
+            this.apparentMagnitude = apparentMagnitude;
+        }
     }
     public void setMagnitude(double magnitude) {
-        //Make rules for input
-        this.magnitude = magnitude;
+        if (isVaild(magnitude)){
+            this.magnitude = magnitude;
+        }
     }
     public void setradius(double radius) {
-        //Make rules for input
-        this.radius = radius;
+        if (isVaild(radius)) {
+            this.radius = radius;
+        }
     }
     public void setMass(double mass) {
-        //Make rules for input
-        this.mass = mass;
+        if (isVaild(mass)) {
+            this.mass = mass;
+        }
     }
     public void setTemperature(double temperature) {
-        //Make rules for input
         this.temperature = temperature;
     }
 
-    //Check methods
-    private boolean checkCoordinate(double coordinate) {
-        return coordinate >= 0;
+    // Check methods
+    private boolean isVaild(double test) {
+        return test >= 0;
     }
 }
