@@ -33,7 +33,10 @@ class ConstToSheetConvTest {
     void printTest() {
         int i = 1;
         for (TimedNote timedNote : sheet.getNotes()) {
-            System.out.println("Note "+i+": "+timedNote.getPitchClass() + " Length: " + timedNote.getLength() + " Timestamp: " + timedNote.getTimeStamp() + "Midi: " + timedNote.getMidiValue());
+            System.out.println( "Note "+i+": "+timedNote.getPitchClass() + " Length: "
+                                + timedNote.getLength() + " Timestamp: "
+                                + timedNote.getTimeStamp() + "Midi: "
+                                + timedNote.getMidiValue());
         }
     }
 
