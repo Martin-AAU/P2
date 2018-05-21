@@ -3,20 +3,64 @@ package dk.aau.sw2_18_a305.nightsky;
 /**
  * This class represents a star
  */
-
 public class Star {
     // FIELDS
-    private int xCoordinate, yCoordinate;
-    private String starClass, apparentColour;
-    private double apparentMagnitude, magnitude, radius, mass, temperature;
+    /**
+     * The x coordinate of the Star
+     */
+    private int xCoordinate;
+    /**
+     * The y coordinate of the star
+     */
+    private int yCoordinate;
+    /**
+     * The classification of the star
+     */
+    private String starClass;
+    /**
+     * The apparent color if the star. The color of the star as it appears to be in the sky
+     */
+    private String apparentColour;
+    /**
+     * How bright the star appears to be (scale from -1 to 10)
+     */
+    private double apparentMagnitude;
+    /**
+     * The apparent magnitude of the star if it was 10 parsecs away (scale from -1 to 10)
+     */
+    private double absoluteMagnitude;
+    /**
+     * The radius of the star
+     */
+    private double radius;
+    /**
+     * The mass of the star
+     */
+    private double mass;
+    /**
+     * The temperature of the star
+     */
+    private double temperature;
 
     // CONSTRUCTORS
+    /**
+     * Constructs a Star with an x coordinate and a y coordinate
+     * @param xCoordinate The x coordinate of the star
+     * @param yCoordinate The y coordinate of the star
+     */
     public Star(int xCoordinate, int yCoordinate) {
         if (isVaild(xCoordinate))
             this.xCoordinate = xCoordinate;
         if (isVaild(yCoordinate))
             this.yCoordinate = yCoordinate;
     }
+
+    /**
+     * Constructs a star with an x coordinate, y coordinate and an apparent colour
+     * @param xCoordinate The x coordinate of the star
+     * @param yCoordinate The y coordinate of the star
+     * @param apparentColour The apparent colour of the star
+     */
     public Star(int xCoordinate, int yCoordinate, String apparentColour) {
         if (isVaild(xCoordinate))
             this.xCoordinate = xCoordinate;
@@ -42,7 +86,7 @@ public class Star {
         return apparentMagnitude;
     }
     public double getMagnitude() {
-        return magnitude;
+        return absoluteMagnitude;
     }
     public double getradius() {
         return radius;
@@ -78,7 +122,7 @@ public class Star {
     }
     public void setMagnitude(double magnitude) {
         if (isVaild(magnitude)){
-            this.magnitude = magnitude;
+            this.absoluteMagnitude = magnitude;
         }
     }
     public void setradius(double radius) {
