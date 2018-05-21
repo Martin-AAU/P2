@@ -19,12 +19,10 @@ public class MidiPlayer {
         try{
             Sequence sequence = MidiSystem.getSequence(midiFile);
 
-            // Create a sequencer for the sequence
+            // Create a sequencer, open it & set the song to play
             Sequencer sequencer = MidiSystem.getSequencer();
             sequencer.open();
             sequencer.setSequence(sequence);
-
-            // Start playing
             sequencer.start();
         } catch(MidiUnavailableException mue) {
             System.out.println("Midi device unavailable!");
