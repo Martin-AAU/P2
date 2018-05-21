@@ -2,19 +2,43 @@ package dk.aau.sw2_18_a305.notation;
 
 import java.util.ArrayList;
 
+/**
+ * Implements the {@link DistanceStrategy}. Used by {@link Chord} to determine the distance between to chords on the circle of fifths
+ */
 public class CircleOfFifths implements DistanceStrategy {
     // FIELDS
+    /**
+     * Represent the Outer row of {@link PitchClass}es in the Circle of fifths
+     */
     private ArrayList<PitchClass> OuterRow = new ArrayList<>();
+    /**
+     * Represents the Inner row of {@link PitchClass}es in the circle of fifths
+     */
     private ArrayList<PitchClass> InnerRow = new ArrayList<>();
 
-    // CONSTRUCTORS
-    CircleOfFifths(){fillArrayLists();}
+    // CONSTRUCTOR
+    /**
+     * Constructs a circle of fifths
+     */
+    public CircleOfFifths(){fillArrayLists();}
 
     // GETTERS
+    /**
+     * Retrieves the outer row of the circle of fifths
+     * @return An ArrayList of {@link PitchClass}es representing the outer row of the circle of fifths
+     */
     public ArrayList<PitchClass> getOuterRow() {return new ArrayList<>(OuterRow);}
+
+    /**
+     * Retrieves the inner row of the circle of fifths
+     * @return An ArrayList of {@link PitchClass}es representing the inner row of the circle of fifths
+     */
     public ArrayList<PitchClass> getInnerRow() {return new ArrayList<>(InnerRow);}
 
     // METHODS
+    /**
+     * Used in the constructor to fill the inner and outer row with correct {@link PitchClass}es to represent the circle of fifths
+     */
     private void fillArrayLists(){
         // Clear list in case this will run multiple times
         OuterRow.clear();
@@ -37,9 +61,12 @@ public class CircleOfFifths implements DistanceStrategy {
         InnerRow.add(PitchClass.Gs);    InnerRow.add(PitchClass.D);
     }
 
-    // Public method for getting the distance between two chords
-    // Return of -1 is invalid
-    // NOTE: Only works for Minor and Major chords!
+    /**
+     * Calculates the distance between two chords in the circle of fifths. Only works with major and minor chords
+     * @param from The chord the distance is calculated from
+     * @param to The chord the distance is calculated to
+     * @return The number of steps between two chord in the circle of fifths. Returns -1 if the chords are invalid
+     */
     @Override
     public int distanceTo(Chord from, Chord to) {
         int fromPosition, toPosition, distance;
@@ -64,8 +91,11 @@ public class CircleOfFifths implements DistanceStrategy {
         return distance;
     }
 
-    // Returns the given position of a chord
-    // -1 is treated as invalid input
+    /**
+     * Finds the position of a {@link Chord} on the circle of fifths. Only works with major and minor chords
+     * @param chord The chord of which the position is to be found
+     * @return An integer representing the position of a {@link Chord} on the circle of fifths. Returns -1 if the chord is invalid
+     */
     public int getPosition(Chord chord){
         if (chord.getChordType() == ChordType.Major && OuterRow.contains(chord.getMainPitchClass())){
             return OuterRow.indexOf(chord.getMainPitchClass());
