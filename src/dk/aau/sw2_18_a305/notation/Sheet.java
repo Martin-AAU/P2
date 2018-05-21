@@ -5,10 +5,10 @@ import java.util.LinkedList;
 import java.util.stream.IntStream;
 
 public class Sheet {
-
-    public static int QUARTER_NOTE = 4;
-    public static int EIGHTH_NOTE = 8;
-    public static int SIXTEENTH_NOTE = 16;
+    // FIELDS
+    private static int QUARTER_NOTE = 4;
+    private static int EIGHTH_NOTE = 8;
+    private static int SIXTEENTH_NOTE = 16;
 
     private LinkedList<TimedNote> notes = new LinkedList<>();
 
@@ -23,7 +23,7 @@ public class Sheet {
 
     // GETTERS
     public LinkedList<TimedNote> getNotes() {
-        return notes;
+        return new LinkedList<>(notes);
     }
     public int getTimeDivision() {
         return timeDivision;
@@ -75,7 +75,11 @@ public class Sheet {
             Track track = sequence.createTrack();
 
             for (TimedNote note : notes) {
-                System.out.println("Note added: "+note.getPitchClass() + " Length: " + note.getLength() + " Timestamp: " + note.getTimeStamp() + " Midi: " + note.getMidiValue() + " octave: "+note.getOctave());
+                System.out.println( "Note added: "+note.getPitchClass() +
+                                    " Length: " + note.getLength() + " Timestamp: "
+                                    + note.getTimeStamp() + " Midi: " + note.getMidiValue()
+                                    + " octave: "+note.getOctave());
+
                 // Create Midi messages
                 ShortMessage messageOn = new ShortMessage();
                 ShortMessage messageOff = new ShortMessage();
@@ -95,7 +99,6 @@ public class Sheet {
         } catch (InvalidMidiDataException e) {
             System.out.println("ERROR: Could not Make a sequence for some reason :c");
         }
-
         return null;
     }
 }
