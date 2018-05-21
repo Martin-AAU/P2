@@ -1,19 +1,8 @@
-/*
-    Thomas Møller Grosen
-    tgrose17@student.aau.dk
-*/
-
 import dk.aau.sw2_18_a305.nightsky.Constellation;
 import dk.aau.sw2_18_a305.nightsky.Nightsky;
 import dk.aau.sw2_18_a305.nightsky.Star;
-import javafx.scene.Group;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
-import javafx.scene.shape.Line;
 
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.Random;
 
 public class StarSound {
