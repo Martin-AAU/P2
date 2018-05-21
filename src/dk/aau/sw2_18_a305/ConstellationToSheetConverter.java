@@ -5,13 +5,12 @@ import dk.aau.sw2_18_a305.nightsky.Star;
 import dk.aau.sw2_18_a305.notation.*;
 
 import java.awt.*;
-import java.util.Random;
 
 /**
  * Final class used purely to convert a constellation to a sheet
  */
 public final class ConstellationToSheetConverter {
-
+    // METHODS
     /**
      * Takes a constellation and converts all the stars to chords and puts it into a sheet
      *
@@ -19,14 +18,11 @@ public final class ConstellationToSheetConverter {
      * @return A Sheet as a result from the constellation
      */
     public static Sheet convert(Constellation constellation) {
-
         Sheet sheet = new Sheet();
         Chord latestChord;
 
         latestChord = FirstStar(sheet, constellation);
-
         latestChord = mostStars(sheet, constellation, latestChord);
-
         lastStar(sheet, constellation, latestChord);
 
         return sheet;
@@ -105,7 +101,7 @@ public final class ConstellationToSheetConverter {
         sheet.addChord(checkClosestChord(latestChord, mol, dur), 16, space + sheet.getTotalPlaytime());
     }
 
-    /**
+        /**
      * Takes two stars, and calculates the length between them.
      * it uses the determineTime(double, double) method to return a time in 16th parts of a note
      *
@@ -146,7 +142,9 @@ public final class ConstellationToSheetConverter {
 
         double angle = Math.atan2(y2-y1,x2-x1) - Math.atan2(y2-y3,x2-x3);
 
-        if (angle < 0) angle += 2 * Math.PI;
+        if (angle < 0) {
+            angle += 2 * Math.PI;
+        }
 
         if(angle > Math.PI) {
             angle = (2 * Math.PI) - angle;
@@ -205,7 +203,6 @@ public final class ConstellationToSheetConverter {
     private static Chord checkClosestChord(Chord ref, Chord a, Chord b) {
         if(ref.distanceTo(a) < ref.distanceTo(b)) {
             return a;
-        }
-        return b;
+        } else return b;
     }
 }
