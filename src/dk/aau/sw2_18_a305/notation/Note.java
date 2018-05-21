@@ -5,7 +5,7 @@ package dk.aau.sw2_18_a305.notation;
  * octave and a midiValue representing the note in midi context
  */
 public class Note {
-
+    // FIELDS
     /**
      * Represents the pitch class of the note
      */
@@ -19,14 +19,15 @@ public class Note {
      */
     private int midiValue;
 
+    // CONSTRUCTORS
     /**
      * Constructs a note by a midivalue. The octave and pitch class are assigned according to the midivalue
      * @param midiValue number representing a note in Midi context
      */
     public Note(int midiValue) {
         this.midiValue = midiValue;
-        calPitch();
-        calOctave();
+        this.calPitch();
+        this.calOctave();
     }
 
     /**
@@ -36,7 +37,7 @@ public class Note {
     public Note(PitchClass pitchClass) {
         this.pitchClass = pitchClass;
         this.octave = 3;
-        calMidiValue();
+        this.calMidiValue();
     }
 
     /**
@@ -47,10 +48,10 @@ public class Note {
     public Note(PitchClass pitchClass, int octave) {
         this.octave = octave;
         this.pitchClass = pitchClass;
-        calMidiValue();
+        this.calMidiValue();
     }
 
-
+    // GETTERS
     /**
      * Retrieves the pitch class
      * @return the pitch class
@@ -75,6 +76,7 @@ public class Note {
         return midiValue;
     }
 
+    // METHODS
     /**
      * Calculates and sets the pitch class from the assigned midi value
      */
