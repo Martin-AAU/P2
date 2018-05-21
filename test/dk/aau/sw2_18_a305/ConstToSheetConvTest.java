@@ -1,3 +1,5 @@
+package dk.aau.sw2_18_a305;
+
 import dk.aau.sw2_18_a305.ConstellationToSheetConverter;
 import dk.aau.sw2_18_a305.nightsky.Constellation;
 import dk.aau.sw2_18_a305.nightsky.Star;
@@ -9,8 +11,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ConstToSheetConvTest {
 
-    Constellation constellation = null;
-    Sheet sheet = null;
+    private Constellation constellation = null;
+    private Sheet sheet = null;
 
     @BeforeEach
     void setup() {
