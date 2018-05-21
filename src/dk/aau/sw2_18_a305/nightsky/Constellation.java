@@ -1,9 +1,5 @@
 package dk.aau.sw2_18_a305.nightsky;
 
-import javafx.scene.Group;
-import javafx.scene.shape.Circle;
-import javafx.scene.shape.Line;
-
 import java.util.ArrayList;
 
 /**
@@ -11,6 +7,7 @@ import java.util.ArrayList;
  */
 
 public class Constellation{
+    // FIELDS
     private String name;
     private ArrayList<Star> stars = new ArrayList<>();
 
@@ -35,6 +32,7 @@ public class Constellation{
         return this;
     }
 
+    // Remove the last star from the constellation
     public Constellation removeLastStar(){
         if (stars.size() > 1){
             stars.remove(stars.size() - 1);
@@ -43,9 +41,6 @@ public class Constellation{
             stars.clear();
             return this;
         }
-
         else return this;
     }
-
-    //
 }

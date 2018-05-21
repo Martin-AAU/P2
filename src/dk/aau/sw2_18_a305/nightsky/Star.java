@@ -5,23 +5,24 @@ package dk.aau.sw2_18_a305.nightsky;
  */
 
 public class Star {
+    // FIELDS
     private int xCoordinate, yCoordinate;
-    private String starClass, apparantColour;
-    private double apparantMagnitude, magnitude, radius, mass, temperature;
+    private String starClass, apparentColour;
+    private double apparentMagnitude, magnitude, radius, mass, temperature;
 
-    //Constructors
+    // CONSTRUCTORS
     public Star(int xCoordinate, int yCoordinate) {
         if (checkCoordinate(xCoordinate))
             this.xCoordinate = xCoordinate;
         if (checkCoordinate(yCoordinate))
             this.yCoordinate = yCoordinate;
     }
-    public Star(int xCoordinate, int yCoordinate, String apparantColour) {
+    public Star(int xCoordinate, int yCoordinate, String apparentColour) {
         if (checkCoordinate(xCoordinate))
             this.xCoordinate = xCoordinate;
         if (checkCoordinate(yCoordinate))
             this.yCoordinate = yCoordinate;
-        this.apparantColour = apparantColour;
+        this.apparentColour = apparentColour;
     }
 
     //GETTERS
@@ -34,11 +35,11 @@ public class Star {
     public String getStarClass() {
         return starClass;
     }
-    public String getApparantColour() {
-        return apparantColour;
+    public String getApparentColour() {
+        return apparentColour;
     }
-    public double getApparantMagnitude() {
-        return apparantMagnitude;
+    public double getApparentMagnitude() {
+        return apparentMagnitude;
     }
     public double getMagnitude() {
         return magnitude;
@@ -53,7 +54,7 @@ public class Star {
         return temperature;
     }
 
-    //SETTERS
+    // SETTERS
     public void setxCoordinate(int xCoordinate) {
         if (checkCoordinate(xCoordinate))
             this.xCoordinate = xCoordinate;
@@ -66,13 +67,13 @@ public class Star {
         //Make rules for starClass  ex. "B5V"
         this.starClass = starClass;
     }
-    public void setApparantColour(String apparantColour) {
+    public void setApparentColour(String apparentColour) {
         //Make rules for input
-        this.apparantColour = apparantColour;
+        this.apparentColour = apparentColour;
     }
-    public void setApparantMagnitude(double apparantMagnitude) {
+    public void setApparentMagnitude(double apparentMagnitude) {
         //Make Rules for input
-        this.apparantMagnitude = apparantMagnitude;
+        this.apparentMagnitude = apparentMagnitude;
     }
     public void setMagnitude(double magnitude) {
         //Make rules for input

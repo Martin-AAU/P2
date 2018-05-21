@@ -1,13 +1,13 @@
 package dk.aau.sw2_18_a305.nightsky;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 /**
  * This class represents the night sky with stars and constellations
  */
 
 public class Nightsky {
+    // FIELDS
     private ArrayList<Star> stars = new ArrayList<>();
     private ArrayList<Constellation> constellations = new ArrayList<>();
 
@@ -23,10 +23,10 @@ public class Nightsky {
 
     //GETTERS
     public ArrayList<Star> getStars() {
-        return stars;
+        return new ArrayList<>(stars);
     }
     public ArrayList<Constellation> getConstellations() {
-        return constellations;
+        return new ArrayList<>(constellations);
     }
 
     //METHODS
