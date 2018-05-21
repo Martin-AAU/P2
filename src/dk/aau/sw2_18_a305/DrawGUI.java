@@ -97,6 +97,7 @@ public class DrawGUI extends Application {
         // Generates circles and lines from the stars x and y positions
         for(int i = 0; i < stars.size(); i++) {
             randomColorNumber = random.nextInt(25);
+            int finalI = i;
 
             // Create a new circle on the same coordinates of a star, and a random radius
             Circle c = new Circle(stars.get(i).getxCoordinate(), stars.get(i).getyCoordinate(), 10 + random.nextInt(10), Color.LIGHTBLUE);
@@ -126,8 +127,6 @@ public class DrawGUI extends Application {
                     break;
             }
 
-            int finalI = i;
-
             // Add an eventhandler to the circle, that triggers when you click on the circle
             c.addEventHandler(MouseEvent.MOUSE_CLICKED, (MouseEvent event) -> {
 
@@ -139,7 +138,10 @@ public class DrawGUI extends Application {
                     int size = nightsky.getConstellations().get(0).getStars().size();
 
                     // Draw a line between current and previous star
-                    Line l = new Line(conStars.get(size-2).getxCoordinate(), conStars.get(size-2).getyCoordinate(), conStars.get(size-1).getxCoordinate(), conStars.get(size-1).getyCoordinate());
+                    Line l = new Line(  conStars.get(size-2).getxCoordinate(),
+                                        conStars.get(size-2).getyCoordinate(),
+                                        conStars.get(size-1).getxCoordinate(),
+                                        conStars.get(size-1).getyCoordinate());
 
                     l.setStroke(Color.WHITESMOKE);
 
@@ -147,10 +149,8 @@ public class DrawGUI extends Application {
                     nightskyScene.getChildren().add(l);
                 }
             } );
-
             circles.add(c);
         }
-
         return circles;
     }
 
@@ -167,15 +167,15 @@ public class DrawGUI extends Application {
         MidiPlayer midiPlayer = new MidiPlayer();
 
         // Creating buttons
-        Button buttonGen = new Button("Save to MIDI");
         Button buttonPlay = new Button("Play");
+        Button buttonGen = new Button("Save to MIDI");
         Button buttonUndo = new Button("Undo");
         Button buttonExit = new Button("Exit");
         ArrayList<Button> buttonArray = new ArrayList<>();
 
         // Fill arrayList
-        buttonArray.add(buttonGen);
         buttonArray.add(buttonPlay);
+        buttonArray.add(buttonGen);
         buttonArray.add(buttonUndo);
         buttonArray.add(buttonExit);
 
@@ -215,7 +215,7 @@ public class DrawGUI extends Application {
             lineArray.remove(lineArray.size() - 1);
             nightsky.getConstellations().get(0).removeLastStar();
         } else if (lineArray.size() == 1){
-            nightskyScene.getChildren().remove(lineArray.get(lineArray.size() - 1));
+            nightskyScene.getChildren().remove(lineArray.get(0));
             lineArray.clear();
             nightsky.getConstellations().get(0).removeLastStar();
         }
