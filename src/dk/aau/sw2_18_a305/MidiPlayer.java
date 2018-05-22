@@ -3,15 +3,20 @@ package dk.aau.sw2_18_a305;
 import javax.sound.midi.*;
 import java.io.*;
 
-public class MidiPlayer {
-    // CONSTRUCTOR
-    MidiPlayer(){}
+/**
+ * Class that can live play a midi file, while program is running
+ */
+public final class MidiPlayer {
 
-    public void playMidiFile(String fileName){
+    /**
+     * Plays a .mid file live when called. Prints error message if file was unreadable
+     * @param fileName The path and filename of the midi file to be played.
+     */
+    public static void playMidiFile(String fileName){
         File midiFile = new File(fileName);
 
         if (!midiFile.canRead()){
-            System.out.println("UNABLE TO READ FILE!");
+            System.out.println("ERROR: UNABLE TO READ FILE");
             return;
         }
 
