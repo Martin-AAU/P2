@@ -91,7 +91,8 @@ public class DrawGUI extends Application {
             int finalI = i;
 
             // Create a new circle on the same coordinates of a star, and a random radius
-            Circle c = new Circle(stars.get(i).getxCoordinate(), stars.get(i).getyCoordinate(), 10 + random.nextInt(10), Color.LIGHTBLUE);
+            Circle c = new Circle(  stars.get(i).getxCoordinate(), stars.get(i).getyCoordinate(),
+                                    10 + random.nextInt(10), Color.LIGHTBLUE);
 
             // Set a random image to the circle
             c.setFill(randomImage());
