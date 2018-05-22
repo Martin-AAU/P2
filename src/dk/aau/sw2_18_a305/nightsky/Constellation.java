@@ -36,7 +36,6 @@ public class Constellation{
     }
 
     // GETTERS
-
     /**
      * Retrieves the name of the constellation
      * @return The name of the constellation
@@ -44,13 +43,11 @@ public class Constellation{
     public String getName() {
         return name;
     }
-
     /**
      * Retreives all the stars in the constellation
      * @return An {@link ArrayList} of {@link Star}s in the constellation
      */
     public ArrayList<Star> getStars() {return new ArrayList<>(stars);}
-
     /**
      * Adds a star to the constellation
      * @param s The star that is to be added to the constellation
@@ -60,7 +57,6 @@ public class Constellation{
         stars.add(s);
         return this;
     }
-
     /**
      * Removes the last star added to the constellation
      * @return The constellation itself so the method can be called consecutively

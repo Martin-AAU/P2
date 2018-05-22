@@ -16,7 +16,7 @@ class ConstellationTest {
 
    @Test
    void getStars01() {
-       Star s = new Star(50, 20, "red");
+       Star s = new Star(50, 20);
        ArrayList<Star> stars = new ArrayList<>();
        stars.add(s);
        Constellation c = new Constellation("c", stars);
@@ -26,7 +26,7 @@ class ConstellationTest {
 
    @Test
     void addStar01() {
-       Star s = new Star(50, 20, "red");
+       Star s = new Star(50, 20);
        Constellation c = new Constellation("c");
        c.addStar(s);
 
@@ -35,9 +35,9 @@ class ConstellationTest {
 
    @Test
     void removeLastStar01(){
-       Star s1 = new Star(50, 20, "red");
-       Star s2 = new Star(45, 20, "red");
-       Star s3 = new Star(10, 20, "red");
+       Star s1 = new Star(50, 20);
+       Star s2 = new Star(45, 20);
+       Star s3 = new Star(10, 20);
        Constellation c = new Constellation("c");
        c.addStar(s1);
        c.addStar(s2);

@@ -6,6 +6,7 @@ import java.util.ArrayList;
  * This class represents a night sky with stars and constellations
  */
 public class Nightsky {
+
     // FIELDS
     /**
      * {@link ArrayList} of all {@link Star}s in the night sky
@@ -20,8 +21,7 @@ public class Nightsky {
     /**
      * Constructs an empty night sky
      */
-    public Nightsky() { }
-
+    public Nightsky() {}
     /**
      * Constructs a night sky with stars
      * @param stars An {@link ArrayList} of {@link Star}s in the night sky
@@ -29,7 +29,6 @@ public class Nightsky {
     public Nightsky(ArrayList<Star> stars) {
         this.stars = stars;
     }
-
     /**
      * Constructs a night sky with stars and constellations
      * @param stars An {@link ArrayList} of {@link Star}s in the night sky
@@ -38,6 +37,15 @@ public class Nightsky {
     public Nightsky(ArrayList<Star> stars, ArrayList<Constellation> constellations) {
         this.stars = stars;
         this.constellations = constellations;
+
+        // Add all stars from the constellations to the night sky
+        for (Constellation constellation : constellations) {
+            for (Star star : constellation.getStars()) {
+                if(!stars.contains(star)) {
+                    stars.add(star);
+                }
+            }
+        }
     }
 
     //GETTERS
@@ -48,7 +56,6 @@ public class Nightsky {
     public ArrayList<Star> getStars() {
         return new ArrayList<>(stars);
     }
-
     /**
      * Retrieves all the constellations in the night sky
      * @return An {@link ArrayList} of {@link Constellation}s in the night sky
@@ -65,12 +72,34 @@ public class Nightsky {
     public void addStar(Star star) {
         this.stars.add(star);
     }
-
     /**
      * Adds a new {@link Constellation} to the night sky
      * @param constellation A {@link Constellation} Added to the night sky
      */
     public void addConstellation(Constellation constellation) {
         this.constellations.add(constellation);
+        addAllStars(constellation);
+    }
+    /**
+     * Adds all non dublicate stars from a constellation to the nightsky
+     * @param constellation The constellation of which the stars are added from
+     */
+    private void addAllStars(Constellation constellation) {
+        for (Star star : constellation.getStars()) {
+            if (!stars.contains(star)) {
+                stars.add(star);
+            }
+        }
+    }
+    /**
+     * Removes all stars that from the nightsky that are present in the given constellation
+     * @param constellation The constellation of which stars are removed from the nightsky
+     */
+    private void removeAllStars(Constellation constellation) {
+        for (Star star : constellation.getStars()) {
+            if(stars.contains(star)) {
+                stars.remove(star);
+            }
+        }
     }
 }

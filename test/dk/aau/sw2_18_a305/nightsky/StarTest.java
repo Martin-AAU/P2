@@ -10,7 +10,7 @@ class StarTest {
 
     @BeforeEach
     void setUp() {
-        star = new Star(100, 33, "red");
+        star = new Star(100, 33);
     }
 
     @Test

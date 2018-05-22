@@ -10,6 +10,7 @@ import java.awt.*;
  * Final class used purely to convert a constellation to a sheet
  */
 public final class ConstellationToSheetConverter {
+
     // METHODS
     /**
      * Takes a constellation and converts all the stars to chords and puts it into a sheet

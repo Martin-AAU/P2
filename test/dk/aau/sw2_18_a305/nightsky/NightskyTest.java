@@ -18,7 +18,7 @@ class NightskyTest {
     void getStars02() {
         ArrayList<Star> stars = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
-            stars.add(new Star(50, 20, "green"));
+            stars.add(new Star(50, 20));
         }
         Nightsky n = new Nightsky(stars);
         assertEquals(10, n.getStars().size());
@@ -33,7 +33,7 @@ class NightskyTest {
     @Test
     void addStar01() {
         Nightsky n = new Nightsky();
-        Star star = new Star(50, 20, "Red");
+        Star star = new Star(50, 20);
         n.addStar(star);
         assertEquals(50, n.getStars().get(0).getxCoordinate());
     }
@@ -42,7 +42,7 @@ class NightskyTest {
     void addConstellation() {
         Nightsky n = new Nightsky();
         Constellation c = new Constellation("Test");
-        Star s = new Star(50, 20, "red");
+        Star s = new Star(50, 20);
         c.addStar(s);
         n.addConstellation(c);
 

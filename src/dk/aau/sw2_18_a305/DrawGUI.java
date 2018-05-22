@@ -80,52 +80,21 @@ public class DrawGUI extends Application {
         primaryStage.show();
     }
 
-    private static ArrayList<Circle> generateCircles(Nightsky nightsky, Group nightskyScene, ArrayList<Line> lineArray) {
+    private ArrayList<Circle> generateCircles(Nightsky nightsky, Group nightskyScene, ArrayList<Line> lineArray) {
         // Circles is to be returned, stars is used as a shortcut
         ArrayList<Circle> circles = new ArrayList<>();
         ArrayList<Star> stars = nightsky.getStars();
         Random random = new Random();
-        // Setup star pictures
-        int randomColorNumber;
-        Image star01 = new Image("Resources/Star01.png");
-        Image star02 = new Image("Resources/Star02.png");
-        Image star03 = new Image("Resources/Star03.png");
-        Image star04 = new Image("Resources/Star04.png");
-        Image star05 = new Image("Resources/Star05.png");
-        Image star06 = new Image("Resources/Star06.png");
 
         // Generates circles and lines from the stars x and y positions
         for(int i = 0; i < stars.size(); i++) {
-            randomColorNumber = random.nextInt(25);
             int finalI = i;
 
             // Create a new circle on the same coordinates of a star, and a random radius
             Circle c = new Circle(stars.get(i).getxCoordinate(), stars.get(i).getyCoordinate(), 10 + random.nextInt(10), Color.LIGHTBLUE);
 
-            // Small chance not to use the white texture
-            switch (randomColorNumber){
-                case 1:
-                    c.setFill(new ImagePattern(star01));
-                    break;
-                case 2:
-                    c.setFill(new ImagePattern(star02));
-                    break;
-                case 3:
-                    c.setFill(new ImagePattern(star03));
-                    break;
-                case 4:
-                    c.setFill(new ImagePattern(star04));
-                    break;
-                case 5:
-                    c.setFill(new ImagePattern(star05));
-                    break;
-                case 6:
-                    c.setFill(new ImagePattern(star06));
-                    break;
-                default:
-                    c.setFill(new ImagePattern(star01));
-                    break;
-            }
+            // Set a random image to the circle
+            c.setFill(randomImage());
 
             // Add an eventhandler to the circle, that triggers when you click on the circle
             c.addEventHandler(MouseEvent.MOUSE_CLICKED, (MouseEvent event) -> {
@@ -263,6 +232,35 @@ public class DrawGUI extends Application {
             MidiSystem.write(sequence, type[0], file);
         } catch (IOException e) {
             System.out.println("Could not write sequence onto the file");
+        }
+    }
+
+    private ImagePattern randomImage() {
+        Random random = new Random();
+
+        Image star01 = new Image("Resources/Star01.png");
+        Image star02 = new Image("Resources/Star02.png");
+        Image star03 = new Image("Resources/Star03.png");
+        Image star04 = new Image("Resources/Star04.png");
+        Image star05 = new Image("Resources/Star05.png");
+        Image star06 = new Image("Resources/Star06.png");
+
+        // Small chance not to use the white texture
+        switch (random.nextInt(25)){
+            case 1:
+                return new ImagePattern(star01);
+            case 2:
+                return new ImagePattern(star02);
+            case 3:
+                return new ImagePattern(star03);
+            case 4:
+                return new ImagePattern(star04);
+            case 5:
+                return new ImagePattern(star05);
+            case 6:
+                return new ImagePattern(star06);
+            default:
+                return new ImagePattern(star01);
         }
     }
 }
