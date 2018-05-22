@@ -43,7 +43,7 @@ public final class ConstellationToSheetConverter {
         //Make the first star a Major chord, and add it to the sheet
         Note note = new Note(calPitchClass(star.getyCoordinate()));
         Chord major = new Chord(note, 4, 3);
-        sheet.addChord(major, 16, 0);
+        sheet.addChord(major, sheet.getTimeDivision()/2, 0);
 
         return major;
     }
@@ -95,10 +95,10 @@ public final class ConstellationToSheetConverter {
 
         //Calculate the end note and chord (Last) and add it to sheet
         Note note = new Note(calPitchClass(constellation.getStars().get(constellation.getStars().size() - 1).getyCoordinate()));
-        sheet.addChord(getNextChord(latestChord, note), 16, space + sheet.getTotalPlaytime());
+        sheet.addChord(getNextChord(latestChord, note), sheet.getTimeDivision()/2, space + sheet.getTotalPlaytime());
     }
 
-        /**
+    /**
      * Takes two stars, and calculates the length between them.
      * it uses the determineTime(double, double) method to return a time in 16th parts of a note
      *
