@@ -1,5 +1,7 @@
 package dk.aau.sw2_18_a305.notation;
 
+import java.util.Objects;
+
 /**
  * Represents A Note played on an instrument. Has a {@link PitchClass},
  * octave and a midiValue representing the note in midi context
@@ -97,5 +99,21 @@ public class Note {
      */
     private void calMidiValue() {
         midiValue = pitchClass.number + (octave+1) * 12;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Note note = (Note) o;
+        return octave == note.octave &&
+                midiValue == note.midiValue &&
+                pitchClass == note.pitchClass;
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(pitchClass, octave, midiValue);
     }
 }

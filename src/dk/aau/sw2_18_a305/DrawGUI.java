@@ -28,16 +28,34 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * The main class of the application. Visualises the GUI, runs the buttons and their opperations on the stars, constellations and midi file
+ */
 public class DrawGUI extends Application {
 
+    /**
+     * The width of the night sky window minus the buttons.
+     * Is set to the width of the computer screen divided by 1.1
+     */
+    private static int width = (int) (Toolkit.getDefaultToolkit().getScreenSize().width/1.10);
+    /**
+     * The height of the night sky window minus the buttons.
+     * Is set to the height of the computer screen divided by 1.25
+     */
+    private static int height = (int) (Toolkit.getDefaultToolkit().getScreenSize().height/1.25);
+
+    /**
+     * Main method, runs launch to create the GUI with javafx
+     * @param args Arguments passed by the caller
+     */
     public static void main(String[] args) {
         launch(args);
     }
 
-    // Global variables for half width and height of screen
-    private static int width = (int) (Toolkit.getDefaultToolkit().getScreenSize().width/1.10);
-    private static int height = (int) (Toolkit.getDefaultToolkit().getScreenSize().height/1.25);
-
+    /**
+     * Method that includes almost all functionality in the <code>DrawGUI</code> class
+     * @param primaryStage The stage that makes up the GUI
+     */
     public void start(Stage primaryStage) {
         Random random = new Random();
         Nightsky nightsky = new Nightsky();
@@ -53,7 +71,7 @@ public class DrawGUI extends Application {
         primaryStage.getIcons().add(icon);
 
         // Add stars to the nightsky
-        addStarsToNightsky(nightsky, random);
+        addStarsToNightsky(nightsky, 50);
 
         // Create the buttons on the bottom of the GUI
         generateButtons(buttons, lineArray, nightsky, nightskyScene);
@@ -80,6 +98,15 @@ public class DrawGUI extends Application {
         primaryStage.show();
     }
 
+    /**
+     * Generates all stars as {@link Circle}s with images. Also gives all circles {@link javafx.event.Event}s.
+     * When you clicl on a circle, the star that made the circle, is added to the first constellation in the night sky.
+     * Lines are drawn between all stars in a constellation
+     * @param nightsky The night sky of which stars are to be visualised
+     * @param nightskyScene The scene where the circles and lines are going to be added
+     * @param lineArray An {@link ArrayList} of lines, where all the lines are added
+     * @return An {@link ArrayList} of the circles generated
+     */
     private ArrayList<Circle> generateCircles(Nightsky nightsky, Group nightskyScene, ArrayList<Line> lineArray) {
         // Circles is to be returned, stars is used as a shortcut
         ArrayList<Circle> circles = new ArrayList<>();
@@ -124,14 +151,28 @@ public class DrawGUI extends Application {
         return circles;
     }
 
-    private void addStarsToNightsky(Nightsky nightsky, Random random){
+    /**
+     * Generates a number of randomly placed stars in a night sky
+     * @param nightsky The night sky in which the stars are added
+     * @param amountOfStars The amount of stars to be generated
+     */
+    private void addStarsToNightsky(Nightsky nightsky, int amountOfStars){
+        Random random = new Random();
+
         // Generate nightsky and add stars to it
         nightsky.addConstellation(new Constellation("Music Constellation"));
-        for(int i = 0; i < 50; i++) {
+        for(int i = 0; i < amountOfStars; i++) {
             nightsky.addStar(new Star(random.nextInt(width-30)+15, random.nextInt(height-30)+15));
         }
     }
 
+    /**
+     * Generate the buttons and their set their actions. They are but in a {@link HBox}
+     * @param buttons The {@link HBox} where the buttons are stored
+     * @param lineArray The {@link ArrayList} of {@link Line}s
+     * @param nightsky The {@link Nightsky} that makes up the visible stars
+     * @param nightskyScene The scene that contains all stars and lines
+     */
     private void generateButtons(HBox buttons, ArrayList<Line> lineArray, Nightsky nightsky, Group nightskyScene){
         // Create a midi player
         MidiPlayer midiPlayer = new MidiPlayer();
@@ -166,11 +207,19 @@ public class DrawGUI extends Application {
         buttonPlay.setOnMouseClicked(e -> playFunctionality(midiPlayer, nightsky));
     }
 
+    /**
+     * The method that is called when you press the exit button. Closes the application
+     */
     private void exitFunctionality(){
         Platform.exit();
         System.exit(0);
     }
 
+    /**
+     * Is called when the Play button is pressed. Generates and plays the midi file, using the {@link MidiPlayer}
+     * @param mPlayer The midi player that is used to play the file
+     * @param nightsky The night sky that the midi file is generated from
+     */
     private void playFunctionality(MidiPlayer mPlayer, Nightsky nightsky){
         // Generate and save .mid file
         generateMidiFile(nightsky.getConstellations().get(0));
@@ -179,6 +228,12 @@ public class DrawGUI extends Application {
         mPlayer.playMidiFile("StarSound.mid");
     }
 
+    /**
+     * Called when the Undo button is pressed. Removes the last star from the constellation, and the last line from the {@link ArrayList}
+     * @param lineArray An {@link ArrayList} of lines that should have the last line removed
+     * @param nightsky The {@link Nightsky} that contains the constellation where the last star should be removed
+     * @param nightskyScene The {@link Scene} that contains all stars
+     */
     private void undoStarChoice(ArrayList<Line> lineArray, Nightsky nightsky, Group nightskyScene){
         if (lineArray.size() > 1){
             nightskyScene.getChildren().remove(lineArray.get(lineArray.size() - 1));
@@ -191,7 +246,10 @@ public class DrawGUI extends Application {
         }
     }
 
-    // Function that loops through every button and sets their style
+    /**
+     * Sets the button style, so the buttons look better
+     * @param bA An {@link ArrayList} of all the buttons that are to be styled
+     */
     private void styleButtons(ArrayList<Button> bA){
         Button b;
 
@@ -210,6 +268,10 @@ public class DrawGUI extends Application {
         }
     }
 
+    /**
+     * Sets the background of the night sky scene to a beatiful picture
+     * @param nightskyScene The {@link Scene} where the background is set
+     */
     private void addSkyBackgroundImage(Group nightskyScene){
         // Background image sky
         ImageView ivSky = new ImageView();
@@ -220,6 +282,11 @@ public class DrawGUI extends Application {
         nightskyScene.getChildren().add(ivSky);
     }
 
+    /**
+     * Generates a midi file by a constellation. Uses {@link ConstellationToSheetConverter} to make a {@link Sheet}
+     * with all notes. Then use the sheets own converter to midi.
+     * @param constellation The constellation that is to be converted to a midi file
+     */
     private void generateMidiFile(Constellation constellation) {
         // Create a sheet from the constellation and a sequence from the sheet
         Sheet sheet = ConstellationToSheetConverter.convert(constellation);
@@ -236,6 +303,10 @@ public class DrawGUI extends Application {
         }
     }
 
+    /**
+     * Chooses a random image used by the circles to visualise a star
+     * @return A random image of a star
+     */
     private ImagePattern randomImage() {
         Random random = new Random();
 

@@ -31,7 +31,7 @@ public class Sheet {
      * Represents how time in this sheet is interpreted. For example a time division of 16 means
      * time in the sheet is  interpreted as 16th parts of a note (a time of 16 would be a full note length)
      */
-    private int timeDivision = QUARTER_NOTE;
+    private int timeDivision = EIGHTH_NOTE;
     /**
      * The time stamp of the last note in the sheet
      */
@@ -137,14 +137,10 @@ public class Sheet {
      */
     public Sequence convertToMidiSequence() {
         try {
-            Sequence sequence = new Sequence(Sequence.PPQ, this.timeDivision/2);
+            Sequence sequence = new Sequence(Sequence.PPQ, timeDivision/4);
             Track track = sequence.createTrack();
 
             for (TimedNote note : notes) {
-                System.out.println( "Note added: "+note.getPitchClass() +
-                                    " Length: " + note.getLength() + " Timestamp: "
-                                    + note.getTimeStamp() + " Midi: " + note.getMidiValue()
-                                    + " octave: "+note.getOctave());
 
                 // Create Midi messages
                 ShortMessage messageOn = new ShortMessage();
@@ -156,7 +152,6 @@ public class Sheet {
                 MidiEvent noteOn = new MidiEvent(messageOn, note.getTimeStamp());
                 MidiEvent noteOff = new MidiEvent(messageOff, note.getLength() + note.getTimeStamp());
 
-                // Add the notes to the track
                 track.add(noteOn);
                 track.add(noteOff);
             }

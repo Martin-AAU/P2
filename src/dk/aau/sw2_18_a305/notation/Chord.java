@@ -1,6 +1,7 @@
 package dk.aau.sw2_18_a305.notation;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * Represents a Chord that has a number of {@link Note}s
@@ -190,5 +191,31 @@ public class Chord{
      */
     public int distanceTo(Chord chord ) {
         return distanceStrategy.distanceTo(this, chord);
+    }
+
+    /**
+     * Two chords are equal if all their notes are equal
+     * @param o The object to be compared to the chord
+     * @return True if the object is a chord and all notes are equal
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Chord chord = (Chord) o;
+
+        int i = 0;
+        for (Note note : notes) {
+            if (! note.equals(((Chord) o).notes.get(i++))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(notes);
     }
 }

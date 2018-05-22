@@ -69,10 +69,8 @@ public final class ConstellationToSheetConverter {
             int distance = calLength(constellation.getStars().get(i-1), star);
             int playtime = calPlayTime(constellation.getStars().get(i-1), star, constellation.getStars().get(i+1));
 
-            //Make the minor and major chords
-            Chord major = new Chord(note, 4, 3);
-            Chord minor = new Chord(note, 3, 4);
-            Chord nextChord = checkClosestChord(latestChord, minor, major);
+            // Get the next chord
+            Chord nextChord = getNextChord(latestChord, note);
 
             //Add the closest of the major or minor chords to sheet
             sheet.addChord(nextChord, playtime, distance + sheet.getTotalPlaytime());
@@ -97,9 +95,7 @@ public final class ConstellationToSheetConverter {
 
         //Calculate the end note and chord (Last) and add it to sheet
         Note note = new Note(calPitchClass(constellation.getStars().get(constellation.getStars().size() - 1).getyCoordinate()));
-        Chord dur = new Chord(note, 4, 3);
-        Chord mol = new Chord(note, 3, 4);
-        sheet.addChord(checkClosestChord(latestChord, mol, dur), 16, space + sheet.getTotalPlaytime());
+        sheet.addChord(getNextChord(latestChord, note), 16, space + sheet.getTotalPlaytime());
     }
 
         /**
@@ -166,16 +162,14 @@ public final class ConstellationToSheetConverter {
      * @return Either 1, 2, 4, 8, or 16 compared to how close number is to range
      */
     private static int determineTime(double number, double range) {
-        if(number < range * 0.2) {
+        if(number < range * 0.25) {
             return 1;
-        } else if(number < range * 0.4) {
+        } else if(number < range * 0.5) {
             return 2;
-        } if(number < range * 0.6) {
+        } if(number < range * 0.75) {
             return 4;
-        } if(number < range * 0.8) {
-            return 8;
         } else {
-            return 16;
+            return 8;
         }
     }
 
@@ -205,5 +199,28 @@ public final class ConstellationToSheetConverter {
         if(ref.distanceTo(a) < ref.distanceTo(b)) {
             return a;
         } else return b;
+    }
+
+    /**
+     * Calculates the next chord, depending on the last chord
+     * @param lastChord The last chord that was added to the sheet
+     * @param nextNote The next note that is to make a new chord
+     * @return A minor or major chord, depending on which is closest to the last chord in the circle of fifths.
+     * Also if the root note in the new chord and last chord are the same, then sets the chord type different to the last
+     */
+    private static Chord getNextChord(Chord lastChord, Note nextNote) {
+        //Make the minor and major chords
+        Chord major = new Chord(nextNote, 4, 3);
+        Chord minor = new Chord(nextNote, 3, 4);
+        Chord nextChord = checkClosestChord(lastChord, minor, major);
+
+        // Make sure the new chord is different from the latest
+        if (lastChord.equals(major)) {
+            nextChord = minor;
+        } else if (lastChord.equals(minor)) {
+            nextChord = major;
+        }
+
+        return nextChord;
     }
 }
