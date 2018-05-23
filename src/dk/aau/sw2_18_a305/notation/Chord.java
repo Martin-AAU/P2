@@ -177,7 +177,7 @@ public class Chord{
     private Note setNote(int interval) {
         PitchClass p;
         int index = notes.get(notes.size()-1).getPitchClass().number + interval;
-        int octave = notes.get(0).getOctave() + (index/12);
+        int octave = notes.get(notes.size()-1).getOctave() + (index/12);
 
         p = PitchClass.readPitchClass(index % 12);
 

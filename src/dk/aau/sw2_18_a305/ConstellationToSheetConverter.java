@@ -182,7 +182,7 @@ public final class ConstellationToSheetConverter {
      */
     private static PitchClass calPitchClass(int y) {
         int index = y / ((int)((Toolkit.getDefaultToolkit().getScreenSize().height/1.25)/12));
-
+        index = 11 - index;
         return PitchClass.readPitchClass(index);
     }
 

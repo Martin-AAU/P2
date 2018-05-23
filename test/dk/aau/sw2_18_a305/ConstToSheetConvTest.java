@@ -42,7 +42,7 @@ class ConstToSheetConvTest {
 
     @Test
     void test01() {
-        assertEquals(16, sheet.getNotes().get(0).getLength());
+        assertEquals(4, sheet.getNotes().get(0).getLength());
     }
 
     @Test
@@ -52,11 +52,11 @@ class ConstToSheetConvTest {
 
     @Test
     void test03() {
-        assertEquals(5, sheet.getTotalPlaytime());
+        assertEquals(9, sheet.getTotalPlaytime());
     }
 
     @Test
     void test04() {
-        assertEquals(8, sheet.getNotes().get(10).getLength());
+        assertEquals(2, sheet.getNotes().get(10).getLength());
     }
 }
