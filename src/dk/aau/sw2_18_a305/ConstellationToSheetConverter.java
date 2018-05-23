@@ -70,7 +70,7 @@ public final class ConstellationToSheetConverter {
             int playtime = calPlayTime(constellation.getStars().get(i-1), star, constellation.getStars().get(i+1));
 
             // Get the next chord
-            Chord nextChord = getNextChord(latestChord, note);
+            Chord nextChord = decideMajorMinor(latestChord, note);
 
             //Add the closest of the major or minor chords to sheet
             sheet.addChord(nextChord, playtime, distance + sheet.getTotalPlaytime());
@@ -95,7 +95,7 @@ public final class ConstellationToSheetConverter {
 
         //Calculate the end note and chord (Last) and add it to sheet
         Note note = new Note(calPitchClass(constellation.getStars().get(constellation.getStars().size() - 1).getyCoordinate()));
-        sheet.addChord(getNextChord(latestChord, note), sheet.getTimeDivision()/2, space + sheet.getTotalPlaytime());
+        sheet.addChord(decideMajorMinor(latestChord, note), sheet.getTimeDivision()/2, space + sheet.getTotalPlaytime());
     }
 
     /**
@@ -208,7 +208,7 @@ public final class ConstellationToSheetConverter {
      * @return A minor or major chord, depending on which is closest to the last chord in the circle of fifths.
      * Also if the root note in the new chord and last chord are the same, then sets the chord type different to the last
      */
-    private static Chord getNextChord(Chord lastChord, Note nextNote) {
+    private static Chord decideMajorMinor(Chord lastChord, Note nextNote) {
         //Make the minor and major chords
         Chord major = new Chord(nextNote, 4, 3);
         Chord minor = new Chord(nextNote, 3, 4);
