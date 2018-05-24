@@ -227,7 +227,7 @@ public class DrawGUI extends Application {
         // Generate variables
         Stage help = new Stage();
         VBox helpVbox = new VBox(20);
-        Scene helpScene = new Scene(helpVbox, width / 2, height / 1.25);
+        Scene helpScene = new Scene(helpVbox, width / 1.75, height / 1.25);
         Text helpText = new Text();
         String readerText;
 
@@ -244,7 +244,7 @@ public class DrawGUI extends Application {
             BufferedReader in = new BufferedReader(new FileReader("help.txt"));
 
             while ((readerText = in.readLine()) != null){
-                helpText.setText(helpText.getText() + "\n" + readerText);
+                helpText.setText(helpText.getText() + readerText + "\n" );
             }
         } catch (FileNotFoundException e){
             System.out.println("UNABLE TO GET HELP TEXT");
@@ -254,7 +254,7 @@ public class DrawGUI extends Application {
 
 
         // Style text
-        helpText.setWrappingWidth((width / 2) - 5);
+        helpText.setWrappingWidth((width / 1.75) - 5);
         helpText.setStyle("-fx-font-size: 18px; -fx-font-family: Tahoma;");
         helpText.setFill(Color.WHITESMOKE);
         helpVbox.getChildren().add(helpText);
