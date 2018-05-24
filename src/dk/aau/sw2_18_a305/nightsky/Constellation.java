@@ -67,7 +67,6 @@ public class Constellation{
         } else if (stars.size() == 1){
             stars.clear();
         }
-
         return this;
     }
 }

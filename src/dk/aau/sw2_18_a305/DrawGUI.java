@@ -18,7 +18,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import javax.sound.midi.MidiSystem;
 import javax.sound.midi.Sequence;
@@ -27,6 +29,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 /**
  * The main class of the application. Visualises the GUI, runs the buttons and their opperations on the stars, constellations and midi file
@@ -74,7 +77,7 @@ public class DrawGUI extends Application {
         addStarsToNightsky(nightsky, 50);
 
         // Create the buttons on the bottom of the GUI
-        generateButtons(buttons, lineArray, nightsky, nightskyScene);
+        generateButtons(buttons, lineArray, nightsky, nightskyScene, primaryStage);
 
         // Add a picture as the background of the nightskyScene
         addSkyBackgroundImage(nightskyScene);
@@ -173,7 +176,7 @@ public class DrawGUI extends Application {
      * @param nightsky The {@link Nightsky} that makes up the visible stars
      * @param nightskyScene The scene that contains all stars and lines
      */
-    private void generateButtons(HBox buttons, ArrayList<Line> lineArray, Nightsky nightsky, Group nightskyScene){
+    private void generateButtons(HBox buttons, ArrayList<Line> lineArray, Nightsky nightsky, Group nightskyScene, Stage primaryStage){
         // Create a midi player
         MidiPlayer midiPlayer = new MidiPlayer();
 
@@ -181,6 +184,7 @@ public class DrawGUI extends Application {
         Button buttonPlay = new Button("Play");
         Button buttonGen = new Button("Save to MIDI");
         Button buttonUndo = new Button("Undo");
+        Button buttonHelp = new Button("Help");
         Button buttonExit = new Button("Exit");
         ArrayList<Button> buttonArray = new ArrayList<>();
 
@@ -188,22 +192,21 @@ public class DrawGUI extends Application {
         buttonArray.add(buttonPlay);
         buttonArray.add(buttonGen);
         buttonArray.add(buttonUndo);
+        buttonArray.add(buttonHelp);
         buttonArray.add(buttonExit);
 
         // Setup buttons GUI
         buttons.setPadding(new Insets(15, 12, 15, 12));
         buttons.setSpacing(10);
         buttons.setStyle("-fx-background-color: linear-gradient(#0d1a26, #070d13);");
-        buttons.getChildren().add(buttonPlay);
-        buttons.getChildren().add(buttonGen);
-        buttons.getChildren().add(buttonUndo);
-        buttons.getChildren().add(buttonExit);
+        for (int i = 0 ; i < buttonArray.size(); i++){ buttons.getChildren().add(buttonArray.get(i)); }
         styleButtons(buttonArray);
 
         // Setup functionality
         buttonExit.setOnMouseClicked(e -> exitFunctionality());
         buttonGen.setOnMouseClicked(e -> generateMidiFile(nightsky.getConstellations().get(0)));
         buttonUndo.setOnMouseClicked(e -> undoStarChoice(lineArray, nightsky, nightskyScene));
+        buttonHelp.setOnMouseClicked(e -> helpPopup(primaryStage));
         buttonPlay.setOnMouseClicked(e -> playFunctionality(midiPlayer, nightsky));
 
         // Set style while mouse is pressed
@@ -217,6 +220,39 @@ public class DrawGUI extends Application {
         buttonGen.setOnMouseReleased(e -> styleButtonPressed(buttonGen, 0));
         buttonUndo.setOnMouseReleased(e -> styleButtonPressed(buttonUndo, 0));
         buttonPlay.setOnMouseReleased(e -> styleButtonPressed(buttonPlay, 0));
+    }
+
+    /**
+     * The method which opens a new popup window with help to how to use the program
+     */
+    private void helpPopup(Stage primaryStage){
+        // Generate variables
+        Stage help = new Stage();
+        VBox helpVbox = new VBox(20);
+        Scene helpScene = new Scene(helpVbox, width / 2, height / 1.5);
+        Text helpText = new Text();
+
+        // Set ownership and top-bar style
+        help.initOwner(primaryStage);
+        help.initStyle(StageStyle.UTILITY);
+
+        // Set style for VBox
+        helpVbox.setStyle(  "-fx-background-color: #21415f, " +
+                            "linear-gradient(#0d1a26, #1a344c); ");
+
+        // Set text
+        helpText.setText("This is some really useful text, and I am super duper duper duper, dabbing 420 blaze it super " +
+                        "dubber dank meme ready and happy that I am able to write this super long text for no reason at all, " +
+                        "haha I was Lying to you because the reason why I am actually writing this text is to test if we can add " +
+                        "it to the Help pop-up ;)");
+        helpText.setWrappingWidth((width / 2) - 10);
+        helpText.setStyle(  "-fx-font-size: 18px; -fx-font-family: Tahoma;");
+        helpText.setFill(Color.WHITESMOKE);
+        helpVbox.getChildren().add(helpText);
+
+        help.setScene(helpScene);
+        help.show();
+
     }
 
     /**
@@ -269,7 +305,7 @@ public class DrawGUI extends Application {
         for (int i = 0; i < bA.size(); i++){
             b = bA.get(i);
 
-            b.setPrefSize((width / bA.size()) - 15, height / 13);
+            b.setPrefSize((width / bA.size()) - 13, height / 13);
             b.setStyle("-fx-background-color: #21415f, " +
                        "linear-gradient(#0d1a26, #1a344c); " +
                        "-fx-text-fill: linear-gradient(#ffffff, #c6d9eb); " +
