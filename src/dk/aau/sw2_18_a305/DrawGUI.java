@@ -205,6 +205,18 @@ public class DrawGUI extends Application {
         buttonGen.setOnMouseClicked(e -> generateMidiFile(nightsky.getConstellations().get(0)));
         buttonUndo.setOnMouseClicked(e -> undoStarChoice(lineArray, nightsky, nightskyScene));
         buttonPlay.setOnMouseClicked(e -> playFunctionality(midiPlayer, nightsky));
+
+        // Set style while mouse is pressed
+        buttonExit.setOnMousePressed(e -> styleButtonPressed(buttonExit, 1));
+        buttonGen.setOnMousePressed(e -> styleButtonPressed(buttonGen, 1));
+        buttonUndo.setOnMousePressed(e -> styleButtonPressed(buttonUndo, 1));
+        buttonPlay.setOnMousePressed(e -> styleButtonPressed(buttonPlay, 1));
+
+        // Set style while mouse is released
+        buttonExit.setOnMouseReleased(e -> styleButtonPressed(buttonExit, 0));
+        buttonGen.setOnMouseReleased(e -> styleButtonPressed(buttonGen, 0));
+        buttonUndo.setOnMouseReleased(e -> styleButtonPressed(buttonUndo, 0));
+        buttonPlay.setOnMouseReleased(e -> styleButtonPressed(buttonPlay, 0));
     }
 
     /**
@@ -265,6 +277,28 @@ public class DrawGUI extends Application {
                        "-fx-background-insets: 0,1.5,5,5,5;" +
                        "-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );" +
                        "-fx-font-family: "+ "Tahoma"+";");
+        }
+    }
+
+    private void styleButtonPressed(Button button, int condition) {
+        // set "pressed button" style if condition is 1
+        // set default style if condition is 0
+        if(condition == 1) {
+            button.setStyle("-fx-background-color: #00060c, " +
+                    "linear-gradient(#0d1a26, #1a344c); " +
+                    "-fx-text-fill: linear-gradient(#ffffff, #c6d9eb); " +
+                    "-fx-font-size: 22px; " +
+                    "-fx-background-insets: 0,1.5,5,5,5;" +
+                    "-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );" +
+                    "-fx-font-family: "+ "Tahoma"+";");
+        } else if(condition == 0) {
+            button.setStyle("-fx-background-color: #21415f, " +
+                    "linear-gradient(#0d1a26, #1a344c); " +
+                    "-fx-text-fill: linear-gradient(#ffffff, #c6d9eb); " +
+                    "-fx-font-size: 22px; " +
+                    "-fx-background-insets: 0,1.5,5,5,5;" +
+                    "-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );" +
+                    "-fx-font-family: "+ "Tahoma"+";");
         }
     }
 
