@@ -25,11 +25,9 @@ import javafx.stage.StageStyle;
 import javax.sound.midi.MidiSystem;
 import javax.sound.midi.Sequence;
 import java.awt.*;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
 
 /**
  * The main class of the application. Visualises the GUI, runs the buttons and their opperations on the stars, constellations and midi file
@@ -229,8 +227,9 @@ public class DrawGUI extends Application {
         // Generate variables
         Stage help = new Stage();
         VBox helpVbox = new VBox(20);
-        Scene helpScene = new Scene(helpVbox, width / 2, height / 1.5);
+        Scene helpScene = new Scene(helpVbox, width / 2, height / 1.25);
         Text helpText = new Text();
+        String readerText;
 
         // Set ownership and top-bar style
         help.initOwner(primaryStage);
@@ -240,13 +239,23 @@ public class DrawGUI extends Application {
         helpVbox.setStyle(  "-fx-background-color: #21415f, " +
                             "linear-gradient(#0d1a26, #1a344c); ");
 
-        // Set text
-        helpText.setText("This is some really useful text, and I am super duper duper duper, dabbing 420 blaze it super " +
-                        "dubber dank meme ready and happy that I am able to write this super long text for no reason at all, " +
-                        "haha I was Lying to you because the reason why I am actually writing this text is to test if we can add " +
-                        "it to the Help pop-up ;)");
-        helpText.setWrappingWidth((width / 2) - 10);
-        helpText.setStyle(  "-fx-font-size: 18px; -fx-font-family: Tahoma;");
+        // Get the text from help.txt
+        try {
+            BufferedReader in = new BufferedReader(new FileReader("help.txt"));
+
+            while ((readerText = in.readLine()) != null){
+                helpText.setText(helpText.getText() + "\n" + readerText);
+            }
+        } catch (FileNotFoundException e){
+            System.out.println("UNABLE TO GET HELP TEXT");
+        } catch (IOException e){
+            System.out.println("UNABLE TO READ HELP TEXT");
+        }
+
+
+        // Style text
+        helpText.setWrappingWidth((width / 2) - 5);
+        helpText.setStyle("-fx-font-size: 18px; -fx-font-family: Tahoma;");
         helpText.setFill(Color.WHITESMOKE);
         helpVbox.getChildren().add(helpText);
 
