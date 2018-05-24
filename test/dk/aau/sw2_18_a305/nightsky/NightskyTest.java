@@ -1,5 +1,6 @@
 package dk.aau.sw2_18_a305.nightsky;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -8,10 +9,16 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class NightskyTest {
 
+    Nightsky nightsky = null;
+
+    @BeforeEach
+    void setup() {
+        nightsky = new Nightsky();
+    }
+
     @Test
     void getStars01() {
-        Nightsky n = new Nightsky();
-        assertEquals(0, n.getStars().size());
+        assertEquals(0, nightsky.getStars().size());
     }
 
     @Test
@@ -20,32 +27,31 @@ class NightskyTest {
         for (int i = 0; i < 10; i++) {
             stars.add(new Star(50, 20));
         }
-        Nightsky n = new Nightsky(stars);
-        assertEquals(10, n.getStars().size());
+        nightsky = new Nightsky(stars);
+
+        assertEquals(10, nightsky.getStars().size());
     }
 
     @Test
     void getConstellations01() {
-        Nightsky n = new Nightsky();
-        assertEquals(0, n.getConstellations().size());
+        assertEquals(0, nightsky.getConstellations().size());
     }
 
     @Test
     void addStar01() {
-        Nightsky n = new Nightsky();
         Star star = new Star(50, 20);
-        n.addStar(star);
-        assertEquals(50, n.getStars().get(0).getxCoordinate());
+        nightsky.addStar(star);
+
+        assertEquals(50, nightsky.getStars().get(0).getxCoordinate());
     }
 
     @Test
     void addConstellation() {
-        Nightsky n = new Nightsky();
-        Constellation c = new Constellation("Test");
+        Constellation constellation = new Constellation("Test");
         Star s = new Star(50, 20);
-        c.addStar(s);
-        n.addConstellation(c);
+        constellation.addStar(s);
+        nightsky.addConstellation(constellation);
 
-        assertEquals(20, n.getConstellations().get(0).getStars().get(0).getyCoordinate());
+        assertEquals(20, nightsky.getConstellations().get(0).getStars().get(0).getyCoordinate());
     }
 }

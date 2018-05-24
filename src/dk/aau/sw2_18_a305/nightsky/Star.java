@@ -65,7 +65,7 @@ public class Star {
      * Constructs a star with an x coordinate, y coordinate and an apparent colour
      * @param xCoordinate The x coordinate of the star
      * @param yCoordinate The y coordinate of the star
-     * @param apparentColour The apparent colour of the star
+     * @param distance The distance to the star
      */
     public Star(int xCoordinate, int yCoordinate, double distance) {
         if (isGreaterThanZero(xCoordinate))

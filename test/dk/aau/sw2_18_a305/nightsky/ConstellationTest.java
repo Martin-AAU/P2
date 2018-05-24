@@ -1,5 +1,6 @@
 package dk.aau.sw2_18_a305.nightsky;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -8,53 +9,66 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ConstellationTest {
 
+    Constellation constellation = null;
+    Star s1 = null;
+    Star s2 = null;
+    Star s3 = null;
+
+    @BeforeEach
+    void setup() {
+        constellation = new Constellation("Stjernebillede");
+        s1 = new Star(50, 20);
+        s2 = new Star(45, 20);
+        s3 = new Star(10, 20);
+    }
+
     @Test
     void getName01() {
-        Constellation c = new Constellation("c");
-        assertEquals("c", c.getName());
+        assertEquals("Stjernebillede", constellation.getName());
     }
 
    @Test
    void getStars01() {
-       Star s = new Star(50, 20);
        ArrayList<Star> stars = new ArrayList<>();
-       stars.add(s);
-       Constellation c = new Constellation("c", stars);
+       stars.add(s1);
+       constellation = new Constellation("Stjernebillede", stars);
 
-       assertEquals(20, c.getStars().get(0).getyCoordinate());
+       assertEquals(20, constellation.getStars().get(0).getyCoordinate());
    }
 
    @Test
     void addStar01() {
-       Star s = new Star(50, 20);
-       Constellation c = new Constellation("c");
-       c.addStar(s);
+       constellation.addStar(s1);
 
-       assertEquals(20, c.getStars().get(0).getyCoordinate());
+       assertEquals(20, constellation.getStars().get(0).getyCoordinate());
    }
 
    @Test
-    void removeLastStar01(){
-       Star s1 = new Star(50, 20);
-       Star s2 = new Star(45, 20);
-       Star s3 = new Star(10, 20);
-       Constellation c = new Constellation("c");
-       c.addStar(s1);
-       c.addStar(s2);
-       c.addStar(s3);
+    void removeLastStar01() {
+       constellation.addStar(s1);
+       constellation.addStar(s2);
 
-       assertEquals(c.getStars().get(c.getStars().size() -1).getxCoordinate(), 10);
-
-       c.removeLastStar();
-       assertEquals(c.getStars().get(c.getStars().size() -1).getxCoordinate(), 45);
-
-       c.removeLastStar();
-       assertEquals(c.getStars().get(c.getStars().size() -1).getxCoordinate(), 50);
-
-       c.removeLastStar();
-       assertEquals(c.getStars().size(), 0);
-
-       c.removeLastStar();
-       assertEquals(c.getStars().size(), 0);
+       constellation.removeLastStar();
+       assertEquals(s1, constellation.getStars().get(constellation.getStars().size()-1));
    }
+
+    @Test
+    void removeLastStar02() {
+        constellation.addStar(s1);
+        constellation.addStar(s2);
+        constellation.addStar(s3);
+
+        constellation.removeLastStar();
+        assertEquals(s2, constellation.getStars().get(constellation.getStars().size()-1));
+    }
+
+    @Test
+    void removeLastStar03() {
+        constellation.addStar(s1);
+        constellation.addStar(s2);
+        constellation.addStar(s3);
+
+        constellation.removeLastStar();
+        assertEquals(2, constellation.getStars().size());
+    }
 }
