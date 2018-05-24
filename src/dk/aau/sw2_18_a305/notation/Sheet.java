@@ -141,10 +141,6 @@ public class Sheet {
             Track track = sequence.createTrack();
 
             for (TimedNote note : notes) {
-                System.out.println("Note: "+note.getPitchClass()+" Octave: "+note.getOctave()+
-                " Length: "+note.getLength()+
-                " tick: "+note.getTimeStamp()+
-                " midi: "+note.getMidiValue());
                 // Create Midi messages
                 ShortMessage messageOn = new ShortMessage();
                 ShortMessage messageOff = new ShortMessage();
