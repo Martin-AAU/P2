@@ -222,6 +222,7 @@ public class DrawGUI extends Application {
 
     /**
      * The method which opens a new popup window with help to how to use the program
+     * @param primaryStage The primary stage of the program, used to link them together, so that popup closes along with primary
      */
     private void helpPopup(Stage primaryStage){
         // Generate variables
@@ -252,16 +253,15 @@ public class DrawGUI extends Application {
             System.out.println("UNABLE TO READ HELP TEXT");
         }
 
-
         // Style text
         helpText.setWrappingWidth((width / 1.75) - 5);
         helpText.setStyle("-fx-font-size: 18px; -fx-font-family: Tahoma;");
         helpText.setFill(Color.WHITESMOKE);
         helpVbox.getChildren().add(helpText);
 
+        // Setup and show scene
         help.setScene(helpScene);
         help.show();
-
     }
 
     /**
