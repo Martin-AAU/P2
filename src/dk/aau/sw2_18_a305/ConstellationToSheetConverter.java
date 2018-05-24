@@ -22,6 +22,13 @@ public final class ConstellationToSheetConverter {
         Sheet sheet = new Sheet();
         Chord latestChord;
 
+        // if the given constellation is empty,
+        // return an empty sheet
+        if(constellation.getStars().size() < 1) {
+            Sheet emptySheet = new Sheet();
+            return emptySheet;
+        }
+
         latestChord = FirstStar(sheet, constellation);
         latestChord = mostStars(sheet, constellation, latestChord);
         lastStar(sheet, constellation, latestChord);
