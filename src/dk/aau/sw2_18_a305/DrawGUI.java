@@ -259,7 +259,7 @@ public class DrawGUI extends Application {
     }
 
     /**
-     * Sets the button style, so the buttons look better
+     * Sets the default button style, so the buttons look better
      * @param bA An {@link ArrayList} of all the buttons that are to be styled
      */
     private void styleButtons(ArrayList<Button> bA){
@@ -280,6 +280,11 @@ public class DrawGUI extends Application {
         }
     }
 
+    /**
+     * Sets the button style when pressed
+     * @param button An {@link Button} to be styled
+     * @param condition A binary condition for whether the button should be styled as pressed (1) or as default (0)
+     */
     private void styleButtonPressed(Button button, int condition) {
         // set "pressed button" style if condition is 1
         // set default style if condition is 0
