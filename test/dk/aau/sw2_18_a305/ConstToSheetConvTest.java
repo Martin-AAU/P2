@@ -5,6 +5,7 @@ import dk.aau.sw2_18_a305.nightsky.Constellation;
 import dk.aau.sw2_18_a305.nightsky.Star;
 import dk.aau.sw2_18_a305.notation.*;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.awt.*;
@@ -32,14 +33,14 @@ class ConstToSheetConvTest {
         sheet = ConstellationToSheetConverter.convert(constellation);
     }
 
-    //@Disabled
-    @Test // This test is purely to print out the notes that was added to the sheet
+    @Disabled
+    @Test// This test is purely to print out the notes that was added to the sheet
     void printTest() {
         int i = 1;
         for (TimedNote timedNote : sheet.getNotes()) {
             System.out.println( "Note "+i+": "+timedNote.getPitchClass() + " Length: "
                                 + timedNote.getLength() + " Timestamp: "
-                                + timedNote.getTimeStamp() + "Midi: "
+                                + timedNote.getTimeStamp() + " Midi: "
                                 + timedNote.getMidiValue());
         }
     }
