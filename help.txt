@@ -1,25 +1,23 @@
 Hello and welcome to NightSky!
 Here's a quick introduction,
 so you can make your very own audible constellations.
-===================================
+
 Using the program:
-1) To select a chord, press a star.
-To add a star to your constellation,
-press another star and the star will
-be connected with the previous star by a white line.
-2) To play your constellation, press the Play button.
-3) Press the Save to MIDI button,
-to save current constellation's music.
-The MIDI file is saved in the same folder as the program.
-4) To undo the addition of a star, press the Undo button.
-===================================
-How the program works:
-1) Y-axis determines the pitch of that star chord.
-2) The length between two stars determines
-the length of the pause between two chords.
-3) The angle of the lines between three stars
-determine the playtime of the middle star.
-===================================
+- Click on a star to select it.
+- To add more stars to your constellation, click on another star,
+  and the star will be connected with the previous star by a white line.
+- To play your constellation, click Play.
+- Click "Save to MIDI" to save the current constillation as a MIDI file.
+  The MIDI file will be saved in the application directory.
+- To undo the last placed star, click Undo.
+
+How constellations translate to music:
+- One star represents one chord.
+- Stars are played in the order they are added.
+- The Y-axis determines the pitch of a chord.
+- The distance between two stars determine the length of the pause between two chords.
+- The angles determine the playtime of the chords. The tighter the angle, the shorter the playtime.
+
 Have fun!
 Group A305 - Jesper, Kamilla, Martin, Mathias & Thomas
 Aalborg University, Software Bachelor 2. Semester 2018
