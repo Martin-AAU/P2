@@ -231,7 +231,7 @@ public class DrawGUI extends Application {
         Scene helpScene;
         Text helpText = new Text();
         String readerText;
-        int boxHeight = 0, PIXELS_PER_LINE = 22;
+        int boxHeight = 22, PIXELS_PER_LINE = 22;
 
         // Set ownership and top-bar style
         help.initOwner(primaryStage);
@@ -246,8 +246,8 @@ public class DrawGUI extends Application {
             BufferedReader in = new BufferedReader(new FileReader("help.txt"));
 
             while ((readerText = in.readLine()) != null){
-                helpText.setText(helpText.getText() + readerText + "\n" );
                 boxHeight += PIXELS_PER_LINE;
+                helpText.setText(helpText.getText() + readerText + "\n" );
             }
         } catch (FileNotFoundException e){
             System.out.println("UNABLE TO GET HELP TEXT");
