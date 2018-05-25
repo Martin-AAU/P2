@@ -7,6 +7,8 @@ import dk.aau.sw2_18_a305.notation.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.awt.*;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class ConstToSheetConvTest {
@@ -16,14 +18,16 @@ class ConstToSheetConvTest {
 
     @BeforeEach
     void setup() {
+        int width = (int) (Toolkit.getDefaultToolkit().getScreenSize().width/1.10);
+        int height = (int) (Toolkit.getDefaultToolkit().getScreenSize().height/1.25);
         constellation = new Constellation("Carlsvognen");
-        constellation.addStar(new Star(0,4))
+        constellation.addStar(new Star(0,height/3))
                      .addStar(new Star(0,0))
-                     .addStar(new Star(4,0))
-                     .addStar(new Star(4,4))
-                     .addStar(new Star(6,5))
-                     .addStar(new Star(10,6))
-                     .addStar(new Star(300, 300));
+                     .addStar(new Star(width/3,0))
+                     .addStar(new Star(width/3,height/3))
+                     .addStar(new Star(width/2,height/2))
+                     .addStar(new Star(width,height/3))
+                     .addStar(new Star(width, height));
 
         sheet = ConstellationToSheetConverter.convert(constellation);
     }
@@ -52,7 +56,7 @@ class ConstToSheetConvTest {
 
     @Test
     void test03() {
-        assertEquals(9, sheet.getTotalPlaytime());
+        assertEquals(32, sheet.getTotalPlaytime());
     }
 
     @Test
