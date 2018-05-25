@@ -231,7 +231,7 @@ public class DrawGUI extends Application {
         Scene helpScene;
         Text helpText = new Text();
         String readerText;
-        int boxHeight = 22, PIXELS_PER_LINE = 22;
+        int boxHeight = 0, PIXELS_PER_LINE = 22;
 
         // Set ownership and top-bar style
         help.initOwner(primaryStage);
