@@ -1,13 +1,10 @@
-How to use the program:
-1) Click on stars to form a constellation
-2) Press "Play" to listen to the current music
-3) Press "Save" to save current music to "StarSound.mid" file in root folder of program
-djd
-jdhdudod
-dndhdh
-shshs
-shsi
-shsjsos
-sjisdhwpihdid
-sjusddjdi
-sjsid
+Hello and welcome to the Nightsky!
+Here's a quick introduction so you can make your very own audible constellations!
+To make chords, click the stars. There will be drawn lines that connects the stars.
+The angle of the line between two stars determines the length of the chords.
+The position of a star on the Y-axis determines the pitch of that star chord,
+and the length between two stars determines the length of the pause between two chords.
+
+When you're done making a constellation, you can click Play to hear the constellation,
+or you can save the MIDI file for use in other software.
+And Undo and Exit should be pretty self-explanatory.
