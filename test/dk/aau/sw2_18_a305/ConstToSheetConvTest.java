@@ -21,7 +21,7 @@ class ConstToSheetConvTest {
     void setup() {
         int width = (int) (Toolkit.getDefaultToolkit().getScreenSize().width/1.10);
         int height = (int) (Toolkit.getDefaultToolkit().getScreenSize().height/1.25);
-        constellation = new Constellation("Carlsvognen");
+        constellation = new Constellation("Karlsvognen");
         constellation.addStar(new Star(0,height/3))
                      .addStar(new Star(0,0))
                      .addStar(new Star(width/3,0))
