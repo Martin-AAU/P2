@@ -3,6 +3,8 @@ package dk.aau.sw2_18_a305.nightsky;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -13,22 +15,22 @@ class  NightskyTest {
 
     @BeforeEach
     void setup() {
-        nightsky = new Nightsky();
+        ArrayList<Star> stars = new ArrayList<>();
+
+        for (int i = 0; i < 10; i++) {
+            stars.add(new Star(50, 20));
+        }
+
+        nightsky = new Nightsky(stars);
     }
 
     @Test
     void getStars01() {
-        assertEquals(0, nightsky.getStars().size());
+        assertEquals(20, nightsky.getStars().get(1));
     }
 
     @Test
     void getStars02() {
-        ArrayList<Star> stars = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            stars.add(new Star(50, 20));
-        }
-        nightsky = new Nightsky(stars);
-
         assertEquals(10, nightsky.getStars().size());
     }
 
@@ -39,19 +41,31 @@ class  NightskyTest {
 
     @Test
     void addStar01() {
-        Star star = new Star(50, 20);
+        Star star = new Star(100, 30);
         nightsky.addStar(star);
 
-        assertEquals(50, nightsky.getStars().get(0).getxCoordinate());
+        assertEquals(100, nightsky.getStars().get(10).getxCoordinate());
     }
 
     @Test
-    void addConstellation() {
+    void addConstellationTest01() {
         Constellation constellation = new Constellation("Test");
-        Star s = new Star(50, 20);
+        Star s = new Star(500, 200);
         constellation.addStar(s);
+
         nightsky.addConstellation(constellation);
 
         assertEquals(20, nightsky.getConstellations().get(0).getStars().get(0).getyCoordinate());
+    }
+
+    @Test
+    void addConstellation02() {
+        Constellation constellation = new Constellation("Test");
+        Star s = new Star(500, 200);
+        constellation.addStar(s);
+
+        nightsky.addConstellation(constellation);
+
+        assertEquals(500, nightsky.getStars().get(10).getxCoordinate());
     }
 }

@@ -34,4 +34,5 @@ class StarTest {
         star.setyCoordinate(500);
         assertEquals(500, star.getyCoordinate());
     }
+
 }

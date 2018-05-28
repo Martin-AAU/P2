@@ -12,15 +12,15 @@ public class Sheet {
     /**
      * Constant used in the <code>timeDivision</code> to indicate 4th parts of note
      */
-    private static int QUARTER_NOTE = 4;
+    public static int QUARTER_NOTE = 4;
     /**
      * Constant used in the <code>timeDivision</code> to indicate 8th parts of note
      */
-    private static int EIGHTH_NOTE = 8;
+    public static int EIGHTH_NOTE = 8;
     /**
      * Constant used in the <code>timeDivision</code> to indicate 4th parts of note
      */
-    private static int SIXTEENTH_NOTE = 16;
+    public static int SIXTEENTH_NOTE = 16;
 
     /**
      * Linked List of {@link TimedNote}s to represent all notes in the sheet
@@ -99,9 +99,14 @@ public class Sheet {
         if(time >= latestStamp) {
             notes.add(n);
         }else {
-            IntStream.range(0, notes.size()).filter(i -> time >= notes.get(i).getTimeStamp()).forEach(i -> {
-                notes.add(i, n);
-            });
+            int i = 0;
+            for (TimedNote note : notes) {
+                if (time < note.getTimeStamp()) {
+                    notes.add(i, n);
+                    return;
+                }
+                i++;
+            }
         }
 
         this.totalPlaytime = this.totalPlaytime < time ? time: this.totalPlaytime;
@@ -157,7 +162,7 @@ public class Sheet {
 
             return sequence;
         } catch (InvalidMidiDataException e) {
-            System.out.println("ERROR: Could not Make a sequence for some reason :c");
+            System.out.println("ERROR: Could not Make a sequence");
         }
         return null;
     }
