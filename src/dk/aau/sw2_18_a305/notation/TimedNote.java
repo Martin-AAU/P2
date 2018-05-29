@@ -12,31 +12,31 @@ public class TimedNote extends Note {
     /**
      * Represent when the note is played. The unit used depends on the {@link Sheet}s time division setting
      */
-    private int timeStamp;
+    private int timestamp;
 
     // CONSTRUCTOR
     /**
      * Constructs a TimedNote from an existing {@link Note} a length and a time stamp
      * @param note A note used to construct a TimedNote
      * @param length The length of the note (time played)
-     * @param timeStamp When the note is played
+     * @param timestamp When the note is played
      */
-    public TimedNote(Note note, int length, int timeStamp) {
+    public TimedNote(Note note, int length, int timestamp) {
         super(note.getPitchClass(), note.getOctave());
         this.length = length;
-        this.timeStamp = timeStamp;
+        this.timestamp = timestamp;
     }
 
     /**
      * Constructs a TimedNote by giving the super class a pitch class, and setting a length and a time stamp
      * @param pitchClass Given to the {@link Note} class' constructor
      * @param length The length of the note (time played)
-     * @param timeStamp When the note is played
+     * @param timestamp When the note is played
      */
-    public TimedNote(PitchClass pitchClass, int length, int timeStamp) {
+    public TimedNote(PitchClass pitchClass, int length, int timestamp) {
         super(pitchClass);
         this.length = length;
-        this.timeStamp = timeStamp;
+        this.timestamp = timestamp;
     }
 
     /**
@@ -45,12 +45,12 @@ public class TimedNote extends Note {
      * @param pitchClass Given to the {@link Note} class' constructor
      * @param octave Given to the {@link Note} class' constructor
      * @param length The length of the note (time played)
-     * @param timeStamp When the note is played
+     * @param timestamp When the note is played
      */
-    public TimedNote(PitchClass pitchClass, int octave, int length, int timeStamp) {
+    public TimedNote(PitchClass pitchClass, int octave, int length, int timestamp) {
         super(pitchClass, octave);
         this.length = length;
-        this.timeStamp = timeStamp;
+        this.timestamp = timestamp;
     }
 
     /**
@@ -58,12 +58,12 @@ public class TimedNote extends Note {
      * the TimedNote a length and a time stamp
      * @param midiValue Used to by the {@link Note}s constructor
      * @param length The length of the note (time played)
-     * @param timeStamp When the note is played
+     * @param timestamp When the note is played
      */
-    public TimedNote(int midiValue, int length, int timeStamp) {
+    public TimedNote(int midiValue, int length, int timestamp) {
         super(midiValue);
         this.length = length;
-        this.timeStamp = timeStamp;
+        this.timestamp = timestamp;
     }
 
     // GETTERS
@@ -77,9 +77,9 @@ public class TimedNote extends Note {
 
     /**
      * Retreives the time stamp (when the note is played) of the TimedNote
-     * @return The timeStamp of the TimedNote
+     * @return The timestamp of the TimedNote
      */
-    public int getTimeStamp() {
-        return timeStamp;
+    public int getTimestamp() {
+        return timestamp;
     }
 }

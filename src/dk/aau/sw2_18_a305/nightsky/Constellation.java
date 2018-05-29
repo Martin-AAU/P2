@@ -3,7 +3,7 @@ package dk.aau.sw2_18_a305.nightsky;
 import java.util.ArrayList;
 
 /**
- * This class represents a constellation of stars
+ * This class represents a constellation of {@link Star}s
  */
 public class Constellation{
     // FIELDS

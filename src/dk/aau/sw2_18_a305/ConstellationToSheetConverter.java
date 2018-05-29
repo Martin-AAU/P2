@@ -7,7 +7,7 @@ import dk.aau.sw2_18_a305.notation.*;
 import java.awt.*;
 
 /**
- * Final class used purely to convert a constellation to a sheet
+ * Final class with only static methods. Used purely to convert a {@link Constellation} to a {@link Sheet}
  */
 public final class ConstellationToSheetConverter {
 
@@ -25,8 +25,7 @@ public final class ConstellationToSheetConverter {
         // if the given constellation is empty,
         // return an empty sheet
         if(constellation.getStars().size() < 1) {
-            Sheet emptySheet = new Sheet();
-            return emptySheet;
+            return new Sheet();
         }
 
         latestChord = FirstStar(sheet, constellation);

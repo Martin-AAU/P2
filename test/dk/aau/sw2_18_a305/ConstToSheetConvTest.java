@@ -1,6 +1,5 @@
 package dk.aau.sw2_18_a305;
 
-import dk.aau.sw2_18_a305.ConstellationToSheetConverter;
 import dk.aau.sw2_18_a305.nightsky.Constellation;
 import dk.aau.sw2_18_a305.nightsky.Star;
 import dk.aau.sw2_18_a305.notation.*;
@@ -40,7 +39,7 @@ class ConstToSheetConvTest {
         for (TimedNote timedNote : sheet.getNotes()) {
             System.out.println( "Note "+i+": "+timedNote.getPitchClass() + " Length: "
                                 + timedNote.getLength() + " Timestamp: "
-                                + timedNote.getTimeStamp() + " Midi: "
+                                + timedNote.getTimestamp() + " Midi: "
                                 + timedNote.getMidiValue());
         }
     }

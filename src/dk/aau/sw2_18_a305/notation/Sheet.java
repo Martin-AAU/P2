@@ -2,10 +2,10 @@ package dk.aau.sw2_18_a305.notation;
 
 import javax.sound.midi.*;
 import java.util.LinkedList;
-import java.util.stream.IntStream;
 
 /**
- * Represents a note sheet. A collection of timed notes in relation to each other
+ * Represents a note sheet. A timestamp sorted collection of {@link TimedNote}s in relation to each other.
+ * Able to convert to a {@link Sequence}
  */
 public class Sheet {
     // FIELDS
@@ -89,11 +89,11 @@ public class Sheet {
      * @param n The {@link TimedNote} to be added
      */
     public void addTimedNote(TimedNote n) {
-        int time = n.getTimeStamp();
+        int time = n.getTimestamp();
         int latestStamp = 0;
 
         if (notes.size() != 0) {
-            latestStamp = notes.get(notes.size() - 1).getTimeStamp();
+            latestStamp = notes.get(notes.size() - 1).getTimestamp();
         }
 
         if(time >= latestStamp) {
@@ -101,7 +101,7 @@ public class Sheet {
         }else {
             int i = 0;
             for (TimedNote note : notes) {
-                if (time < note.getTimeStamp()) {
+                if (time < note.getTimestamp()) {
                     notes.add(i, n);
                     return;
                 }
@@ -153,8 +153,8 @@ public class Sheet {
                 messageOff.setMessage(ShortMessage.NOTE_OFF, 0, note.getMidiValue(), 100);
 
                 // Create 4 MidiEvents (class) and add the messages to them
-                MidiEvent noteOn = new MidiEvent(messageOn, note.getTimeStamp());
-                MidiEvent noteOff = new MidiEvent(messageOff, note.getLength() + note.getTimeStamp());
+                MidiEvent noteOn = new MidiEvent(messageOn, note.getTimestamp());
+                MidiEvent noteOff = new MidiEvent(messageOff, note.getLength() + note.getTimestamp());
 
                 track.add(noteOn);
                 track.add(noteOff);

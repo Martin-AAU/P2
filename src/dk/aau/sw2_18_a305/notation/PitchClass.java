@@ -1,7 +1,7 @@
 package dk.aau.sw2_18_a305.notation;
 
 /**
- * Represents the pitch of a note (C, D, E, F, G, A, B). The 's' represents #.
+ * Represents the pitch of a note (C, D, E, F, G, A, B). The 's' represents #. Used in the {@link Note} class
  */
 public enum PitchClass {
     C(0), Cs(1), D(2), Ds(3), E(4), F(5), Fs(6), G(7), Gs(8), A(9), As(10), B(11);
