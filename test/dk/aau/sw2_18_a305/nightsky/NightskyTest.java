@@ -26,7 +26,7 @@ class  NightskyTest {
 
     @Test
     void getStars01() {
-        assertEquals(20, nightsky.getStars().get(1));
+        assertEquals(20, nightsky.getStars().get(1).getyCoordinate());
     }
 
     @Test
@@ -55,7 +55,7 @@ class  NightskyTest {
 
         nightsky.addConstellation(constellation);
 
-        assertEquals(20, nightsky.getConstellations().get(0).getStars().get(0).getyCoordinate());
+        assertEquals(200, nightsky.getConstellations().get(0).getStars().get(0).getyCoordinate());
     }
 
     @Test
