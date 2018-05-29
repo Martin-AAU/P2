@@ -15,8 +15,9 @@ How constellations translate to music:
 - One star represents one chord.
 - Stars are played in the order they are added.
 - The Y-axis determines the pitch of a chord.
-- The distance between two stars determine the length of the pause between two chords.
-- The angles determine the playtime of the chords. The tighter the angle, the shorter the playtime.
+- The distance between two stars determine the length of the pause.
+- The angles determine the playtime of the chords.
+The tighter the angle, the shorter the playtime.
 
 Have fun!
 Group A305 - Jesper, Kamilla, Martin, Mathias & Thomas

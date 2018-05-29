@@ -33,7 +33,6 @@ import java.util.Random;
  * The main class of the application. Visualises the GUI, runs the buttons and their opperations on the stars, constellations and midi file
  */
 public class DrawGUI extends Application {
-
     /**
      * The width of the night sky window minus the buttons.
      * Is set to the width of the computer screen divided by 1.1
@@ -256,14 +255,13 @@ public class DrawGUI extends Application {
         }
 
         // Style text
-        helpText.setWrappingWidth((width / 1.75) - 5);
+        helpText.setWrappingWidth((width / 1.8) - 5);
         helpText.setStyle("-fx-font-size: 18px; -fx-font-family: Tahoma;");
         helpText.setFill(Color.WHITESMOKE);
         helpVbox.getChildren().add(helpText);
-        helpVbox.resize(width / 1.75, boxHeight);
+        helpVbox.resize(width / 1.8, boxHeight);
 
-
-        helpScene = new Scene(helpVbox, width / 1.75,  boxHeight);
+        helpScene = new Scene(helpVbox, width / 1.8,  boxHeight);
         // Setup and show scene
         help.setScene(helpScene);
         help.show();
